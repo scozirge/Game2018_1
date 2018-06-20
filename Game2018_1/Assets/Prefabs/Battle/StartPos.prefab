@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4734095827636158}
   - component: {fileID: 50745185360513822}
-  - component: {fileID: 114399672782674850}
   - component: {fileID: 58904095774937872}
   m_Layer: 0
   m_Name: StartPos
@@ -107,19 +106,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &114399672782674850
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1005113402372418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ea2415f59a89e242b68d5b2d0168e48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BloodPrefab: {fileID: 1448007386476784, guid: fe71209818a84334b884d8f1b258875f,
-    type: 2}
 --- !u!212 &212410040432073412
 SpriteRenderer:
   m_ObjectHideFlags: 1

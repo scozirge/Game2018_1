@@ -5,6 +5,10 @@ using UnityEngine;
 public class BallSpawner : MonoBehaviour
 {
     [SerializeField]
+    MonsterPrefab MyMonster;
+    [SerializeField]
+    AmmoSpawner MyAmmoSpawner;
+    [SerializeField]
     Transform Trans_SpawnPos;
     [SerializeField]
     BallPrefab MyBallPrefab;
@@ -15,12 +19,15 @@ public class BallSpawner : MonoBehaviour
     [SerializeField]
     GameObject EndPosPrefab;
 
-    Vector3 startPos;
-    Vector3 endPos;
+    bool IsPress;
+    public static bool CanShoot { get; protected set; }
+    Vector3 StartPos;
+    Vector3 EndPos;
     GameObject Go_StartPos;
     GameObject Go_EndPos;
     public void Start()
     {
+        SetCanShoot(true);
         Go_EndPos = Instantiate(StartPosPrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
         Go_StartPos = Instantiate(EndPosPrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
         Go_StartPos.SetActive(false);
@@ -32,31 +39,51 @@ public class BallSpawner : MonoBehaviour
     }
     void ClickToSpawn()
     {
+        if (!CanShoot)
+            return;
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = MyCamera.ScreenPointToRay(Input.mousePosition);
-            startPos = ray.origin + (ray.direction * MyCamera.transform.position.z * -1);
+            StartPos = ray.origin + (ray.direction * MyCamera.transform.position.z * -1);
 
             Go_StartPos.SetActive(true);
             Go_EndPos.SetActive(true);
-            Go_EndPos.transform.position = startPos;
-            Go_StartPos.transform.position = startPos;
-
+            Go_EndPos.transform.position = StartPos;
+            Go_StartPos.transform.position = StartPos;
+            MyMonster.Arm();
+            MyAmmoSpawner.SpawnAmmo(MyMonster.transform.position);
+            IsPress = true;
         }
-        if(Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0))
         {
             Ray ray = MyCamera.ScreenPointToRay(Input.mousePosition);
             Go_EndPos.transform.position = ray.origin + (ray.direction * MyCamera.transform.position.z * -1);
         }
         if (Input.GetMouseButtonUp(0))
         {
+            if (IsPress)
+                IsPress = false;
+            else
+                return;
             Go_StartPos.SetActive(false);
             Go_EndPos.SetActive(false);
             Ray ray = MyCamera.ScreenPointToRay(Input.mousePosition);
-            endPos = ray.origin + (ray.direction * MyCamera.transform.position.z * -1);
-            Vector3 force = (startPos - endPos) * 250;
-            Spawn(force);
+            EndPos = ray.origin + (ray.direction * MyCamera.transform.position.z * -1);
+            Spawn(GetForce());
+            MyAmmoSpawner.ShootAmmo();
         }
+    }
+    Vector3 GetForce()
+    {
+        float speed = Vector3.Distance(StartPos, EndPos) * 250;
+        if (speed < 300)
+            speed = 300;
+        else if (speed > 2000)
+            speed = 2000;
+        Vector3 dir = (StartPos - EndPos).normalized;
+        if (dir == Vector3.zero)
+            dir = new Vector3(0, 1, 0);
+        return dir * speed;
     }
     public void Spawn(Vector2 _force)
     {
@@ -65,5 +92,9 @@ public class BallSpawner : MonoBehaviour
         bp.transform.SetParent(transform);
         bp.transform.localPosition = Trans_SpawnPos.localPosition;
         bp.Init(_force);
+    }
+    public static void SetCanShoot(bool _canShoot)
+    {
+        CanShoot = _canShoot;
     }
 }

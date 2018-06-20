@@ -8,6 +8,8 @@ public class BallPrefab : MonoBehaviour
     Rigidbody2D myRigibody;
     [SerializeField]
     GameObject BloodPrefab;
+    [SerializeField]
+    GameObject BloodPrefab2;
 
     public int MaxBounceTimes { get; protected set; }
     public int curBounceTimes { get; protected set; }
@@ -22,19 +24,29 @@ public class BallPrefab : MonoBehaviour
     void Launch(Vector2 _force)
     {
         myRigibody.AddForce(_force);
+        SpawnBlood2();
+        BallSpawner.SetCanShoot(false);
     }
     void OnTriggerEnter2D(Collider2D _col)
     {
         switch (_col.gameObject.tag)
         {
             case "HCollider":
+                CameraPrefab.AllCameraShake();
                 if (Bounce())
                     myRigibody.velocity = new Vector2(myRigibody.velocity.x * -1, myRigibody.velocity.y);
-
                 break;
             case "VCollider":
+                CameraPrefab.AllCameraShake();
                 if (Bounce())
                     myRigibody.velocity = new Vector2(myRigibody.velocity.x, myRigibody.velocity.y * -1);
+                break;
+            case "EnemyShield":
+                SelfDestroy();
+                break;
+            case "Monster":
+                _col.GetComponent<MonsterPrefab>().BeStruck();
+                SelfDestroy();
                 break;
             default:
                 break;
@@ -42,14 +54,30 @@ public class BallPrefab : MonoBehaviour
     }
     bool Bounce()
     {
+        SpawnBlood();
         curBounceTimes++;
         if (curBounceTimes > MaxBounceTimes)
         {
-            Destroy(gameObject);
+            SelfDestroy();
             return false;
         }
+        return true;
+    }
+    void SpawnBlood()
+    {
         GameObject bloodGo = Instantiate(BloodPrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
         bloodGo.transform.position = transform.position;
-        return true;
+    }
+    void SpawnBlood2()
+    {
+        GameObject bloodGo = Instantiate(BloodPrefab2.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
+        bloodGo.transform.SetParent(transform);
+        bloodGo.transform.position = transform.position;
+    }
+    void SelfDestroy()
+    {
+        SpawnBlood();
+        Destroy(gameObject);
+        MonsterPrefab.SetAllMonsterUnarm();
     }
 }
