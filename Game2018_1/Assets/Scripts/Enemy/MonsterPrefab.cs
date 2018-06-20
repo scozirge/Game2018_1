@@ -25,6 +25,8 @@ public partial class MonsterPrefab : MonoBehaviour
     public void BeStruck()
     {
         PlayMotion("BeStruck", 0);
+        CameraPrefab.DoEffect("Blood");
+        CameraPrefab.DoAction("Shake", 0);
     }
     void CountDownToUnArm()
     {
@@ -43,8 +45,8 @@ public partial class MonsterPrefab : MonoBehaviour
     }
     void Move()
     {
-        float x = Random.Range(-2, 2);
-        transform.position = new Vector2(x, 4);
+        float x = Random.Range(-300, 300);
+        transform.position = new Vector2(x, 400);
     }
     public void Arm()
     {

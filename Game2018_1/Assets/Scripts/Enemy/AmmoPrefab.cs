@@ -30,6 +30,18 @@ public class AmmoPrefab : MonoBehaviour
         CircularMotion();
         LifeTimeCountDown();
     }
+    void OnTriggerEnter2D(Collider2D _col)
+    {
+        switch (_col.gameObject.tag)
+        {
+            case "Player":
+                Destroy(gameObject);
+                CameraPrefab.DoEffect("Blood");
+                break;
+            default:
+                break;
+        }
+    }
     void LifeTimeCountDown()
     {
         if (!IsLaunching)
@@ -50,7 +62,7 @@ public class AmmoPrefab : MonoBehaviour
     public void Shoot()
     {
         IsLaunching = true;
-        Force = (transform.position - Center).normalized * 300;
+        Force = (transform.position - Center).normalized * 30000;
         MyRigi.AddForce(Force);
     }
 }

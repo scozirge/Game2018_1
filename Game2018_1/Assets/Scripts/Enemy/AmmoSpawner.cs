@@ -24,7 +24,7 @@ public class AmmoSpawner : MonoBehaviour
     public void SpawnAmmo(Vector3 _shooterPos)
     {
         int ammoNum = 4;
-        float radius = 1.5f;
+        float radius = 150f;
         AmmoList = new List<AmmoPrefab>();
         for (int i = 0; i < ammoNum; i++)
         {

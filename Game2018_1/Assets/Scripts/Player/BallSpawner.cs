@@ -75,11 +75,13 @@ public class BallSpawner : MonoBehaviour
     }
     Vector3 GetForce()
     {
-        float speed = Vector3.Distance(StartPos, EndPos) * 250;
-        if (speed < 300)
-            speed = 300;
-        else if (speed > 2000)
-            speed = 2000;
+        float speed = Vector3.Distance(StartPos, EndPos) * 200;
+        Debug.Log(speed);
+        if (speed < 30000)
+            speed = 30000;
+        else if (speed > 200000)
+            speed = 200000;
+        Debug.Log(speed);
         Vector3 dir = (StartPos - EndPos).normalized;
         if (dir == Vector3.zero)
             dir = new Vector3(0, 1, 0);

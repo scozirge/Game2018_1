@@ -29,15 +29,16 @@ public class BallPrefab : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D _col)
     {
+        Rotate();
         switch (_col.gameObject.tag)
         {
             case "HCollider":
-                CameraPrefab.AllCameraShake();
+                CameraPrefab.DoAction("Shake", 0);
                 if (Bounce())
                     myRigibody.velocity = new Vector2(myRigibody.velocity.x * -1, myRigibody.velocity.y);
                 break;
             case "VCollider":
-                CameraPrefab.AllCameraShake();
+                CameraPrefab.DoAction("Shake", 0);
                 if (Bounce())
                     myRigibody.velocity = new Vector2(myRigibody.velocity.x, myRigibody.velocity.y * -1);
                 break;
@@ -62,6 +63,10 @@ public class BallPrefab : MonoBehaviour
             return false;
         }
         return true;
+    }
+    void Rotate()
+    {
+        myRigibody.AddTorque(300);
     }
     void SpawnBlood()
     {

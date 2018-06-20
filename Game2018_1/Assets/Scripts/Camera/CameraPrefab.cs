@@ -4,26 +4,42 @@ using UnityEngine;
 
 public class CameraPrefab : MonoBehaviour
 {
-    delegate void OneDelegate();
-    static OneDelegate CameraShake;
+    delegate void DelegateAction1(string _str, float _flo);
+    static DelegateAction1 CameraAction;
+    delegate void DelegateAction2(string _str);
+    static DelegateAction2 CameraEffect;
     [SerializeField]
     Animator MyAni;
+    [SerializeField]
+    GameObject BloodPrefab;
 
     void Start()
     {
-        CameraShake += Shake;
+        CameraAction += PlayMotion;
+        CameraEffect += PlayEffect;
     }
-    void Shake()
+    public static void DoAction(string _str, float _flo)
     {
-        PlayMotion("Shake", 0);
+        if (CameraAction != null)
+            CameraAction(_str, _flo);
     }
-    public static void AllCameraShake()
+    public static void DoEffect(string _str)
     {
-        if (CameraShake != null)
-            CameraShake();
+        if (CameraEffect != null)
+            CameraEffect(_str);
     }
-
-    public void PlayMotion(string _motion, float _normalizedTime)
+    void PlayEffect(string _str)
+    {
+        switch (_str)
+        {
+            case "Blood":
+                Blood();
+                break;
+            default:
+                break;
+        }
+    }
+    void PlayMotion(string _motion, float _normalizedTime)
     {
         switch (_motion)
         {
@@ -40,5 +56,10 @@ public class CameraPrefab : MonoBehaviour
             default:
                 break;
         }
+    }
+    void Blood()
+    {
+        GameObject bloodGo = Instantiate(BloodPrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
+        bloodGo.transform.position = Vector3.zero;
     }
 }
