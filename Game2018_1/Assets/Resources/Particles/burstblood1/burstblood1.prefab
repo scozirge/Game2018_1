@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 199568231480966112}
   - component: {fileID: 114466638493572498}
   m_Layer: 0
-  m_Name: burstblood1
+  m_Name: burstBlood1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,6 +53,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8f63618a6dbe9c43a5c0c6ca3bd311e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Loop: 0
+  LifeTime: 0
 --- !u!198 &198193349554540318
 ParticleSystem:
   m_ObjectHideFlags: 1

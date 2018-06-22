@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-public class Debugger : MonoBehaviour
+public partial class Debugger : MonoBehaviour
 {
     public GameObject Go_DebugPanel;
-    public GameObject Go_FPS;
-    public WarningBox MyLogBox;
+    //public WarningBox MyLogBox;
     public Text Text_FPS;
+    public bool IsLimitFPS;
+    public int MaxFPS;
     //Declare these in your class
     int m_frameCounter = 0;
     float m_timeCounter = 0.0f;
@@ -19,7 +20,6 @@ public class Debugger : MonoBehaviour
     public void Start()
     {
         //限制FPS在30左右
-        LimitFPS30(false);
         DontDestroyOnLoad(gameObject);
     }
     /// <summary>
@@ -34,18 +34,18 @@ public class Debugger : MonoBehaviour
     /// </summary>
     public void ShowFPS(bool _show)
     {
-        Go_FPS.SetActive(_show);
+        Text_FPS.gameObject.SetActive(_show);
     }
     /// <summary>
     /// 是否限制FPS
     /// </summary>
-    public void LimitFPS30(bool _limit)
+    public void LimitFPS(bool _limit,int _fps)
     {
         if (_limit)
         {
             //限制FPS在30左右
             QualitySettings.vSyncCount = 0;  // VSync must be disabled
-            Application.targetFrameRate = 30;
+            Application.targetFrameRate = _fps;
         }
         else
         {
@@ -56,6 +56,7 @@ public class Debugger : MonoBehaviour
     {
         if (Text_FPS == null)
             return;
+        LimitFPS(IsLimitFPS, MaxFPS);
         if (m_timeCounter < m_refreshTime)
         {
             m_timeCounter += Time.deltaTime;
@@ -77,5 +78,6 @@ public class Debugger : MonoBehaviour
     void Update()
     {
         FPSCalc();
+        KeyDetector();
     }
 }

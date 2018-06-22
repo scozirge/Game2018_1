@@ -4,27 +4,18 @@ using UnityEngine;
 
 public class PlayerAmmo : AmmoPrefab
 {
-
-    [SerializeField]
-    GameObject BloodPrefab;
-    [SerializeField]
-    GameObject BloodPrefab2;
-
     public int MaxBounceTimes { get; protected set; }
     public int curBounceTimes { get; protected set; }
-
-    public void Init(Vector2 _force)
+    public override void Init(Vector3 _shooterPos, int _damage)
     {
-        MyRigi = gameObject.GetComponent<Rigidbody2D>();
+        base.Init(_shooterPos, _damage);
         MaxBounceTimes = 3;
         curBounceTimes = 0;
-        Launch(_force);
     }
-    void Launch(Vector2 _force)
+    public override void Launch(Vector2 _force)
     {
-        MyRigi.AddForce(_force);
-        SpawnBlood2();
-        PlayerAmmoSpawner.SetCanShoot(false);
+        base.Launch(_force);
+        SpawnParticleOnSelf("bleeding1");
     }
     protected override void OnTriggerEnter2D(Collider2D _col)
     {
@@ -46,7 +37,7 @@ public class PlayerAmmo : AmmoPrefab
                 SelfDestroy();
                 break;
             case "Monster":
-                _col.GetComponent<EnemyRole>().BeStruck();
+                _col.GetComponent<EnemyRole>().BeStruck(Damage);
                 SelfDestroy();
                 break;
             default:
@@ -55,7 +46,7 @@ public class PlayerAmmo : AmmoPrefab
     }
     bool Bounce()
     {
-        SpawnBlood();
+        SpawnParticleOnPos("burstblood1");
         curBounceTimes++;
         if (curBounceTimes > MaxBounceTimes)
         {
@@ -68,20 +59,9 @@ public class PlayerAmmo : AmmoPrefab
     {
         MyRigi.AddTorque(300);
     }
-    void SpawnBlood()
-    {
-        GameObject bloodGo = Instantiate(BloodPrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
-        bloodGo.transform.position = transform.position;
-    }
-    void SpawnBlood2()
-    {
-        GameObject bloodGo = Instantiate(BloodPrefab2.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
-        bloodGo.transform.SetParent(transform);
-        bloodGo.transform.position = transform.position;
-    }
     protected override void SelfDestroy()
     {
-        SpawnBlood();
+        SpawnParticleOnPos("burstblood1");
         EnemyRole.SetAllMonsterUnarm();
         base.SelfDestroy();
     }

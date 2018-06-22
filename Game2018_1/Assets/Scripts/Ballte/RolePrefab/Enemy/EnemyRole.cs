@@ -19,11 +19,13 @@ public partial class EnemyRole : RolePrefab
     bool BeginUnarm;
     const float UnarmTime = 0.5f;
     float UnarmTimer;
+    int AmmoNum;
 
 
     public override void Init(Dictionary<string, object> _dataDic)
     {
         base.Init(_dataDic);
+        AmmoNum = (int)_dataDic["AmmoNum"];
         Move();
     }
     protected override void Start()
@@ -37,12 +39,17 @@ public partial class EnemyRole : RolePrefab
         base.Update();
         CountDownToUnArm();
     }
-    public override void BeStruck()
+    public override void BeStruck(int _dmg)
     {
-        base.BeStruck();
+        base.BeStruck(_dmg);
         PlayMotion("BeStruck", 0);
         CameraPrefab.DoEffect("Blood");
         CameraPrefab.DoAction("Shake", 0);
+    }
+    public override void ReceiveDmg(int _dmg)
+    {
+        base.ReceiveDmg(_dmg);
+        BattleCanvas.UpdateEnemyHealth();
     }
     void CountDownToUnArm()
     {
@@ -61,26 +68,32 @@ public partial class EnemyRole : RolePrefab
     }
     void Move()
     {
-        float x = Random.Range(-MoveRangeX, MoveRangeX);
-        transform.position = new Vector2(x, MovePosY);
+        Vector2 movePos = new Vector2(Random.Range(-MoveRangeX, MoveRangeX), MovePosY);
+        transform.position = movePos;
+        BattleCanvas.EnemySetPos();
     }
     public void Arm()
     {
         Move();
-        MyAmmoSpawner.SpawnAmmo(transform.position);
+        MyAmmoSpawner.SpawnAmmo(AmmoNum, transform.position, Attack);
+        SetShield();
+    }
+    void SetShield()
+    {
         Trans_Shield.gameObject.SetActive(true);
         ShieldAngle = Random.Range(0, 360);
         Trans_Shield.rotation = Quaternion.Euler(new Vector3(0, 0, ShieldAngle));
+        BattleCanvas.EnemyShieldRotate();
     }
     public void LaunchAmmo()
     {
-        MyAmmoSpawner.ShootAmmo();
+        MyAmmoSpawner.LaunchAmmo();
     }
     void UnArm()
     {
         Trans_Shield.gameObject.SetActive(false);
         BeginUnarm = false;
-        PlayerAmmoSpawner.SetCanShoot(true);
+        PlayerRole.SetCanShoot(true);
     }
     public void BeginToUnarm()
     {

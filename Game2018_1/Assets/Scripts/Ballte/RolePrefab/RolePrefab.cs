@@ -20,6 +20,17 @@ public abstract partial class RolePrefab : MonoBehaviour
     }
     int MaxHealth;
     public float HealthRatio { get { return (float)Health / (float)MaxHealth; } set { return; } }
+    private int attack;
+    public int Attack
+    {
+        get { return attack; }
+        set
+        {
+            if (value < 0)
+                value = 0;
+            attack = value;
+        }
+    }
 
 
     public virtual void Init(Dictionary<string, object> _dataDic)
@@ -27,30 +38,38 @@ public abstract partial class RolePrefab : MonoBehaviour
         IsAlive = true;
         Health = (int)_dataDic["Health"];
         MyCamera = _dataDic["Camera"] as Camera;
+        Attack = (int)_dataDic["Attack"];
         MaxHealth = Health;
     }
 
-    public void ReceiveDmg(int _dmg)
-    {
-        if (!IsAlive)
-            return;
-        Health -= _dmg;
-        DeathCheck();
-    }
-    public void DeathCheck()
-    {
-        if (Health <= 0)
-        {
-            IsAlive = false;
-        }
-    }
+
     protected virtual void Start()
     {
     }
     protected virtual void Update()
     {
     }
-    public virtual void BeStruck()
+    public virtual void BeStruck(int _dmg)
     {
+        ReceiveDmg(_dmg);
+    }
+    public virtual void ReceiveDmg(int _dmg)
+    {
+        if (!IsAlive)
+            return;
+        Health -= _dmg;
+        DeathCheck();
+    }
+    protected void DeathCheck()
+    {
+        if (Health <= 0)
+        {
+            IsAlive = false;
+            BattleManager.Win();
+        }
+    }
+    public void SelfDestroy()
+    {
+        Destroy(gameObject);
     }
 }

@@ -12,9 +12,9 @@ public class EnemyAmmo : AmmoPrefab
     protected float StartRadian;
     protected float CurRadian;
 
-    public override void Init(Vector3 _shooterPos)
+    public override void Init(Vector3 _shooterPos, int _damage)
     {
-        base.Init(_shooterPos);
+        base.Init(_shooterPos, _damage);
     }
     public void SetCircularMotion(float _radius, float _startAngle)
     {
@@ -34,8 +34,9 @@ public class EnemyAmmo : AmmoPrefab
         switch (_col.gameObject.tag)
         {
             case "Player":
-                Destroy(gameObject);
                 CameraPrefab.DoEffect("Blood");
+                _col.GetComponent<PlayerRole>().BeStruck(Damage);
+                SelfDestroy();
                 break;
             default:
                 break;
@@ -59,9 +60,9 @@ public class EnemyAmmo : AmmoPrefab
         float y = Radius * Mathf.Sin(CurRadian) + ShootPos.y;
         transform.position = new Vector2(x, y);
     }
-    public override void Shoot()
+    public override void Launch()
     {
-        base.Shoot();
+        base.Launch();
         Force = (transform.position - ShootPos).normalized * 30000;
         MyRigi.AddForce(Force);
     }

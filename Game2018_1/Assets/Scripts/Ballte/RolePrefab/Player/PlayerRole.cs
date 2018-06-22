@@ -2,17 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerRole : RolePrefab
+public partial class PlayerRole : RolePrefab
 {
-    [SerializeField]
-    PlayerAmmoSpawner MyAmmoSpawner;
+
     protected EnemyRole Target;
+    [SerializeField]
+    Vector2 SpawnPos;
 
     public override void Init(Dictionary<string, object> _dataDic)
     {
         base.Init(_dataDic);
-        Target = _dataDic["Target"] as EnemyRole;
-        MyAmmoSpawner.Init(Target, MyCamera);
+        SetTarget(_dataDic["Target"] as EnemyRole);
+        transform.localPosition = SpawnPos;
+        InitShooter();
+    }
+    public void SetTarget(EnemyRole _enemy)
+    {
+        Target = _enemy;
+    }
+    protected override void Update()
+    {
+        base.Update();
+        ClickToSpawn();
+    }
+    public override void ReceiveDmg(int _dmg)
+    {
+        base.ReceiveDmg(_dmg);
+        BattleCanvas.UpdatePlayerHealth();
     }
 
 }
