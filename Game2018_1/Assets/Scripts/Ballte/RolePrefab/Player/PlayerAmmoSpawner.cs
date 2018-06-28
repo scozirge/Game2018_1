@@ -9,14 +9,28 @@ public class PlayerAmmoSpawner : MonoBehaviour
     [SerializeField]
     PlayerAmmo PlayerAmmoPrefab;
 
+    public List<PlayerAmmo> MyAmmos;
 
-    public void Spawn(Vector3 _shooterPos, Vector2 _force, int _damage)
+
+    public void Spawn(Dictionary<string, object> _data)
     {
+        MyAmmos = new List<PlayerAmmo>();
         GameObject ballGo = Instantiate(PlayerAmmoPrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
         PlayerAmmo pa = ballGo.GetComponent<PlayerAmmo>();
+        MyAmmos.Add(pa);
         pa.transform.SetParent(transform);
         pa.transform.localPosition = Trans_SpawnPos.localPosition;
-        pa.Init(_shooterPos, _damage);
-        pa.Launch(_force);
+        pa.Init(_data);
+        pa.Launch();
+    }
+    public void DestroyAllAmmos()
+    {
+        if (MyAmmos == null)
+            return;
+        for (int i = 0; i < MyAmmos.Count; i++)
+        {
+            if (MyAmmos[i] != null)
+                MyAmmos[i].SelfDestroy();
+        }
     }
 }

@@ -5,17 +5,24 @@ using UnityEngine;
 public class PlayerAmmo : AmmoPrefab
 {
     public int MaxBounceTimes { get; protected set; }
-    public int curBounceTimes { get; protected set; }
-    public override void Init(Vector3 _shooterPos, int _damage)
+    public int CurBounceTimes { get; protected set; }
+    public int AmmoBounceDamage { get; protected set; }
+    public override int Damage { get { return BaseDamage + CurBounceTimes * AmmoBounceDamage; } }
+    public bool IsWeaknessStrike { get; protected set; }
+    public override void Init(Dictionary<string, object> _dic)
     {
-        base.Init(_shooterPos, _damage);
-        MaxBounceTimes = 3;
-        curBounceTimes = 0;
+        base.Init(_dic);
+        Force = (Vector3)_dic["Force"];
+        MaxBounceTimes = (int)_dic["AmmoBounceTimes"];
+        AmmoBounceDamage = (int)_dic["AmmoBounceDamage"];
+        CurBounceTimes = 0;
+        IsWeaknessStrike = false;
     }
-    public override void Launch(Vector2 _force)
+    public override void Launch()
     {
-        base.Launch(_force);
+        base.Launch();
         SpawnParticleOnSelf("bleeding1");
+        BattleManager.SetRecord("ShootTimes", 1, Operator.Plus);
     }
     protected override void OnTriggerEnter2D(Collider2D _col)
     {
@@ -34,10 +41,14 @@ public class PlayerAmmo : AmmoPrefab
                     MyRigi.velocity = new Vector2(MyRigi.velocity.x, MyRigi.velocity.y * -1);
                 break;
             case "EnemyShield":
+                BattleManager.MyEnemyRole.BeStruck(MyMath.GetNumber1DividedByNumber2(Damage, 2));
+                BattleManager.SetRecord("StrikeTimes", 1, Operator.Plus);
                 SelfDestroy();
                 break;
             case "Monster":
-                _col.GetComponent<EnemyRole>().BeStruck(Damage);
+                BattleManager.MyEnemyRole.BeStruck(Damage);
+                BattleManager.SetRecord("WeaknessStrikeTimes", 1, Operator.Plus);
+                IsWeaknessStrike = true;
                 SelfDestroy();
                 break;
             default:
@@ -47,8 +58,8 @@ public class PlayerAmmo : AmmoPrefab
     bool Bounce()
     {
         SpawnParticleOnPos("burstblood1");
-        curBounceTimes++;
-        if (curBounceTimes > MaxBounceTimes)
+        CurBounceTimes++;
+        if (CurBounceTimes > MaxBounceTimes)
         {
             SelfDestroy();
             return false;
@@ -59,10 +70,14 @@ public class PlayerAmmo : AmmoPrefab
     {
         MyRigi.AddTorque(300);
     }
-    protected override void SelfDestroy()
+    public override void SelfDestroy()
     {
         SpawnParticleOnPos("burstblood1");
         EnemyRole.SetAllMonsterUnarm();
+        if (IsWeaknessStrike)
+            BattleManager.SetRecord("MaxComboStrikes", 1, Operator.Plus);
+        else
+            BattleManager.SetRecord("MaxComboStrikes", 0, Operator.Equal);
         base.SelfDestroy();
     }
 }

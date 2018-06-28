@@ -4,7 +4,9 @@ using UnityEngine;
 
 public abstract partial class RolePrefab : MonoBehaviour
 {
-
+    [SerializeField]
+    protected Transform Trans_Shield;
+    public int ShieldAngle { get; protected set; }
     public bool IsAlive { get; protected set; }
     protected Camera MyCamera;
     private int health;
@@ -18,19 +20,14 @@ public abstract partial class RolePrefab : MonoBehaviour
             health = value;
         }
     }
-    int MaxHealth;
-    public float HealthRatio { get { return (float)Health / (float)MaxHealth; } set { return; } }
-    private int attack;
-    public int Attack
-    {
-        get { return attack; }
-        set
-        {
-            if (value < 0)
-                value = 0;
-            attack = value;
-        }
-    }
+    public int MaxHealth { get; protected set; }
+    public float HealthRatio { get { return (float)Health / (float)MaxHealth; } }
+    public virtual int Attack { get { return BaseAttack + ExtraAttack; } }
+    public int ExtraAttack { get; protected set; }
+    public int BaseAttack { get; protected set; }
+    public int BaseAmmoNum { get; protected set; }
+    public virtual int AmmoNum { get { return BaseAmmoNum; } }
+
 
 
     public virtual void Init(Dictionary<string, object> _dataDic)
@@ -38,10 +35,13 @@ public abstract partial class RolePrefab : MonoBehaviour
         IsAlive = true;
         Health = (int)_dataDic["Health"];
         MyCamera = _dataDic["Camera"] as Camera;
-        Attack = (int)_dataDic["Attack"];
+        BaseAttack = (int)_dataDic["Attack"];
         MaxHealth = Health;
+        StartConditionRefresh();
     }
-
+    public virtual void StartConditionRefresh()
+    {
+    }
 
     protected virtual void Start()
     {
@@ -60,16 +60,30 @@ public abstract partial class RolePrefab : MonoBehaviour
         Health -= _dmg;
         DeathCheck();
     }
-    protected void DeathCheck()
+    public virtual void HealHP(int _heal)
+    {
+        if (!IsAlive)
+            return;
+        Health += _heal;
+    }
+    public virtual void IncreaseMaxHP(int _heal)
+    {
+        if (!IsAlive)
+            return;
+        MaxHealth += _heal;
+        Health += _heal;
+    }
+    protected virtual bool DeathCheck()
     {
         if (Health <= 0)
         {
             IsAlive = false;
-            BattleManager.Win();
         }
+        else IsAlive = true;
+        return !IsAlive;
     }
-    public void SelfDestroy()
-    {
+    public virtual void SelfDestroy()
+    {        
         Destroy(gameObject);
     }
 }

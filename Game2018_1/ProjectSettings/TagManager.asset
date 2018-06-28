@@ -8,6 +8,7 @@ TagManager:
   - HCollider
   - VCollider
   - EnemyShield
+  - PlayerShield
   layers:
   - Default
   - TransparentFX

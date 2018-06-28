@@ -29,10 +29,10 @@ public class PhaseUI : MonoBehaviour
     }
     public void WinEnd()
     {
-        BattleManager.NextLevel();
+        BattleManager.Upgrade();
     }
     public void NextLevelEnd()
     {
-        BattleManager.ReStartGame();
+        BattleManager.NextGame();
     }
 }

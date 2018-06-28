@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class CameraPrefab : MonoBehaviour
 {
-    delegate void DelegateAction1(string _str, float _flo);
-    static DelegateAction1 CameraAction;
-    delegate void DelegateAction2(string _str);
-    static DelegateAction2 CameraEffect;
+    static CameraPrefab MyCameraPrefab;
     [SerializeField]
     Animator MyAni;
     [SerializeField]
@@ -15,20 +12,17 @@ public class CameraPrefab : MonoBehaviour
 
     void Start()
     {
-        CameraAction += PlayMotion;
-        CameraEffect += PlayEffect;
+        MyCameraPrefab = this.GetComponent<CameraPrefab>();
     }
-    public static void DoAction(string _str, float _flo)
+    public static void DoAction(string _str, float _normalizedTime)
     {
-        if (CameraAction != null)
-            CameraAction(_str, _flo);
+        MyCameraPrefab.PlayMotion(_str, _normalizedTime);
     }
     public static void DoEffect(string _str)
     {
-        if (CameraEffect != null)
-            CameraEffect(_str);
+        MyCameraPrefab.PlayEffect(_str);
     }
-    void PlayEffect(string _str)
+    public void PlayEffect(string _str)
     {
         switch (_str)
         {
@@ -39,7 +33,7 @@ public class CameraPrefab : MonoBehaviour
                 break;
         }
     }
-    void PlayMotion(string _motion, float _normalizedTime)
+    public void PlayMotion(string _motion, float _normalizedTime)
     {
         switch (_motion)
         {

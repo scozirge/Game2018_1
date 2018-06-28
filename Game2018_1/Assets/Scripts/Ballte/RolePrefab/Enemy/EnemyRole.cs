@@ -7,26 +7,39 @@ public partial class EnemyRole : RolePrefab
     [SerializeField]
     EnemyAmmoSpawner MyAmmoSpawner;
     [SerializeField]
-    Transform Trans_Shield;
-    [SerializeField]
     float MoveRangeX;
     [SerializeField]
     float MovePosY;
 
     delegate void OneDelegate();
     static OneDelegate MonsterUnarm;
-    public int ShieldAngle { get; protected set; }
+
     bool BeginUnarm;
     const float UnarmTime = 0.5f;
     float UnarmTimer;
-    int AmmoNum;
+    public override int AmmoNum
+    {
+        get
+        {
+            if (BaseAmmoNum - BattleManager.MyPlayerRole.DecreaseEnemyAmmo < 1)
+                return 1;
+            else
+                return BaseAmmoNum - BattleManager.MyPlayerRole.DecreaseEnemyAmmo;
+        }
+    }
 
 
     public override void Init(Dictionary<string, object> _dataDic)
     {
         base.Init(_dataDic);
-        AmmoNum = (int)_dataDic["AmmoNum"];
+        BaseAmmoNum = (int)_dataDic["AmmoNum"];
         Move();
+    }
+    public override void StartConditionRefresh()
+    {
+        base.StartConditionRefresh();
+        BattleCanvas.UpdateEnemyHealth();
+        BattleCanvas.EnemySetPos();
     }
     protected override void Start()
     {
@@ -36,6 +49,8 @@ public partial class EnemyRole : RolePrefab
     }
     protected override void Update()
     {
+        if (BattleManager.IsPause)
+            return;
         base.Update();
         CountDownToUnArm();
     }
@@ -75,9 +90,14 @@ public partial class EnemyRole : RolePrefab
     public void Arm()
     {
         Move();
-        MyAmmoSpawner.SpawnAmmo(AmmoNum, transform.position, Attack);
+        Dictionary<string, object> data = new Dictionary<string, object>();
+        data.Add("Damage", Attack);
+        data.Add("ShooterPos", transform.position);
+        data.Add("AmmoNum", AmmoNum);
+        MyAmmoSpawner.SpawnAmmo(data);
         SetShield();
     }
+
     void SetShield()
     {
         Trans_Shield.gameObject.SetActive(true);
@@ -100,6 +120,21 @@ public partial class EnemyRole : RolePrefab
         BeginUnarm = true;
         UnarmTimer = UnarmTime;
     }
-
-
+    protected override bool DeathCheck()
+    {
+        if (base.DeathCheck())
+        {
+            BattleManager.SetRecord("Kill", 1, Operator.Plus);
+            BattleManager.Win();
+        }
+        else
+        {
+        }
+        return !IsAlive;
+    }
+    public override void SelfDestroy()
+    {
+        MyAmmoSpawner.DestroyAllAmmos();
+        base.SelfDestroy();
+    }
 }

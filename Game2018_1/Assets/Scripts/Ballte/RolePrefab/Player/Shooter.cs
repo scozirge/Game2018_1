@@ -35,6 +35,8 @@ public partial class PlayerRole
 
     void ClickToSpawn()
     {
+        if (BattleManager.IsPause)
+            return;
         if (!CanShoot)
             return;
         if (Input.GetMouseButtonDown(0))
@@ -67,10 +69,20 @@ public partial class PlayerRole
             Go_EndPos.SetActive(false);
             Ray ray = MyCamera.ScreenPointToRay(Input.mousePosition);
             EndPos = ray.origin + (ray.direction * MyCamera.transform.position.z * -1);
-            MyAmmoSpawner.Spawn(transform.position, GetForce(), Attack);
-            SetCanShoot(false);
-            Target.LaunchAmmo();
+            Shoot();
         }
+    }
+    void Shoot()
+    {
+        Dictionary<string, object> data = new Dictionary<string, object>();
+        data.Add("Damage", Attack);
+        data.Add("ShootPos", transform.position);
+        data.Add("Force", GetForce());
+        data.Add("AmmoBounceTimes", AmmoBounceTimes);
+        data.Add("AmmoBounceDamage", AmmoBounceDamage);
+        MyAmmoSpawner.Spawn(data);
+        Target.LaunchAmmo();
+        SetCanShoot(false);
     }
     public static void SetCanShoot(bool _canShoot)
     {

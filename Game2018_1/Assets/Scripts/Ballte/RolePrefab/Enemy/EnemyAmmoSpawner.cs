@@ -6,34 +6,48 @@ public class EnemyAmmoSpawner : MonoBehaviour
 {
     [SerializeField]
     EnemyAmmo ThatAmmoPrefab;
-    List<EnemyAmmo> AmmoList;
+    List<EnemyAmmo> MyAmmos;
 
 
 
     public void LaunchAmmo()
     {
-        for (int i = 0; i < AmmoList.Count; i++)
+        if (MyAmmos == null)
+            return;
+        for (int i = 0; i < MyAmmos.Count; i++)
         {
-            AmmoList[i].Launch();
+            MyAmmos[i].Launch();
         }
     }
-
-    public void SpawnAmmo(int _ammoNum,Vector3 _shooterPos,int _damage)
+    public void DestroyAllAmmos()
+    {
+        if (MyAmmos == null)
+            return;
+        for (int i = 0; i < MyAmmos.Count; i++)
+        {
+            if (MyAmmos[i] != null)
+                MyAmmos[i].SelfDestroy();
+        }
+    }
+    public void SpawnAmmo(Dictionary<string, object> _data)
     {
         float radius = 150f;
-        AmmoList = new List<EnemyAmmo>();
-        for (int i = 0; i < _ammoNum; i++)
+        MyAmmos = new List<EnemyAmmo>();
+        int ammoNum = (int)_data["AmmoNum"];
+        Vector3 shooterPos = (Vector3)_data["ShooterPos"];
+
+        for (int i = 0; i < ammoNum; i++)
         {
             GameObject ammoGo = Instantiate(ThatAmmoPrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
             EnemyAmmo ea = ammoGo.GetComponent<EnemyAmmo>();
-            float divAngle = 360 / _ammoNum;
-            float x = radius * Mathf.Cos(i * divAngle * Mathf.Deg2Rad) + _shooterPos.x;
-            float y = radius * Mathf.Sin(i * divAngle * Mathf.Deg2Rad) + _shooterPos.y;
+            float divAngle = 360 / ammoNum;
+            float x = radius * Mathf.Cos(i * divAngle * Mathf.Deg2Rad) + shooterPos.x;
+            float y = radius * Mathf.Sin(i * divAngle * Mathf.Deg2Rad) + shooterPos.y;
             ammoGo.transform.SetParent(transform);
             ammoGo.transform.position = new Vector2(x, y);
-            ea.Init(_shooterPos, _damage);
+            ea.Init(_data);
             ea.SetCircularMotion(radius, i * divAngle * Mathf.Deg2Rad);
-            AmmoList.Add(ea);
+            MyAmmos.Add(ea);
         }
     }
 }

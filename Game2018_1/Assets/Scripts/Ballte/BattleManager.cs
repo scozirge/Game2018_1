@@ -4,6 +4,10 @@ using UnityEngine;
 
 public partial class BattleManager : MonoBehaviour
 {
+    public delegate void PauseFunc();
+    public static PauseFunc StartPause;
+    public static PauseFunc EndPause;
+
     [SerializeField]
     BattleCanvas MyBattleCanvas;
     [SerializeField]
@@ -16,29 +20,73 @@ public partial class BattleManager : MonoBehaviour
     static BattleManager MySelf;
     public static PlayerRole MyPlayerRole;
     public static EnemyRole MyEnemyRole;
+    public static bool IsPause { get; private set; }
+
+    public static int StrikeTimes { get; protected set; }
+    public static int WeaknessStrikeTimes { get; protected set; }
+    public static int MaxComboStrikes { get; protected set; }
+    public static int ShootTimes { get; protected set; }
+    public static float Accuracy { get; protected set; }
+    public static int Kill { get; protected set; }
+    public static int Score { get; protected set; }
+    public static int HighestScoring { get; protected set; }
+
 
     void Start()
     {
+        if (!GameDictionary.IsInit)
+        {
+            GameDictionary.InitDic();
+        }
+
+        IsPause = false;
         MySelf = transform.GetComponent<BattleManager>();
         BattleManager.StartGame();
+    }
+    static void ResetScore()
+    {
+        StrikeTimes = 0;
+        WeaknessStrikeTimes = 0;
+        MaxComboStrikes = 0;
+        ShootTimes = 0;
+        Accuracy = 0;
+        Kill = 0;
+        Score = 0;
+        HighestScoring = 0;
+        Level = 1;
     }
     // Use this for initialization
     public static void StartGame()
     {
-        Level = 1;
+        ResetScore();
+        HighestScoring = PlayerPrefs.GetInt("HighestScoring");
         MySelf.SpawnRoles();
         MySelf.MyBattleCanvas.Init(MyPlayerRole, MyEnemyRole);
         BattleCanvas.StartGame();
     }
     public static void ReStartGame()
     {
+        ResetScore();
+        HighestScoring = PlayerPrefs.GetInt("HighestScoring");
+        MySelf.ClearEnemyRole();
+        MySelf.ClearPlayerRoles();
+        MySelf.SpawnRoles();
+        MySelf.MyBattleCanvas.Init(MyPlayerRole, MyEnemyRole);
+        BattleCanvas.ReStartGame();
+        MyPlayerRole.StartConditionRefresh();
+        MyEnemyRole.StartConditionRefresh();
+        SetPause(false);
+    }
+    public static void NextGame()
+    {
         MySelf.ClearEnemyRole();
         MySelf.SpanwEnemyRole();
         MyPlayerRole.SetTarget(MyEnemyRole);
         MySelf.MyBattleCanvas.Init(MyPlayerRole, MyEnemyRole);
         BattleCanvas.ReStartGame();
-        PlayerRole.SetCanShoot(true);
-
+        MyPlayerRole.StartConditionRefresh();
+        MyEnemyRole.StartConditionRefresh();
+        SetPause(false);
     }
     void SpanwEnemyRole()
     {
@@ -48,8 +96,8 @@ public partial class BattleManager : MonoBehaviour
         enemyGo.transform.SetParent(transform);
         //Init EnemyData
         Dictionary<string, object> enemyDataDic = new Dictionary<string, object>();
-        enemyDataDic.Add("Health", 2);
-        enemyDataDic.Add("Attack", 1);
+        enemyDataDic.Add("Health", 60 + Level * 10);
+        enemyDataDic.Add("Attack", 10 + Level * 5);
         enemyDataDic.Add("Camera", MyCamera);
         enemyDataDic.Add("AmmoNum", Level + 3);
         MyEnemyRole.Init(enemyDataDic);
@@ -67,25 +115,98 @@ public partial class BattleManager : MonoBehaviour
 
         //Init EnemyData
         Dictionary<string, object> enemyDataDic = new Dictionary<string, object>();
-        enemyDataDic.Add("Health", 2);
-        enemyDataDic.Add("Attack", 1);
+        enemyDataDic.Add("Health", 60);
+        enemyDataDic.Add("Attack", 10);
         enemyDataDic.Add("Camera", MyCamera);
         enemyDataDic.Add("AmmoNum", Level + 3);
         MyEnemyRole.Init(enemyDataDic);
         //Init PlayerData
         Dictionary<string, object> playerDataDic = new Dictionary<string, object>();
-        playerDataDic.Add("Health", 3);
-        playerDataDic.Add("Attack", 1);
+        playerDataDic.Add("Health", 30);
+        playerDataDic.Add("Attack", 50);
+        playerDataDic.Add("AmmoBounceTimes", 1);
+        playerDataDic.Add("AmmoBounceDamage", 0);
+        playerDataDic.Add("DecreaseEnemyAmmo", 0);
+        playerDataDic.Add("ShieldLevel", 0);
         playerDataDic.Add("Camera", MyCamera);
         playerDataDic.Add("Target", MyEnemyRole);
         MyPlayerRole.Init(playerDataDic);
     }
-    void ClearRoles()
+    void ClearPlayerRoles()
     {
-        MyPlayerRole.SelfDestroy();
+        if (MyPlayerRole != null)
+            MyPlayerRole.SelfDestroy();
     }
     void ClearEnemyRole()
     {
-        MyEnemyRole.SelfDestroy();
+        if (MyEnemyRole != null)
+            MyEnemyRole.SelfDestroy();
+    }
+    public static void AddToStartPauseFnc(PauseFunc _pf)
+    {
+        StartPause += _pf;
+    }
+    public static void RemoveFromStartPauseFnc(PauseFunc _pf)
+    {
+        if (StartPause != null)
+            StartPause -= _pf;
+    }
+    public static void AddToEndPauseFnc(PauseFunc _pf)
+    {
+        EndPause += _pf;
+    }
+    public static void RemoveFromEndPauseFnc(PauseFunc _pf)
+    {
+        if (EndPause != null)
+            EndPause -= _pf;
+    }
+    public static void SetPause(bool _pause)
+    {
+        if (IsPause == _pause)
+            return;
+        IsPause = _pause;
+        if (IsPause)
+        {
+            if (StartPause != null)
+                StartPause();
+        }
+        else
+        {
+            if (EndPause != null)
+                EndPause();
+        }
+    }
+    public static void SetRecord(string _type, int _value, Operator _operator)
+    {
+        switch (_type)
+        {
+            case "StrikeTimes":
+                StrikeTimes = MyMath.Calculate_ReturnINT(StrikeTimes, _value, _operator);
+                Score += 3;
+                break;
+            case "WeaknessStrikeTimes":
+                WeaknessStrikeTimes = MyMath.Calculate_ReturnINT(WeaknessStrikeTimes, _value, _operator);
+                Score += 5;
+                break;
+            case "MaxComboStrikes":
+                MaxComboStrikes = MyMath.Calculate_ReturnINT(MaxComboStrikes, _value, _operator);
+                Score += MaxComboStrikes;
+                break;
+            case "ShootTimes":
+                ShootTimes = MyMath.Calculate_ReturnINT(ShootTimes, _value, _operator);
+                break;
+            case "Accuracy":
+                Accuracy = MyMath.Calculate_ReturnFloat(Accuracy, _value, _operator);
+                break;
+            case "Kill":
+                Kill = MyMath.Calculate_ReturnINT(Kill, _value, _operator);
+                break;
+            case "Score":
+                Score = MyMath.Calculate_ReturnINT(Score, _value, _operator);
+                break;
+            case "HighestScoring":
+                HighestScoring = MyMath.Calculate_ReturnINT(HighestScoring, _value, _operator);
+                break;
+        }
     }
 }

@@ -11,10 +11,11 @@ public class EnemyAmmo : AmmoPrefab
     protected float Radius { get; set; }
     protected float StartRadian;
     protected float CurRadian;
-
-    public override void Init(Vector3 _shooterPos, int _damage)
+    protected Vector3 ShootPos;
+    public override void Init(Dictionary<string, object> _dic)
     {
-        base.Init(_shooterPos, _damage);
+        base.Init(_dic);
+        ShootPos = (Vector3)_dic["ShooterPos"];
     }
     public void SetCircularMotion(float _radius, float _startAngle)
     {
@@ -24,6 +25,8 @@ public class EnemyAmmo : AmmoPrefab
     }
     protected override void Update()
     {
+        if (BattleManager.IsPause)
+            return;
         base.Update();
         CircularMotion();
         LifeTimeCountDown();
@@ -34,8 +37,13 @@ public class EnemyAmmo : AmmoPrefab
         switch (_col.gameObject.tag)
         {
             case "Player":
-                CameraPrefab.DoEffect("Blood");
-                _col.GetComponent<PlayerRole>().BeStruck(Damage);
+                SpawnParticleOnPos("burstblood1");
+                BattleManager.MyPlayerRole.BeStruck(Damage);
+                SelfDestroy();
+                break;
+            case "PlayerShield":
+                SpawnParticleOnPos("burstblood1");
+                BattleManager.MyPlayerRole.ShieldBeStruck();
                 SelfDestroy();
                 break;
             default:
