@@ -255,6 +255,7 @@ MonoBehaviour:
   Trans_SpawnPos: {fileID: 4891987532367038}
   PlayerAmmoPrefab: {fileID: 114265863953750458, guid: 134f47b5628cbf249aabf08ae1c6915d,
     type: 2}
+  MyAmmos: []
 --- !u!212 &212278274882025448
 SpriteRenderer:
   m_ObjectHideFlags: 1
