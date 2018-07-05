@@ -9,7 +9,7 @@ public abstract class AmmoPrefab : MonoBehaviour
     protected Rigidbody2D MyRigi;
     public virtual int BaseDamage { get; protected set; }
     public virtual int Damage { get { return BaseDamage; } }
-    public virtual void Init(Dictionary<string,object> _dic)
+    public virtual void Init(Dictionary<string, object> _dic)
     {
         IsLaunching = false;
         MyRigi = transform.GetComponent<Rigidbody2D>();
@@ -37,6 +37,11 @@ public abstract class AmmoPrefab : MonoBehaviour
     protected virtual void SpawnParticleOnSelf(string _effectName)
     {
         GameObject particlePrefab = Resources.Load(string.Format("Particles/{0}/{0}", _effectName)) as GameObject;
+        if (particlePrefab == null)
+        {
+            Debug.LogWarning("No particle prefab are assigned");
+            return;
+        }
         GameObject particleGo = Instantiate(particlePrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
         particleGo.transform.SetParent(transform);
         particleGo.transform.localPosition = Vector3.zero;
@@ -44,6 +49,11 @@ public abstract class AmmoPrefab : MonoBehaviour
     protected virtual void SpawnParticleOnPos(string _effectName)
     {
         GameObject particlePrefab = Resources.Load(string.Format("Particles/{0}/{0}", _effectName)) as GameObject;
+        if (particlePrefab == null)
+        {
+            Debug.LogWarning("No particle prefab are assigned");
+            return;
+        }
         GameObject particleGo = Instantiate(particlePrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
         particleGo.transform.position = transform.position;
     }
