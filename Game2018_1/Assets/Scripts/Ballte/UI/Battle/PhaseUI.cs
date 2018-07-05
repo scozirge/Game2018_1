@@ -34,6 +34,13 @@ public class PhaseUI : MonoBehaviour
                 else
                     MyPhaseAni.StopPlayback();//重播
                 break;
+            case "StartGame":
+                SetText();
+                if (Animator.StringToHash(string.Format("Base Layer.{0}", _motion)) != MyPhaseAni.GetCurrentAnimatorStateInfo(0).fullPathHash)
+                    MyPhaseAni.Play(_motion, 0, _normalizedTime);
+                else
+                    MyPhaseAni.StopPlayback();//重播
+                break;
             case "NextLevel":
                 SetText();
                 if (Animator.StringToHash(string.Format("Base Layer.{0}", _motion)) != MyPhaseAni.GetCurrentAnimatorStateInfo(0).fullPathHash)
@@ -56,5 +63,9 @@ public class PhaseUI : MonoBehaviour
     public void NextLevelEnd()
     {
         BattleManager.NextGame();
+    }
+    public void StartGameEnd()
+    {
+        BattleManager.SetPause(false);
     }
 }

@@ -50,7 +50,7 @@ public partial class BattleCanvas : MonoBehaviour
         RelyERole = _er;
     }
 
-    public static void StartGame()
+    public static void SetStage()
     {
         MySelf.SpawnRoles();
         //UpdateHealthUI & SetPos
@@ -169,6 +169,10 @@ public partial class BattleCanvas : MonoBehaviour
     public static void NextLevel()
     {
         MySelf.MyPhaseUI.PlayMotion("NextLevel", 0);
+    }
+    public static void StartGame()
+    {
+        MySelf.MyPhaseUI.PlayMotion("StartGame", 0);
     }
     public void CallSetting()
     {

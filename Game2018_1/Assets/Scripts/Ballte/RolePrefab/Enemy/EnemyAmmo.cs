@@ -67,10 +67,12 @@ public class EnemyAmmo : AmmoPrefab
         float x = Radius * Mathf.Cos(CurRadian) + ShootPos.x;
         float y = Radius * Mathf.Sin(CurRadian) + ShootPos.y;
         transform.position = new Vector2(x, y);
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, 90 - MyMath.GetAngerFormTowPoint2D(ShootPos, transform.position)));
     }
     public override void Launch()
     {
         base.Launch();
+        EffectEmitter.EmitParticle("trail_arrow", Vector3.zero, Vector3.zero, transform);
         Force = (transform.position - ShootPos).normalized * 30000;
         MyRigi.AddForce(Force);
     }

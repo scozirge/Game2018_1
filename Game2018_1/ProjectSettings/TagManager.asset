@@ -48,6 +48,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Effect_BelowTheRole
+    uniqueID: 2527406637
+    locked: 0
   - name: Role
     uniqueID: 323703241
     locked: 0

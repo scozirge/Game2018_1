@@ -18,8 +18,7 @@ public class EffectEmitter : MonoBehaviour
             particleGo.transform.SetParent(_parent);
 
         particleGo.transform.localPosition = _pos;
-
-        particleGo.transform.rotation = Quaternion.Euler(_dir);
+        particleGo.transform.localRotation = Quaternion.Euler(_dir);
     }
 
 }

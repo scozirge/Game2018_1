@@ -43,7 +43,7 @@ public partial class BattleManager : MonoBehaviour
             GameDictionary.InitDic();
         IsPause = false;
         MySelf = transform.GetComponent<BattleManager>();
-        BattleManager.StartGame();
+        StartGame();
     }
     
     static void ResetScore()
@@ -70,6 +70,8 @@ public partial class BattleManager : MonoBehaviour
         ClearGame();
         MySelf.SpawnRoles();
         MySelf.MyBattleCanvas.Init(MyPlayerRole, MyEnemyRole);
+        BattleCanvas.SetStage();
+        SetPause(true);
         BattleCanvas.StartGame();
     }
     public static void ReStartGame()
@@ -80,7 +82,8 @@ public partial class BattleManager : MonoBehaviour
         BattleCanvas.ReStartGame();
         MyPlayerRole.StartConditionRefresh();
         MyEnemyRole.StartConditionRefresh();
-        SetPause(false);
+        SetPause(true);
+        BattleCanvas.StartGame();
     }
     public static void ClearGame()
     {
@@ -110,7 +113,7 @@ public partial class BattleManager : MonoBehaviour
         enemyDataDic.Add("Health", 60 + Level * 10);
         enemyDataDic.Add("Attack", 10 + Level * 5);
         enemyDataDic.Add("Camera", MyCamera);
-        enemyDataDic.Add("AmmoNum", Level + 20);
+        enemyDataDic.Add("AmmoNum", Level + 5);
         MyEnemyRole.Init(enemyDataDic);
     }
     void SpawnRoles()
@@ -129,7 +132,7 @@ public partial class BattleManager : MonoBehaviour
         enemyDataDic.Add("Health", 60);
         enemyDataDic.Add("Attack", 10);
         enemyDataDic.Add("Camera", MyCamera);
-        enemyDataDic.Add("AmmoNum", Level + 20);
+        enemyDataDic.Add("AmmoNum", Level + 5);
         MyEnemyRole.Init(enemyDataDic);
         //Init PlayerData
         Dictionary<string, object> playerDataDic = new Dictionary<string, object>();
