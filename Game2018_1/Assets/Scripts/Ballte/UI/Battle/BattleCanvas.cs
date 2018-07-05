@@ -96,6 +96,18 @@ public partial class BattleCanvas : MonoBehaviour
             return;
         MyPlayerUI.UpdateHealthUI(RelyPRole.HealthRatio);
     }
+    public static void ShowRole(Force _force, bool _bool)
+    {
+        switch (_force)
+        {
+            case Force.Player:
+                MyPlayerUI.gameObject.SetActive(_bool);
+                break;
+            case Force.Enemy:
+                MyEnemyUI.gameObject.SetActive(_bool);
+                break;
+        }
+    }
     public static void UpdateEnemyHealth()
     {
         if (!CheckInit())
@@ -149,6 +161,10 @@ public partial class BattleCanvas : MonoBehaviour
     public static void Win()
     {
         MySelf.MyPhaseUI.PlayMotion("Win", 0);
+    }
+    public static void Lose()
+    {
+        MySelf.MyPhaseUI.PlayMotion("Lose", 0);
     }
     public static void NextLevel()
     {

@@ -5,10 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Monster
-  - HCollider
-  - VCollider
   - EnemyShield
   - PlayerShield
+  - TopCol
+  - BotCol
+  - RightCol
+  - LeftCol
   layers:
   - Default
   - TransparentFX
@@ -51,4 +53,7 @@ TagManager:
     locked: 0
   - name: Ammo
     uniqueID: 1863493087
+    locked: 0
+  - name: Effect
+    uniqueID: 612120315
     locked: 0

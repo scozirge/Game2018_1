@@ -27,6 +27,7 @@ public partial class PlayerRole : RolePrefab
         ShieldAngle = -90;
         transform.localPosition = SpawnPos;
         InitShooter();
+        MyForce = Force.Player;
     }
     public override void StartConditionRefresh()
     {
@@ -107,12 +108,13 @@ public partial class PlayerRole : RolePrefab
         IsAlive = true;
         HealHP(MaxHealth);
         BattleCanvas.UpdatePlayerHealth();
+        BattleCanvas.ShowRole(MyForce, true);
     }
     protected override bool DeathCheck()
     {
         if (base.DeathCheck())
         {
-            BattleManager.Settlement();
+            BattleManager.Lose();
         }
         else
         {

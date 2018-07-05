@@ -30,6 +30,12 @@ public partial class BattleManager : MonoBehaviour {
         BattleCanvas.Win();
         PlayerRole.SetCanShoot(false);
     }
+    public static void Lose()
+    {
+        SetPause(true);
+        BattleCanvas.Lose();
+        PlayerRole.SetCanShoot(false);
+    }
     public static void NextLevel()
     {
         Level++;

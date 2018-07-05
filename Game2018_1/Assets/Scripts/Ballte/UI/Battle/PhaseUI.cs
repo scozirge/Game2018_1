@@ -28,6 +28,12 @@ public class PhaseUI : MonoBehaviour
                 else
                     MyPhaseAni.StopPlayback();//重播
                 break;
+            case "Lose":
+                if (Animator.StringToHash(string.Format("Base Layer.{0}", _motion)) != MyPhaseAni.GetCurrentAnimatorStateInfo(0).fullPathHash)
+                    MyPhaseAni.Play(_motion, 0, _normalizedTime);
+                else
+                    MyPhaseAni.StopPlayback();//重播
+                break;
             case "NextLevel":
                 SetText();
                 if (Animator.StringToHash(string.Format("Base Layer.{0}", _motion)) != MyPhaseAni.GetCurrentAnimatorStateInfo(0).fullPathHash)
@@ -42,6 +48,10 @@ public class PhaseUI : MonoBehaviour
     public void WinEnd()
     {
         BattleManager.Upgrade();
+    }
+    public void LoseEnd()
+    {
+        BattleManager.Settlement();
     }
     public void NextLevelEnd()
     {

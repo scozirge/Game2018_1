@@ -34,6 +34,7 @@ public partial class EnemyRole : RolePrefab
         base.Init(_dataDic);
         BaseAmmoNum = (int)_dataDic["AmmoNum"];
         Move();
+        MyForce = Force.Enemy;
     }
     public override void StartConditionRefresh()
     {

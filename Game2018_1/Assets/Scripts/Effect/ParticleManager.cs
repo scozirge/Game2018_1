@@ -10,10 +10,11 @@ public class ParticleManager : MonoBehaviour
     private ParticleSystem ps;
     void Start()
     {
-        if (LifeTime > 0 || Loop)
-            return;
-        ps = GetComponent<ParticleSystem>();
-        LifeTime = ps.main.duration + ps.main.startLifetimeMultiplier + ps.main.startDelayMultiplier;
+        if (LifeTime == 0)
+        {
+            ps = GetComponent<ParticleSystem>();
+            LifeTime = ps.main.duration + ps.main.startLifetimeMultiplier + ps.main.startDelayMultiplier;
+        }
     }
     void LifeTimeCountDown()
     {
@@ -21,7 +22,9 @@ public class ParticleManager : MonoBehaviour
             return;
         LifeTime -= Time.deltaTime;
         if (LifeTime <= 0)
+        {
             Destroy(gameObject);
+        }
     }
     void Update()
     {

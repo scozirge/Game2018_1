@@ -120,6 +120,11 @@ public class GoogleADManager : MonoBehaviour
 
     public static void CallRewardBasedVideo()
     {
+        if (!MySelf)
+        {
+            BattleManager.Revive();
+            return;
+        }
         Debug.Log("ADisLoad:" + MySelf.rewardBasedVideo.IsLoaded());
         if (MySelf.rewardBasedVideo.IsLoaded())
         {
@@ -128,6 +133,8 @@ public class GoogleADManager : MonoBehaviour
     }
     public static void CallInterstitialAD()
     {
+        if (!MySelf)
+            return;
         if (MySelf.interstitial.IsLoaded())
         {
             MySelf.interstitial.Show();

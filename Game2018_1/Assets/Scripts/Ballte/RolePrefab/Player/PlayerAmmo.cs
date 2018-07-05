@@ -21,31 +21,46 @@ public class PlayerAmmo : AmmoPrefab
     public override void Launch()
     {
         base.Launch();
-        SpawnParticleOnSelf("bleeding1");
+        EffectEmitter.EmitParticle("trail_shiny", Vector3.zero, Vector3.zero, transform);
         BattleManager.SetRecord("ShootTimes", 1, Operator.Plus);
     }
     protected override void OnTriggerEnter2D(Collider2D _col)
     {
         base.OnTriggerEnter2D(_col);
-        Rotate();
         switch (_col.gameObject.tag)
         {
-            case "HCollider":
+            case "LeftCol":
+                EffectEmitter.EmitParticle("bounceEffect", transform.position, new Vector3(0, 0, 180), null);
                 CameraPrefab.DoAction("Shake", 0);
                 if (Bounce())
                     MyRigi.velocity = new Vector2(MyRigi.velocity.x * -1, MyRigi.velocity.y);
                 break;
-            case "VCollider":
+            case "RightCol":
+                EffectEmitter.EmitParticle("bounceEffect", transform.position, Vector3.zero, null);
+                CameraPrefab.DoAction("Shake", 0);
+                if (Bounce())
+                    MyRigi.velocity = new Vector2(MyRigi.velocity.x * -1, MyRigi.velocity.y);
+                break;
+            case "TopCol":
+                EffectEmitter.EmitParticle("bounceEffect", transform.position, new Vector3(0, 0, 90), null);
+                CameraPrefab.DoAction("Shake", 0);
+                if (Bounce())
+                    MyRigi.velocity = new Vector2(MyRigi.velocity.x, MyRigi.velocity.y * -1);
+                break;
+            case "BotCol":
+                EffectEmitter.EmitParticle("bounceEffect", transform.position, new Vector3(0, 0, 270), null);
                 CameraPrefab.DoAction("Shake", 0);
                 if (Bounce())
                     MyRigi.velocity = new Vector2(MyRigi.velocity.x, MyRigi.velocity.y * -1);
                 break;
             case "EnemyShield":
+                EffectEmitter.EmitParticle("shieldhit", transform.position, new Vector3(0, 0, 180 - MyMath.GetAngerFormTowPoint2D(BattleManager.MyEnemyRole.transform.position, transform.position)), null);
                 BattleManager.MyEnemyRole.BeStruck(MyMath.GetNumber1DividedByNumber2(Damage, 2));
                 BattleManager.SetRecord("StrikeTimes", 1, Operator.Plus);
                 SelfDestroy();
                 break;
             case "Monster":
+                EffectEmitter.EmitParticle("bloodEffect", transform.position, new Vector3(0, 0, 180 - MyMath.GetAngerFormTowPoint2D(BattleManager.MyEnemyRole.transform.position, transform.position)), null);
                 BattleManager.MyEnemyRole.BeStruck(Damage);
                 BattleManager.SetRecord("WeaknessStrikeTimes", 1, Operator.Plus);
                 IsWeaknessStrike = true;
@@ -57,7 +72,6 @@ public class PlayerAmmo : AmmoPrefab
     }
     bool Bounce()
     {
-        SpawnParticleOnPos("burstblood1");
         CurBounceTimes++;
         if (CurBounceTimes > MaxBounceTimes)
         {
@@ -72,7 +86,6 @@ public class PlayerAmmo : AmmoPrefab
     }
     public override void SelfDestroy()
     {
-        SpawnParticleOnPos("burstblood1");
         EnemyRole.SetAllMonsterUnarm();
         if (IsWeaknessStrike)
             BattleManager.SetRecord("MaxComboStrikes", 1, Operator.Plus);

@@ -60,7 +60,8 @@ public partial class BattleManager : MonoBehaviour
     public static void Revive()
     {
         MySelf.ReviveTimes++;
-        MyPlayerRole.Revive();        
+        MyPlayerRole.Revive();
+        PlayerRole.SetCanShoot(true);
         SetPause(false);
     }
     // Use this for initialization

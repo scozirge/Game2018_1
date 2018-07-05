@@ -27,6 +27,7 @@ public abstract partial class RolePrefab : MonoBehaviour
     public int BaseAttack { get; protected set; }
     public int BaseAmmoNum { get; protected set; }
     public virtual int AmmoNum { get { return BaseAmmoNum; } }
+    public Force MyForce { get; protected set; }
 
 
 
@@ -51,6 +52,7 @@ public abstract partial class RolePrefab : MonoBehaviour
     }
     public virtual void BeStruck(int _dmg)
     {
+        EffectEmitter.EmitParticle("hitEffect", transform.position, Vector3.zero, null);
         ReceiveDmg(_dmg);
     }
     public virtual void ReceiveDmg(int _dmg)
@@ -78,12 +80,14 @@ public abstract partial class RolePrefab : MonoBehaviour
         if (Health <= 0)
         {
             IsAlive = false;
+            EffectEmitter.EmitParticle("deathEffect", transform.position, Vector3.zero, null);
+            BattleCanvas.ShowRole(MyForce, false);
         }
         else IsAlive = true;
         return !IsAlive;
     }
     public virtual void SelfDestroy()
-    {        
+    {
         Destroy(gameObject);
     }
 }

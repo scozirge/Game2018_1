@@ -37,12 +37,12 @@ public class EnemyAmmo : AmmoPrefab
         switch (_col.gameObject.tag)
         {
             case "Player":
-                SpawnParticleOnPos("burstblood1");
+                EffectEmitter.EmitParticle("bloodEffect", transform.position, new Vector3(0, 0, 180 - MyMath.GetAngerFormTowPoint2D(BattleManager.MyPlayerRole.transform.position, transform.position)), null);
                 BattleManager.MyPlayerRole.BeStruck(Damage);
                 SelfDestroy();
                 break;
             case "PlayerShield":
-                SpawnParticleOnPos("burstblood1");
+                EffectEmitter.EmitParticle("shieldhit", transform.position, new Vector3(0, 0, 180 - MyMath.GetAngerFormTowPoint2D(BattleManager.MyPlayerRole.transform.position, transform.position)), null);
                 BattleManager.MyPlayerRole.ShieldBeStruck();
                 SelfDestroy();
                 break;
