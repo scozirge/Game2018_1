@@ -43,6 +43,7 @@ public class SkillData
     public int Shield { get; private set; }
     public int DecreaseEnemyAmmo { get; private set; }
     public int IncreaseBounceTimes { get; private set; }
+    public string IconString { get; private set; }
 
 
 
@@ -98,6 +99,9 @@ public class SkillData
                     case "IncreaseBounceTimes":
                         IncreaseBounceTimes = int.Parse(item[key].ToString());
                         break;
+                    case "ICON":
+                        IconString = item[key].ToString();
+                        break;
                     default:
                         Debug.LogWarning(string.Format("{0}表有不明屬性:{1}", DataName, key));
                         break;
@@ -119,5 +123,9 @@ public class SkillData
         List<int> keys = new List<int>(GameDictionary.SkillDic.Keys);
         int rand = UnityEngine.Random.Range(0, keys.Count);
         return GameDictionary.SkillDic[keys[rand]];
+    }
+    public Sprite GetSkillICON()
+    {
+        return Resources.Load<Sprite>(string.Format("Images/BattleUI/{0}",IconString));
     }
 }

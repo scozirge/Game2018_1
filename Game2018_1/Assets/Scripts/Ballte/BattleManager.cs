@@ -4,6 +4,7 @@ using UnityEngine;
 
 public partial class BattleManager : MonoBehaviour
 {
+
     public delegate void PauseFunc();
     public static PauseFunc StartPause;
     public static PauseFunc EndPause;
@@ -16,17 +17,19 @@ public partial class BattleManager : MonoBehaviour
     EnemyRole EnemyPrefab;
     [SerializeField]
     PlayerRole PlayerPrefab;
+    [SerializeField]
+    Debugger DebuggerPrefab;
 
     static BattleManager MySelf;
     public static PlayerRole MyPlayerRole;
     public static EnemyRole MyEnemyRole;
     public static bool IsPause { get; private set; }
-
+    public int ReviveTimes { get; private set; }
     public static int StrikeTimes { get; protected set; }
     public static int WeaknessStrikeTimes { get; protected set; }
     public static int MaxComboStrikes { get; protected set; }
     public static int ShootTimes { get; protected set; }
-    public static float Accuracy { get; protected set; }
+    public static float Accuracy { get { return MyMath.Calculate_ReturnFloat(WeaknessStrikeTimes, ShootTimes, Operator.Divided); } }
     public static int Kill { get; protected set; }
     public static int Score { get; protected set; }
     public static int HighestScoring { get; protected set; }
@@ -34,48 +37,55 @@ public partial class BattleManager : MonoBehaviour
 
     void Start()
     {
+        if (!Debugger.IsSpawn)
+            DeployDebugger();
         if (!GameDictionary.IsInit)
-        {
             GameDictionary.InitDic();
-        }
-
         IsPause = false;
         MySelf = transform.GetComponent<BattleManager>();
         BattleManager.StartGame();
     }
+    
     static void ResetScore()
     {
         StrikeTimes = 0;
         WeaknessStrikeTimes = 0;
         MaxComboStrikes = 0;
         ShootTimes = 0;
-        Accuracy = 0;
         Kill = 0;
         Score = 0;
-        HighestScoring = 0;
+        HighestScoring = PlayerPrefs.GetInt("HighestScoring");
         Level = 1;
+    }
+    public static void Revive()
+    {
+        MySelf.ReviveTimes++;
+        MyPlayerRole.Revive();        
+        SetPause(false);
     }
     // Use this for initialization
     public static void StartGame()
     {
-        ResetScore();
-        HighestScoring = PlayerPrefs.GetInt("HighestScoring");
+        ClearGame();
         MySelf.SpawnRoles();
         MySelf.MyBattleCanvas.Init(MyPlayerRole, MyEnemyRole);
         BattleCanvas.StartGame();
     }
     public static void ReStartGame()
     {
-        ResetScore();
-        HighestScoring = PlayerPrefs.GetInt("HighestScoring");
-        MySelf.ClearEnemyRole();
-        MySelf.ClearPlayerRoles();
+        ClearGame();
         MySelf.SpawnRoles();
         MySelf.MyBattleCanvas.Init(MyPlayerRole, MyEnemyRole);
         BattleCanvas.ReStartGame();
         MyPlayerRole.StartConditionRefresh();
         MyEnemyRole.StartConditionRefresh();
         SetPause(false);
+    }
+    public static void ClearGame()
+    {
+        ResetScore();
+        MySelf.ClearEnemyRole();
+        MySelf.ClearPlayerRoles();
     }
     public static void NextGame()
     {
@@ -99,7 +109,7 @@ public partial class BattleManager : MonoBehaviour
         enemyDataDic.Add("Health", 60 + Level * 10);
         enemyDataDic.Add("Attack", 10 + Level * 5);
         enemyDataDic.Add("Camera", MyCamera);
-        enemyDataDic.Add("AmmoNum", Level + 3);
+        enemyDataDic.Add("AmmoNum", Level + 20);
         MyEnemyRole.Init(enemyDataDic);
     }
     void SpawnRoles()
@@ -118,7 +128,7 @@ public partial class BattleManager : MonoBehaviour
         enemyDataDic.Add("Health", 60);
         enemyDataDic.Add("Attack", 10);
         enemyDataDic.Add("Camera", MyCamera);
-        enemyDataDic.Add("AmmoNum", Level + 3);
+        enemyDataDic.Add("AmmoNum", Level + 20);
         MyEnemyRole.Init(enemyDataDic);
         //Init PlayerData
         Dictionary<string, object> playerDataDic = new Dictionary<string, object>();
@@ -195,9 +205,6 @@ public partial class BattleManager : MonoBehaviour
             case "ShootTimes":
                 ShootTimes = MyMath.Calculate_ReturnINT(ShootTimes, _value, _operator);
                 break;
-            case "Accuracy":
-                Accuracy = MyMath.Calculate_ReturnFloat(Accuracy, _value, _operator);
-                break;
             case "Kill":
                 Kill = MyMath.Calculate_ReturnINT(Kill, _value, _operator);
                 break;
@@ -208,5 +215,10 @@ public partial class BattleManager : MonoBehaviour
                 HighestScoring = MyMath.Calculate_ReturnINT(HighestScoring, _value, _operator);
                 break;
         }
+    }
+    void DeployDebugger()
+    {
+        GameObject debugGo = Instantiate(DebuggerPrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
+        debugGo.transform.position = Vector3.zero;
     }
 }

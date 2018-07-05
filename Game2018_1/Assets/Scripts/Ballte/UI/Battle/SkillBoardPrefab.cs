@@ -10,6 +10,8 @@ public class SkillBoardPrefab : MonoBehaviour
     Text Name_Text;
     [SerializeField]
     Text Name_Description;
+    [SerializeField]
+    Image Icon;
 
     SkillData RelyData;
 
@@ -18,6 +20,7 @@ public class SkillBoardPrefab : MonoBehaviour
         RelyData = _data;
         Name_Text.text = RelyData.Name;
         Name_Description.text = RelyData.Description;
+        Icon.sprite = _data.GetSkillICON();
     }
     public void Choice()
     {

@@ -16,6 +16,8 @@ public partial class BattleCanvas : MonoBehaviour
     [SerializeField]
     PhaseUI MyPhaseUI;
     [SerializeField]
+    Text Level_Title;
+    [SerializeField]
     Text Level_Text;
     [SerializeField]
     SettingUI MySettingUI;
@@ -36,6 +38,11 @@ public partial class BattleCanvas : MonoBehaviour
     static EnemyRoleUI MyEnemyUI;
 
 
+    void Start()
+    {
+        if (GameDictionary.IsInit)
+            Level_Title.text = GameDictionary.String_UIDic["Round"].GetString(Player.UseLanguage);
+    }
     public void Init(PlayerRole _pr, EnemyRole _er)
     {
         MySelf = transform.GetComponent<BattleCanvas>();
@@ -137,7 +144,7 @@ public partial class BattleCanvas : MonoBehaviour
     }
     public static void UpdateLevel()
     {
-        MySelf.Level_Text.text = string.Format("Level:{0}", BattleManager.Level.ToString());
+        MySelf.Level_Text.text = BattleManager.Level.ToString();
     }
     public static void Win()
     {

@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 public partial class Debugger : MonoBehaviour
 {
+    public static bool IsSpawn;
     public GameObject Go_DebugPanel;
     //public WarningBox MyLogBox;
     public Text Text_FPS;
@@ -19,9 +20,12 @@ public partial class Debugger : MonoBehaviour
     /// </summary>
     public void Start()
     {
+        IsSpawn = true;
         //限制FPS在30左右
         DontDestroyOnLoad(gameObject);
     }
+
+
     /// <summary>
     /// 除錯顯示控制
     /// </summary>

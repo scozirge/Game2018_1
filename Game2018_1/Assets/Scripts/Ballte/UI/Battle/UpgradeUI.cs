@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UpgradeUI : MonoBehaviour
 {
-
+    [SerializeField]
+    Text ChoseSkill_Title;
     [SerializeField]
     SkillBoardPrefab MySkillPrefab;
     [SerializeField]
@@ -14,6 +16,10 @@ public class UpgradeUI : MonoBehaviour
 
     List<SkillBoardPrefab> SkillBoardList;
 
+    void OnEnable()
+    {
+        ChoseSkill_Title.text = GameDictionary.String_UIDic["ChoseSkill"].GetString(Player.UseLanguage);
+    }
 
     public void SetSkillBoard()
     {

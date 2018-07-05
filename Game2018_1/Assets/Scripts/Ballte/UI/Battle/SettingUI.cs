@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SettingUI : MonoBehaviour
 {
     [SerializeField]
-    Slider AudioSlider;
+    GameObject CheckUI;
 
     public void CallSetting(bool _bool)
     {
@@ -15,10 +15,14 @@ public class SettingUI : MonoBehaviour
 
     public void UpdateVolume()
     {
-        AudioListener.volume = AudioSlider.value;
     }
     public void QuitGame()
     {
+        BattleManager.ClearGame();
         GameManager.ChangeScene("Menu");
+    }
+    public void CallQuitCheckUI(bool _bool)
+    {
+        CheckUI.SetActive(_bool);
     }
 }

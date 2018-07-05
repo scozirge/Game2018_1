@@ -102,6 +102,12 @@ public partial class PlayerRole : RolePrefab
             ShieldLevel += _data.Shield;
         }
     }
+    public void Revive()
+    {
+        IsAlive = true;
+        HealHP(MaxHealth);
+        BattleCanvas.UpdatePlayerHealth();
+    }
     protected override bool DeathCheck()
     {
         if (base.DeathCheck())
@@ -116,7 +122,6 @@ public partial class PlayerRole : RolePrefab
     public override void SelfDestroy()
     {
         MyAmmoSpawner.DestroyAllAmmos();
-        Debug.Log("Player");
         base.SelfDestroy();
     }
 }

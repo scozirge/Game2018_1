@@ -11,7 +11,6 @@ public partial class BattleManager : MonoBehaviour {
     }
     public static void Settlement()
     {
-        Accuracy = MyMath.Calculate_ReturnFloat(StrikeTimes, ShootTimes, Operator.Divided);
         Dictionary<string, object> data = new Dictionary<string, object>();
         data.Add("WeaknessStrikeTimes", WeaknessStrikeTimes);
         data.Add("MaxComboStrikes", MaxComboStrikes);
