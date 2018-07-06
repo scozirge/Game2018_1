@@ -712,7 +712,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 20
+    maxNumParticles: 50
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -1029,8 +1029,8 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 3
-        scalar: 20
-        minScalar: 15
+        scalar: 26
+        minScalar: 22
         maxCurve:
           serializedVersion: 2
           m_Curve:
@@ -9400,7 +9400,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 500
-      minScalar: 350
+      minScalar: 300
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -10148,8 +10148,8 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 3
-        scalar: 25
-        minScalar: 15
+        scalar: 30
+        minScalar: 20
         maxCurve:
           serializedVersion: 2
           m_Curve:
@@ -14736,8 +14736,8 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 3
-        scalar: 7
-        minScalar: 4
+        scalar: 9
+        minScalar: 6
         maxCurve:
           serializedVersion: 2
           m_Curve:
