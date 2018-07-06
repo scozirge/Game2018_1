@@ -60,7 +60,11 @@ public partial class EnemyRole : RolePrefab
         base.BeStruck(_dmg);
         PlayMotion("BeStruck", 0);
         //CameraPrefab.DoEffect("Blood");
-        CameraPrefab.DoAction("Shake", 0);
+    }
+    public override void ShieldBeSruck(int _dmg)
+    {
+        base.ShieldBeSruck(_dmg);
+        ReceiveDmg(MyMath.GetNumber1DividedByNumber2(_dmg, 2));
     }
     public override void ReceiveDmg(int _dmg)
     {

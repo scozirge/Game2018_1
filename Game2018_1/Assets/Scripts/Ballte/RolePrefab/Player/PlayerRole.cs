@@ -57,8 +57,9 @@ public partial class PlayerRole : RolePrefab
         Trans_Shield.rotation = Quaternion.Euler(new Vector3(0, 0, ShieldAngle));
         BattleCanvas.PlayerShieldRotate();
     }
-    public void ShieldBeStruck()
+    public override void ShieldBeSruck(int _dmg)
     {
+        base.ShieldBeSruck(_dmg);
         ShieldLevel -= 1;
         if (ShieldLevel < 1)
         {

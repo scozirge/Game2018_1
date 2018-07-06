@@ -55,7 +55,7 @@ public class PlayerAmmo : AmmoPrefab
                 break;
             case "EnemyShield":
                 EffectEmitter.EmitParticle("shieldhit", transform.position, new Vector3(0, 0, 180 - MyMath.GetAngerFormTowPoint2D(BattleManager.MyEnemyRole.transform.position, transform.position)), null);
-                BattleManager.MyEnemyRole.BeStruck(MyMath.GetNumber1DividedByNumber2(Damage, 2));
+                BattleManager.MyEnemyRole.ShieldBeSruck(Damage);
                 BattleManager.SetRecord("StrikeTimes", 1, Operator.Plus);
                 SelfDestroy();
                 break;

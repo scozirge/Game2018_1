@@ -431,36 +431,6 @@ Prefab:
       propertyPath: MyCamera
       value: 
       objectReference: {fileID: 960585234}
-    - target: {fileID: 114615350611071640, guid: 964618808e8fc2c45b43ffc5a3b22aef,
-        type: 2}
-      propertyPath: DebuggerPrefab
-      value: 
-      objectReference: {fileID: 114520653799664356, guid: 34d7f35244719c441ae89560ab8f936f,
-        type: 2}
-    - target: {fileID: 1445126866688692, guid: 964618808e8fc2c45b43ffc5a3b22aef, type: 2}
-      propertyPath: m_TagString
-      value: TopCol
-      objectReference: {fileID: 0}
-    - target: {fileID: 1635692139136236, guid: 964618808e8fc2c45b43ffc5a3b22aef, type: 2}
-      propertyPath: m_TagString
-      value: BotCol
-      objectReference: {fileID: 0}
-    - target: {fileID: 1704582149368406, guid: 964618808e8fc2c45b43ffc5a3b22aef, type: 2}
-      propertyPath: m_TagString
-      value: LeftCol
-      objectReference: {fileID: 0}
-    - target: {fileID: 1389299104874874, guid: 964618808e8fc2c45b43ffc5a3b22aef, type: 2}
-      propertyPath: m_TagString
-      value: RightCol
-      objectReference: {fileID: 0}
-    - target: {fileID: 1389299104874874, guid: 964618808e8fc2c45b43ffc5a3b22aef, type: 2}
-      propertyPath: m_Name
-      value: rightCol
-      objectReference: {fileID: 0}
-    - target: {fileID: 1704582149368406, guid: 964618808e8fc2c45b43ffc5a3b22aef, type: 2}
-      propertyPath: m_Name
-      value: leftCol
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 964618808e8fc2c45b43ffc5a3b22aef, type: 2}
   m_IsPrefabParent: 0
