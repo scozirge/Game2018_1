@@ -5551,7 +5551,7 @@ ParticleSystem:
       cycleCount: 1
       repeatInterval: 0.01
     - serializedVersion: 2
-      time: 0.07
+      time: 0.09
       countCurve:
         serializedVersion: 2
         minMaxState: 0
@@ -5612,14 +5612,14 @@ ParticleSystem:
     curve:
       serializedVersion: 2
       minMaxState: 1
-      scalar: 1.7
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0.59899527
+          value: 0.4171762
           inSlope: 0.9730774
           outSlope: 0.9730774
           tangentMode: 0
@@ -5957,7 +5957,7 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 30647
+        atime1: 39899
         atime2: 65535
         atime3: 65535
         atime4: 65535
@@ -9297,7 +9297,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1913908795
-  m_SortingLayer: 3
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
