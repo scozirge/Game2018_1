@@ -9,6 +9,8 @@ public partial class GameDictionary
     public static Dictionary<int, SkillData> SkillDic;
     //UI
     public static Dictionary<string, StringData> String_UIDic;
+    //Case表
+    public static Dictionary<int, CaseTableData> CaseTableDic;
 
     /// <summary>
     /// 將Json資料寫入字典裡
@@ -22,6 +24,9 @@ public partial class GameDictionary
         SkillData.SetData(SkillDic, "Skill");
         //UI
         String_UIDic = StringGetter.GetStringData("String_UI");
+        //Case
+        CaseTableDic = new Dictionary<int, CaseTableData>();
+        CaseTableData.SetData(CaseTableDic);
 
     }
 }

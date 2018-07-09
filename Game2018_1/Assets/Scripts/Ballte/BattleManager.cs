@@ -54,7 +54,7 @@ public partial class BattleManager : MonoBehaviour
         ShootTimes = 0;
         Kill = 0;
         Score = 0;
-        HighestScoring = PlayerPrefs.GetInt("HighestScoring");
+        HighestScoring = Player.BestScore;
         Level = 1;
     }
     public static void Revive()

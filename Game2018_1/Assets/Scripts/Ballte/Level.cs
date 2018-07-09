@@ -21,7 +21,7 @@ public partial class BattleManager : MonoBehaviour {
         data.Add("HighestScoring", HighestScoring);
         BattleCanvas.Settle(data);
         if (Score > HighestScoring)
-            PlayerPrefs.SetInt("HighestScoring", Score);
+            PlayerPrefs.SetInt("Score", Score);
         SetPause(true);
     }
     public static void Win()

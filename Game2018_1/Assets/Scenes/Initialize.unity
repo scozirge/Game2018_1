@@ -152,9 +152,36 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114374494794086926, guid: bd16546e01bf03446ba2bb0ac0ebd77e,
+        type: 2}
+      propertyPath: SR
+      value: 
+      objectReference: {fileID: 1513071608}
+    - target: {fileID: 114374494794086926, guid: bd16546e01bf03446ba2bb0ac0ebd77e,
+        type: 2}
+      propertyPath: PopUIPrefab
+      value: 
+      objectReference: {fileID: 114768463510591170, guid: 2740e343e2aaeeb4da13125020b01904,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bd16546e01bf03446ba2bb0ac0ebd77e, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1513071607 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1750665485212942, guid: bd16546e01bf03446ba2bb0ac0ebd77e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1513071606}
+--- !u!114 &1513071608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1513071607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5031f92ff4f23f14a8af39bd74b20140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1871507337
 Prefab:
   m_ObjectHideFlags: 0
