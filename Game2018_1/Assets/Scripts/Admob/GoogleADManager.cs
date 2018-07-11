@@ -53,9 +53,9 @@ public class GoogleADManager : MonoBehaviour
         else
             adUnitId = MyRewardUnitID;
 #elif UNITY_IPHONE
-            string adUnitId = "ca-app-pub-3940256099942544/1712485313";
+            adUnitId = "ca-app-pub-3940256099942544/1712485313";
 #else
-            string adUnitId = "unexpected_platform";
+            adUnitId = "unexpected_platform";
 #endif
 
         // Create an empty ad request.
@@ -73,9 +73,9 @@ public class GoogleADManager : MonoBehaviour
         else
             adUnitId = MyInterstitialID;
 #elif UNITY_IPHONE
-        string adUnitId = "ca-app-pub-3940256099942544/4411468910";
+        adUnitId = "ca-app-pub-3940256099942544/4411468910";
 #else
-        string adUnitId = "unexpected_platform";
+        adUnitId = "unexpected_platform";
 #endif
 
         // Initialize an InterstitialAd.
