@@ -1,0 +1,55 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="sfx_shoot_data" version="1.3.0" audacityversion="2.2.2" sel0="0.0000000000" sel1="0.1695138889" vpos="0" h="0.0000000000" zoom="884.8832445719" rate="44100.0" snapto="off" selectionformat="時:分:秒 + 毫秒" frequencyformat="赫茲" bandwidthformat="八度音">
+	<tags/>
+	<wavetrack name="sci-fi metal impact, steel bulkhead hit, low 01" channel="0" linked="1" mute="1" solo="0" height="150" minimized="0" isSelected="0" rate="48000" gain="0.316228" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="95199">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808d99.au" len="95199" min="-0.919348" max="0.83542" rms="0.172672"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="sci-fi metal impact, steel bulkhead hit, low 01" channel="1" linked="0" mute="1" solo="0" height="150" minimized="0" isSelected="0" rate="48000" gain="0.316228" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="95199">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808663.au" len="95199" min="-1.0" max="0.874023" rms="0.16901"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="雷射_發射2" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="1.995262" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="86166">
+				<waveblock start="0">
+					<simpleblockfile filename="e080893c.au" len="86166" min="-0.173065" max="0.174194" rms="0.014617"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="雷射_發射2" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="1.995262" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="86166">
+				<waveblock start="0">
+					<simpleblockfile filename="e080822d.au" len="86166" min="-0.154297" max="0.216309" rms="0.014285"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="205563__everheat__arrow" channel="2" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="48000" gain="1.412538" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="3499">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808e9e.au" len="3499" min="-0.02771" max="0.029785" rms="0.006695"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+</project>
