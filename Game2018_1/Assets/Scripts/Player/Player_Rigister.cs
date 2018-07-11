@@ -3,6 +3,7 @@ using System.Collections;
 
 public partial class Player
 {
+    public static bool IsRigister { get; private set; }
     /// <summary>
     /// 設定語言
     /// </summary>
@@ -14,22 +15,31 @@ public partial class Player
     {
         AC = _data[0];
         ACPass = _data[1];
-        BestScore = int.Parse(_data[2]);
-        Kills = int.Parse(_data[3]);
-        Shot = int.Parse(_data[4]);
-        CriticalHit = int.Parse(_data[5]);
-        Death = int.Parse(_data[6]);
-        CriticalCombo = int.Parse(_data[7]);
+        Name = _data[2];
+        /*
+        BestScore = int.Parse(_data[3]);
+        Kills = int.Parse(_data[4]);
+        Shot = int.Parse(_data[5]);
+        CriticalHit = int.Parse(_data[6]);
+        Death = int.Parse(_data[7]);
+        CriticalCombo = int.Parse(_data[8]);
+        */
         PlayerPrefs.SetString("AC", AC);
         PlayerPrefs.SetString("ACPass", ACPass);
+        PlayerPrefs.SetString("Name", Name);
+        IsRigister = true;
     }
     public static void SignInGetData(string[] _data)
     {
-        BestScore = int.Parse(_data[0]);
-        Kills = int.Parse(_data[1]);
-        Shot = int.Parse(_data[2]);
-        CriticalHit = int.Parse(_data[3]);
-        Death = int.Parse(_data[4]);
-        CriticalCombo = int.Parse(_data[5]);
+        /*
+        Name = _data[0];
+        BestScore = int.Parse(_data[1]);
+        Kills = int.Parse(_data[2]);
+        Shot = int.Parse(_data[3]);
+        CriticalHit = int.Parse(_data[4]);
+        Death = int.Parse(_data[5]);
+        CriticalCombo = int.Parse(_data[6]);
+        */
+        IsRigister = true;
     }
 }

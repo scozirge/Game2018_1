@@ -138,7 +138,7 @@ public partial class BattleManager : MonoBehaviour
         Dictionary<string, object> playerDataDic = new Dictionary<string, object>();
         playerDataDic.Add("Health", 30);
         playerDataDic.Add("Attack", 50);
-        playerDataDic.Add("AmmoBounceTimes", 1);
+        playerDataDic.Add("AmmoBounceTimes", 2);
         playerDataDic.Add("AmmoBounceDamage", 0);
         playerDataDic.Add("DecreaseEnemyAmmo", 0);
         playerDataDic.Add("ShieldLevel", 0);
@@ -224,5 +224,13 @@ public partial class BattleManager : MonoBehaviour
     {
         GameObject debugGo = Instantiate(DebuggerPrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
         debugGo.transform.position = Vector3.zero;
+    }
+    public static void CheckAliveAmmoToContinueShoot()
+    {
+        if (MyPlayerRole.MyAmmoSpawner.CheckAlifeAmmo())
+            return;
+        if (MyEnemyRole.MyAmmoSpawner.CheckAlifeAmmo())
+            return;
+        PlayerRole.SetCanShoot(true);
     }
 }

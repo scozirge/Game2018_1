@@ -19,6 +19,17 @@ public class EnemyAmmoSpawner : MonoBehaviour
             MyAmmos[i].Launch();
         }
     }
+    public bool CheckAlifeAmmo()
+    {
+        if (MyAmmos == null)
+            return true;
+        for (int i = 0; i < MyAmmos.Count; i++)
+        {
+            if (!MyAmmos[i].IsDavestated)
+                return true;
+        }
+        return false;
+    }
     public void DestroyAllAmmos()
     {
         if (MyAmmos == null)

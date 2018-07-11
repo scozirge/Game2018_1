@@ -7,9 +7,10 @@ public partial class Player
     public static Language UseLanguage { get; private set; }
     public static string AC { get; private set; }
     public static string ACPass { get; private set; }
+    public static string Name { get; private set; }
     public static int BestScore { get; protected set; }
     public static int Kills { get; protected set; }
-    public static float Accuracy { get { return MyMath.Calculate_ReturnFloat(CriticalCombo, Shot, Operator.Divided); } }
+    public static float Accuracy { get { return MyMath.Calculate_ReturnFloat(CriticalHit, Shot, Operator.Divided); } }
     public static int Shot { get; protected set; }
     public static int CriticalHit { get; protected set; }
     public static int Death { get; protected set; }
@@ -23,29 +24,45 @@ public partial class Player
             AC = PlayerPrefs.GetString("AC");
         if (PlayerPrefs.GetString("ACPass") != "")
             ACPass = PlayerPrefs.GetString("ACPass");
+        if (PlayerPrefs.GetInt("BestScore") != 0)
+            BestScore = PlayerPrefs.GetInt("BestScore");
+        if (PlayerPrefs.GetInt("Kills") != 0)
+            Kills = PlayerPrefs.GetInt("Kills");
+        if (PlayerPrefs.GetInt("Shot") != 0)
+            Shot = PlayerPrefs.GetInt("Shot");
+        if (PlayerPrefs.GetInt("CriticalHit") != 0)
+            CriticalHit = PlayerPrefs.GetInt("CriticalHit");
+        if (PlayerPrefs.GetInt("Death") != 0)
+            Death = PlayerPrefs.GetInt("Death");
+        if (PlayerPrefs.GetInt("CriticalCombo") != 0)
+            CriticalCombo = PlayerPrefs.GetInt("CriticalCombo");
     }
-    public static void SetRecord(string _type, int _value, Operator _operator)
+    public static void UpdateRecord(Dictionary<string, object> _data)
     {
-        switch (_type)
-        {
-            case "BestScore":
-                BestScore = MyMath.Calculate_ReturnINT(BestScore, _value, _operator);
-                break;
-            case "Kills":
-                Kills = MyMath.Calculate_ReturnINT(Kills, _value, _operator);
-                break;
-            case "Shot":
-                Shot = MyMath.Calculate_ReturnINT(Shot, _value, _operator);
-                break;
-            case "CriticalHit":
-                CriticalHit = MyMath.Calculate_ReturnINT(CriticalHit, _value, _operator);
-                break;
-            case "Death":
-                Death = MyMath.Calculate_ReturnINT(Death, _value, _operator);
-                break;
-            case "CriticalCombo":
-                CriticalCombo = MyMath.Calculate_ReturnINT(CriticalCombo, _value, _operator);
-                break;
-        }
+        int score = (int)_data["Score"];
+        if (score > BestScore)
+            BestScore = score;
+        Kills += (int)_data["Kill"];
+        Shot += (int)_data["ShootTimes"];
+        CriticalHit += (int)_data["WeaknessStrikeTimes"];
+        Death++;
+        CriticalCombo += (int)_data["MaxComboStrikes"];
+        PlayerPrefs.SetInt("BestScore", BestScore);
+        PlayerPrefs.SetInt("Kills", Kills);
+        PlayerPrefs.SetInt("Shot", Shot);
+        PlayerPrefs.SetInt("CriticalHit", CriticalHit);
+        PlayerPrefs.SetInt("Death", Death);
+        PlayerPrefs.SetInt("CriticalCombo", CriticalCombo);
+        ServerRequest.Settlement();//資料送server
+    }
+    public static void Test()
+    {
+        BestScore = 10;
+        Kills = 11;
+        Shot = 12;
+        CriticalHit = 13;
+        Death = 14;
+        CriticalCombo = 15;
+        ServerRequest.Settlement();
     }
 }

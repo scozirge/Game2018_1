@@ -5,7 +5,7 @@ using UnityEngine;
 public partial class EnemyRole : RolePrefab
 {
     [SerializeField]
-    EnemyAmmoSpawner MyAmmoSpawner;
+    public EnemyAmmoSpawner MyAmmoSpawner;
     [SerializeField]
     float MoveRangeX;
     [SerializeField]
@@ -15,7 +15,7 @@ public partial class EnemyRole : RolePrefab
     static OneDelegate MonsterUnarm;
 
     bool BeginUnarm;
-    const float UnarmTime = 0.5f;
+    const float UnarmTime = 2f;
     float UnarmTimer;
     public override int AmmoNum
     {
@@ -118,7 +118,6 @@ public partial class EnemyRole : RolePrefab
     {
         Trans_Shield.gameObject.SetActive(false);
         BeginUnarm = false;
-        PlayerRole.SetCanShoot(true);
     }
     public void BeginToUnarm()
     {

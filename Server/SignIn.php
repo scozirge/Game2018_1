@@ -8,17 +8,18 @@ require_once('./config.php');
 require_once('./3DES.php');
 $ac = $_POST['AC'];
 $acPass=$_POST['ACPass'];
-$requestTime = $_POST['RequestTime'];
+
+
 //連線至DB
 $con_l = mysql_connect($db_host_write,$db_user,$db_pass) or ("Fail:2:"  . mysql_error());
 if (!$con_l)
 	die('Fail:2:' . mysql_error());
 mysql_select_db($db_name , $con_l) or die ("Fail:3:" . mysql_error());
-$result = mysql_query("SELECT * FROM game2018_1.playeraccount WHERE `Account`='".$ac."'",$con_l);
+$result = mysql_query("SELECT * FROM ".$db_name.".playeraccount WHERE `Account`='".$ac."'",$con_l);
 $dataNum = mysql_num_rows($result );
 if ($dataNum == 0)
 {
-	die ("Fail:4:");
+	die ("Fail:4:ac=".$ac );
 }
 else
 {
@@ -39,18 +40,23 @@ if($head != "u.6vu4" || $tail != "gk4ru4")
 }
 	while($row = mysql_fetch_assoc($result ))
 	{
-			//帳戶
-			$AC=$ac;
-			//通關碼
-			$rep = new Crypt3Des (); // new一個加密類
-			$ACPass=$rep->encrypt ( "u.6vu4".$ac."gk4ru4");
 			//取資料
-			$Score=$row['score'];
-			$kills=$row['kills'];
-			$shot=$row['shot'];
-			$criticalHit=$row['criticalHit'];
-			$death=$row['death'];
-			$criticalCombo=$row['criticalCombo'];	
+			$AC=$ac;
+			$name=$row['name'];
+			//使用server資料
+			//$Score=$row['score'];
+			//$kills=$row['kills'];
+			//$shot=$row['shot'];
+			//$criticalHit=$row['criticalHit'];
+			//$death=$row['death'];
+			//$criticalCombo=$row['criticalCombo'];
+			//使用本機資料
+			$Score=$_POST['BestScore'];
+			$kills=$_POST['Kills'];
+			$shot=$_POST['Shot'];
+			$criticalHit=$_POST['CriticalHit'];
+			$death=$_POST['Death'];
+			$criticalCombo=$_POST['CriticalCombo'];	
 			//登入時間
 			date_default_timezone_set('Asia/Taipei');
 			$LastSignIn= date("Y/m/d H:i:s");
@@ -59,14 +65,20 @@ if($head != "u.6vu4" || $tail != "gk4ru4")
             if (!$con_w)
                 die('Fail:2:' . mysql_error());
             mysql_select_db($db_name , $con_w) or die ("Fail:3:" . mysql_error());
-			$set = mysql_query("UPDATE `playeraccount` SET `SignInTime` = '".$LastSignIn."' WHERE `Account` = '".$ac."' ",$con_w);
+			//使用server資料
+			//$set = mysql_query("UPDATE `playeraccount` SET `SignInTime` = '".$LastSignIn."' WHERE `Account` = '".$ac."' ",$con_w);
+			//使用本基資料
+			$set = mysql_query("UPDATE `playeraccount` SET `score` = '".$Score."', `kills` = '".$kills."', `shot` = '".$shot."', `criticalHit` = '".$criticalHit."', `death` = '".$death."', `criticalCombo` = '".$criticalCombo."', `SignInTime` = '".$LastSignIn."' WHERE `Account` = '".$ac."' ",$con_w);
 			//更新資料的回傳結果
             if($set)
 			{
 				//計算執行時間
 				$time_end = microtime(true);
 				$executeTime = $time_end - $time_start;
-				die("Success:". $Score.",".$kills.",".$shot.",".$criticalHit.",".$death.",".$criticalCombo. ": \nExecuteTime=".$executeTime);
+				//使用server資料
+				//die("Success:".$name.",". $Score.",".$kills.",".$shot.",".$criticalHit.",".$death.",".$criticalCombo. ": \nExecuteTime=".$executeTime);
+				//使用本機器資料
+				die("Success:: \nExecuteTime=".$executeTime);
 			}
 			else
 			{

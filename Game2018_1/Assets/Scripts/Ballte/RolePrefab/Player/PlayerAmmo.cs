@@ -9,6 +9,7 @@ public class PlayerAmmo : AmmoPrefab
     public int AmmoBounceDamage { get; protected set; }
     public override int Damage { get { return BaseDamage + CurBounceTimes * AmmoBounceDamage; } }
     public bool IsWeaknessStrike { get; protected set; }
+    public bool IsHitTarget = false;
     public override void Init(Dictionary<string, object> _dic)
     {
         base.Init(_dic);
@@ -54,17 +55,23 @@ public class PlayerAmmo : AmmoPrefab
                     MyRigi.velocity = new Vector2(MyRigi.velocity.x, MyRigi.velocity.y * -1);
                 break;
             case "EnemyShield":
+                if (IsHitTarget)
+                    return;
                 EffectEmitter.EmitParticle("shieldhit", transform.position, new Vector3(0, 0, 180 - MyMath.GetAngerFormTowPoint2D(BattleManager.MyEnemyRole.transform.position, transform.position)), null);
                 BattleManager.MyEnemyRole.ShieldBeSruck(Damage);
                 BattleManager.SetRecord("StrikeTimes", 1, Operator.Plus);
                 SelfDestroy();
+                IsHitTarget = true;
                 break;
             case "Monster":
+                if (IsHitTarget)
+                    return;
                 EffectEmitter.EmitParticle("bloodEffect", transform.position, new Vector3(0, 0, 180 - MyMath.GetAngerFormTowPoint2D(BattleManager.MyEnemyRole.transform.position, transform.position)), null);
                 BattleManager.MyEnemyRole.BeStruck(Damage);
                 BattleManager.SetRecord("WeaknessStrikeTimes", 1, Operator.Plus);
                 IsWeaknessStrike = true;
                 SelfDestroy();
+                IsHitTarget = true;
                 break;
             default:
                 break;

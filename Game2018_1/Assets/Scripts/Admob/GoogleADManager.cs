@@ -15,10 +15,12 @@ public class GoogleADManager : MonoBehaviour
     string SampleInterstirialID = "ca-app-pub-3940256099942544/1033173712";
     string MyRewardUnitID = "ca-app-pub-6853317566550401/8253800285";
     string MyInterstitialID = "ca-app-pub-6853317566550401/5405125729";
+    bool IsTest = false;
 
     public void Start()
     {
         MySelf = this;
+        Debug.Log(MySelf);
         // Get singleton reward based video ad reference.
         this.rewardBasedVideo = RewardBasedVideoAd.Instance;
 
@@ -38,13 +40,18 @@ public class GoogleADManager : MonoBehaviour
         rewardBasedVideo.OnAdLeavingApplication += HandleRewardBasedVideoLeftApplication;
 
         this.RequestRewardBasedVideo();
-        this.RequestInterstitial();
+        //this.RequestInterstitial();
+        DontDestroyOnLoad(gameObject);
     }
 
     void RequestRewardBasedVideo()
     {
+        string adUnitId;
 #if UNITY_ANDROID
-        string adUnitId = MyRewardUnitID;
+        if (IsTest)
+            adUnitId = SampleRewardUnitID;
+        else
+            adUnitId = MyRewardUnitID;
 #elif UNITY_IPHONE
             string adUnitId = "ca-app-pub-3940256099942544/1712485313";
 #else
@@ -59,8 +66,12 @@ public class GoogleADManager : MonoBehaviour
 
     void RequestInterstitial()
     {
+        string adUnitId;
 #if UNITY_ANDROID
-        string adUnitId = SampleInterstirialID;
+        if (IsTest)
+            adUnitId = SampleInterstirialID;
+        else
+            adUnitId = MyInterstitialID;
 #elif UNITY_IPHONE
         string adUnitId = "ca-app-pub-3940256099942544/4411468910";
 #else
@@ -104,6 +115,7 @@ public class GoogleADManager : MonoBehaviour
 
     public void HandleRewardBasedVideoRewarded(object sender, Reward args)
     {
+        Debug.Log("REVIVE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         string type = args.Type;
         double amount = args.Amount;
         MonoBehaviour.print(
@@ -120,12 +132,12 @@ public class GoogleADManager : MonoBehaviour
 
     public static void CallRewardBasedVideo()
     {
-        if (!MySelf)
+        Debug.Log("////////////////////////////////////");
+        if (!MySelf || !MySelf.rewardBasedVideo.IsLoaded())
         {
             BattleManager.Revive();
             return;
         }
-        Debug.Log("ADisLoad:" + MySelf.rewardBasedVideo.IsLoaded());
         if (MySelf.rewardBasedVideo.IsLoaded())
         {
             MySelf.rewardBasedVideo.Show();

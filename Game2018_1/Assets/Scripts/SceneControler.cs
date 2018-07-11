@@ -16,7 +16,6 @@ public partial class GameManager : MonoBehaviour
                 break;
             case "Battle":
                 SceneManager.LoadScene(_scene);
-                GoogleADManager.CallInterstitialAD();
                 break;
             default:
                 Debug.LogWarning(string.Format("錯誤的場景名稱:{0}", _scene));

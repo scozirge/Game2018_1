@@ -9,6 +9,7 @@ public abstract class AmmoPrefab : MonoBehaviour
     protected Rigidbody2D MyRigi;
     public virtual int BaseDamage { get; protected set; }
     public virtual int Damage { get { return BaseDamage; } }
+    public bool IsDavestated = false;
     public virtual void Init(Dictionary<string, object> _dic)
     {
         IsLaunching = false;
@@ -30,8 +31,10 @@ public abstract class AmmoPrefab : MonoBehaviour
     }
     public virtual void SelfDestroy()
     {
+        IsDavestated = true;
         BattleManager.RemoveFromStartPauseFnc(PauseGame);
         BattleManager.RemoveFromEndPauseFnc(ResumeGame);
+        BattleManager.CheckAliveAmmoToContinueShoot();
         Destroy(gameObject);
     }
 

@@ -57,7 +57,6 @@ public abstract partial class RolePrefab : MonoBehaviour
     }
     public virtual void ShieldBeSruck(int _dmg)
     {
-        ReceiveDmg(_dmg);
     }
     public virtual void ReceiveDmg(int _dmg)
     {

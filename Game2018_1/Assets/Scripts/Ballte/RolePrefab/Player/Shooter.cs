@@ -5,7 +5,7 @@ using UnityEngine;
 public partial class PlayerRole
 {
     [SerializeField]
-    PlayerAmmoSpawner MyAmmoSpawner;
+    public PlayerAmmoSpawner MyAmmoSpawner;
     [SerializeField]
     GameObject StartPosPrefab;
     [SerializeField]
@@ -53,6 +53,8 @@ public partial class PlayerRole
         }
         if (Input.GetMouseButton(0))
         {
+            if (!IsPress)
+                return;
             Ray ray = MyCamera.ScreenPointToRay(Input.mousePosition);
             CurPos = ray.origin + (ray.direction * MyCamera.transform.position.z * -1);
             Go_EndPos.transform.position = CurPos;;

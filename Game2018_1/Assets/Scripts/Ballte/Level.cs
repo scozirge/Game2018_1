@@ -11,6 +11,7 @@ public partial class BattleManager : MonoBehaviour {
     }
     public static void Settlement()
     {
+        //存資料
         Dictionary<string, object> data = new Dictionary<string, object>();
         data.Add("WeaknessStrikeTimes", WeaknessStrikeTimes);
         data.Add("MaxComboStrikes", MaxComboStrikes);
@@ -19,9 +20,9 @@ public partial class BattleManager : MonoBehaviour {
         data.Add("Kill", Kill);
         data.Add("Score", Score);
         data.Add("HighestScoring", HighestScoring);
+        Player.UpdateRecord(data);
+        //
         BattleCanvas.Settle(data);
-        if (Score > HighestScoring)
-            PlayerPrefs.SetInt("Score", Score);
         SetPause(true);
     }
     public static void Win()

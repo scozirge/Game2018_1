@@ -20,8 +20,14 @@ public partial class ServerRequest : MonoBehaviour
     static void SendSignUpQuest()
     {
         WWWForm form = new WWWForm();
-        string requestTime = DateTime.Now.ToString("yyyy-MM-dd  HH:mm:ss");//命令時間，格式2015-11-25 15:39:36
-        WWW w = new WWW(string.Format("{0}{1}",GetServerURL(),"QuickSignUp.php"), form);
+        //string requestTime = DateTime.Now.ToString("yyyy-MM-dd  HH:mm:ss");//命令時間，格式2015-11-25 15:39:36
+        form.AddField("BestScore", Player.BestScore);
+        form.AddField("Kills", Player.Kills);
+        form.AddField("Shot", Player.Shot);
+        form.AddField("CriticalHit", Player.CriticalHit);
+        form.AddField("Death", Player.Death);
+        form.AddField("CriticalCombo", Player.CriticalCombo);
+        WWW w = new WWW(string.Format("{0}{1}", GetServerURL(), "QuickSignUp.php"), form);
         //設定為正等待伺服器回傳
         WaitCB_QuickSignUp = true;
         Conn.StartCoroutine(Coroutine_QuickSignUpCB(w));
@@ -33,7 +39,7 @@ public partial class ServerRequest : MonoBehaviour
     static IEnumerator Coroutine_QuickSignUpCB(WWW w)
     {
         if (ReSendQuestTimes_QuickSignUp == MaxReSendQuestTimes_QuickSignUp)
-            CaseLogManager.ShowCaseLog(30002);//註冊帳戶中
+            if (ShowLoading) CaseLogManager.ShowCaseLog(30002);//註冊帳戶中
         yield return w;
         Debug.LogWarning(w.text);
         if (WaitCB_QuickSignUp)
@@ -55,12 +61,12 @@ public partial class ServerRequest : MonoBehaviour
                     else if (result[0] == ServerCBCode.Fail.ToString())
                     {
                         int caseID = int.Parse(result[1]);
-                        CaseLogManager.ShowCaseLog(caseID);
+                        if (ShowLoading) CaseLogManager.ShowCaseLog(caseID);
                         PopupUI.HideLoading();//隱藏Loading
                     }
                     else
                     {
-                        CaseLogManager.ShowCaseLog(2004);
+                        if (ShowLoading) CaseLogManager.ShowCaseLog(2004);
                         PopupUI.HideLoading();//隱藏Loading
                     }
                 }
@@ -68,15 +74,15 @@ public partial class ServerRequest : MonoBehaviour
                 catch (Exception ex)
                 {
                     Debug.LogException(ex);
-                    CaseLogManager.ShowCaseLog(2003);//註冊例外
+                    if (ShowLoading) CaseLogManager.ShowCaseLog(2003);//註冊例外
                     PopupUI.HideLoading();//隱藏Loading
                 }
             }
             //////////////////回傳null////////////////
             else
             {
-                Debug.LogError(w.error);
-                CaseLogManager.ShowCaseLog(2); ;//連線不到server
+                Debug.LogWarning(w.error);
+                if (ShowLoading) CaseLogManager.ShowCaseLog(2); ;//連線不到server
                 PopupUI.HideLoading();//隱藏Loading
             }
         }
@@ -97,14 +103,14 @@ public partial class ServerRequest : MonoBehaviour
             if (ReSendQuestTimes_QuickSignUp > 0)
             {
                 ReSendQuestTimes_QuickSignUp--;
-                CaseLogManager.ShowCaseLog(30001);//連線逾時，嘗試重複連線請玩家稍待
+                if (ShowLoading) CaseLogManager.ShowCaseLog(30001);//連線逾時，嘗試重複連線請玩家稍待
                 //向Server重送要求
                 SendSignUpQuest();
             }
             else
             {
                 WaitCB_QuickSignUp = false;//設定為false代表不接受回傳了
-                CaseLogManager.ShowCaseLog(40001); ;//請玩家檢查網路狀況或一段時間再嘗試連線
+                if (ShowLoading) CaseLogManager.ShowCaseLog(40001); ;//請玩家檢查網路狀況或一段時間再嘗試連線
                 //CaseLogManager.ShowCaseLog(11);//請玩家檢查網路狀況或一段時間再嘗試連線
                 PopupUI.HideLoading();//隱藏Loading
             }
