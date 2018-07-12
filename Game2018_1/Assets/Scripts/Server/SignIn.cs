@@ -25,6 +25,7 @@ public partial class ServerRequest : MonoBehaviour
         form.AddField("CriticalHit", Player.CriticalHit);
         form.AddField("Death", Player.Death);
         form.AddField("CriticalCombo", Player.CriticalCombo);
+        form.AddField("FBID", Player.FBID);
         WWW w = new WWW(string.Format("{0}{1}", GetServerURL(), "SignIn.php"), form);
         //設定為正等待伺服器回傳
         WaitCB_SignIn = true;

@@ -12,7 +12,7 @@ public partial class ServerRequest : MonoBehaviour
         //判斷若還沒登入要先進行登入
         if (!Player.IsRigister)
         {
-            GameManager.AutoLogin();
+            Player.AutoLogin();
             return;
         }
         ReSendQuestTimes_Settlement = MaxReSendQuestTimes_Settlement;//重置重送要求給Server的次數

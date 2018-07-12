@@ -16,6 +16,8 @@ public partial class Player
     public static int Death { get; protected set; }
     public static int CriticalCombo { get; protected set; }
 
+    public static string FBID { get; private set; }
+
     public static void Init()
     {
         //PlayerPrefs.DeleteAll();//清除玩家資料
@@ -36,6 +38,9 @@ public partial class Player
             Death = PlayerPrefs.GetInt("Death");
         if (PlayerPrefs.GetInt("CriticalCombo") != 0)
             CriticalCombo = PlayerPrefs.GetInt("CriticalCombo");
+
+        if (PlayerPrefs.GetString("FBID") != "")
+            FBID = PlayerPrefs.GetString("FBID");
     }
     public static void UpdateRecord(Dictionary<string, object> _data)
     {
@@ -54,6 +59,34 @@ public partial class Player
         PlayerPrefs.SetInt("Death", Death);
         PlayerPrefs.SetInt("CriticalCombo", CriticalCombo);
         ServerRequest.Settlement();//資料送server
+    }
+    public static void AutoLogin()
+    {
+        //如果本地有儲存障密的話
+        if (Player.AC == null || Player.ACPass == null)
+        {
+            ServerRequest.QuickSignUp();
+        }
+        else
+        {
+            ServerRequest.SignIn();
+        }
+    }
+    public static void SetFBUserID(string _id)
+    {
+        if (FBID == _id)
+        {
+            AutoLogin();
+        }
+        else if (FBID == "")
+        {
+            AutoLogin();
+        }
+        else if (FBID != _id)
+        {
+
+        }
+        PlayerPrefs.SetString("FBID", _id);
     }
     public static void Test()
     {

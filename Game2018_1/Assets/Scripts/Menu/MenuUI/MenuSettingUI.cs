@@ -15,4 +15,11 @@ public class MenuSettingUI : MonoBehaviour {
     {
         Debug.Log(string.Format("音樂關閉{0}", Music_Toggle.isOn));
     }
+    public void FBLogin()
+    {
+        if (!FBManager.IsInit)
+            FBManager.Init();
+        else
+            FBManager.Login();
+    }
 }

@@ -13,6 +13,8 @@ public partial class GameManager : MonoBehaviour
     [SerializeField]
     GoogleADManager GoogleAdmobPrefab;
     [SerializeField]
+    FBManager FBPrefab;
+    [SerializeField]
     ServerRequest SR;
     void Start()
     {
@@ -22,15 +24,18 @@ public partial class GameManager : MonoBehaviour
             DeployPopupUI();
         if (!GameDictionary.IsInit)
             GameDictionary.InitDic();
+        if (!GoogleADManager.IsInit)
+            DeployGoogleAdmob();
+        if (!FBManager.IsSpawn)
+            DeployFacebook();
         if (IsInit)
             return;
         Player.Init();
-        DeployGoogleAdmob();
         DontDestroyOnLoad(gameObject);
-        GameManager.ChangeScene("Menu");
-        IsInit = true;
         SR.Init();
-        AutoLogin();
+        Player.AutoLogin();
+        IsInit = true;
+        GameManager.ChangeScene("Menu");
     }
     void DeployDebugger()
     {
@@ -49,17 +54,9 @@ public partial class GameManager : MonoBehaviour
         GameObject googleAdMobGo = Instantiate(GoogleAdmobPrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
         googleAdMobGo.transform.position = Vector3.zero;
     }
-    public static void AutoLogin()
+    void DeployFacebook()
     {
-        //如果本地有儲存障密的話
-        if (Player.AC == null || Player.ACPass == null)
-        {
-            ServerRequest.QuickSignUp();
-        }
-        else
-        {
-            ServerRequest.SignIn();
-        }
-
+        GameObject FacebookGo = Instantiate(FBPrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
+        FacebookGo.transform.position = Vector3.zero;
     }
 }

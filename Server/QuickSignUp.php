@@ -26,6 +26,7 @@ if ($numrows == 0)
 	$criticalHit=$_POST['CriticalHit'];
 	$death=$_POST['Death'];
 	$criticalCombo=$_POST['CriticalCombo'];	
+	$FBID=$_POST['FBID'];	
 	$name="unnamed";
 	//使用Server資料
     // $score=0;
@@ -41,7 +42,7 @@ if ($numrows == 0)
     $con_w = mysql_connect($db_host_write,$db_user,$db_pass,true) or ("Fail:1:"  . mysql_error());
     if (!$con_w)
         die('Fail:1:' . mysql_error());
-    $signUpResult = mysql_query("INSERT INTO  ".$db_name.".playeraccount (   `account` ,`name` ,`score`,`kills`,`shot`,`criticalHit`,`death`,`criticalCombo`,`SignInTime`,`SignUpTime`) VALUES ( '".$ac."' , '".$name."', '".$score."' , '".$kills."' , '".$shot."' , '".$criticalHit."' , '".$death."' , '".$criticalCombo."','".$signUpTime."','".$signUpTime."') ; ",$con_w);
+    $signUpResult = mysql_query("INSERT INTO  ".$db_name.".playeraccount (   `account` ,`name` ,`score`,`kills`,`shot`,`criticalHit`,`death`,`criticalCombo`,`SignInTime`,`SignUpTime`,`FBID`) VALUES ( '".$ac."' , '".$name."', '".$score."' , '".$kills."' , '".$shot."' , '".$criticalHit."' , '".$death."' , '".$criticalCombo."','".$signUpTime."','".$signUpTime."','".$FBID."') ; ",$con_w);
 	if ($signUpResult)
 	{
 		//寫入玩家名稱player+流水號
