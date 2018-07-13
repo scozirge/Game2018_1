@@ -15,7 +15,7 @@ $con_l = mysql_connect($db_host_write,$db_user,$db_pass) or ("Fail:2:"  . mysql_
 if (!$con_l)
 	die('Fail:2:' . mysql_error());
 mysql_select_db($db_name , $con_l) or die ("Fail:3:" . mysql_error());
-$result = mysql_query("SELECT * FROM ".$db_name.".playeraccount WHERE `Account`='".$ac."'",$con_l);
+$result = mysql_query("SELECT * FROM ".$db_name.".playeraccount WHERE `account`='".$ac."'",$con_l);
 $dataNum = mysql_num_rows($result );
 if ($dataNum == 0)
 {
@@ -57,7 +57,6 @@ if($head != "u.6vu4" || $tail != "gk4ru4")
 			$criticalHit=$_POST['CriticalHit'];
 			$death=$_POST['Death'];
 			$criticalCombo=$_POST['CriticalCombo'];
-			$FBID=$_POST['FBID'];	
 			//登入時間
 			date_default_timezone_set('Asia/Taipei');
 			$LastSignIn= date("Y/m/d H:i:s");
@@ -69,7 +68,7 @@ if($head != "u.6vu4" || $tail != "gk4ru4")
 			//使用server資料
 			//$set = mysql_query("UPDATE `playeraccount` SET `SignInTime` = '".$LastSignIn."' WHERE `Account` = '".$ac."' ",$con_w);
 			//使用本基資料
-			$set = mysql_query("UPDATE `playeraccount` SET `score` = '".$Score."', `kills` = '".$kills."', `shot` = '".$shot."', `criticalHit` = '".$criticalHit."', `death` = '".$death."', `criticalCombo` = '".$criticalCombo."', `SignInTime` = '".$LastSignIn."', `FBID` = '".$FBID."' WHERE `Account` = '".$ac."' ",$con_w);
+			$set = mysql_query("UPDATE `playeraccount` SET `score` = '".$Score."', `kills` = '".$kills."', `shot` = '".$shot."', `criticalHit` = '".$criticalHit."', `death` = '".$death."', `criticalCombo` = '".$criticalCombo."', `SignInTime` = '".$LastSignIn."' WHERE `Account` = '".$ac."' ",$con_w);
 			//更新資料的回傳結果
             if($set)
 			{

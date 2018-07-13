@@ -26,6 +26,8 @@ public partial class ServerRequest : MonoBehaviour
         form.AddField("Death", Player.Death);
         form.AddField("CriticalCombo", Player.CriticalCombo);
         form.AddField("FBID", Player.FBID);
+        Debug.Log(Player.AC);
+        Debug.Log(Player.FBID);
         WWW w = new WWW(string.Format("{0}{1}", GetServerURL(), "FBBinding.php"), form);
         //設定為正等待伺服器回傳
         WaitCB_FBBinding = true;
@@ -38,7 +40,7 @@ public partial class ServerRequest : MonoBehaviour
     static IEnumerator Coroutine_FBBindingCB(WWW w)
     {
         if (ReSendQuestTimes_FBBinding == MaxReSendQuestTimes_FBBinding)
-            if (ShowLoading) CaseLogManager.ShowCaseLog(30003);//登入中
+            CaseLogManager.ShowCaseLog(30003);//登入中
         yield return w;
         Debug.LogWarning(w.text);
         if (WaitCB_FBBinding)
@@ -50,22 +52,36 @@ public partial class ServerRequest : MonoBehaviour
                 {
                     string[] result = w.text.Split(':');
                     //////////////////成功////////////////
-                    if (result[0] == ServerCBCode.Success.ToString())
+                    if (result[0] == "UpdateAC")//server找到FBID 且跟現在本基帳號依樣 將現在資料跟FBID存到server
+                    {
+                        Player.UpdateACFB_CallBack();
+                        PopupUI.HideLoading();//隱藏Loading
+                    }
+                    else if (result[0] == "ChangeAC")//server找到FBID 但跟本基帳號不一樣 依造FB帳號的server資料傳到本機
                     {
                         string[] data = result[1].Split(',');
-                        //Player.FBBindingGetData(data);
+                        Player.ChangeACFB_CallBack(data);
+                    }
+                    else if (result[0] == "BlindingFB")//server找不到FBID 但找到相同帳號 將FBID跟現在資料存到servery上
+                    {
+                        Player.BlindingFB_CallBack();
                         PopupUI.HideLoading();//隱藏Loading
+                    }
+                    else if (result[0] == "NoAC")//server找不到FBID 也找不到相同帳號 創立新帳號在server並將資料跟FBID傳到server上
+                    {
+                        string[] data = result[1].Split(',');
+                        Player.NoACFB_CallBack(data);
                     }
                     //////////////////失敗///////////////
                     else if (result[0] == ServerCBCode.Fail.ToString())
                     {
                         int caseID = int.Parse(result[1]);
-                        if (ShowLoading) CaseLogManager.ShowCaseLog(caseID);
+                        CaseLogManager.ShowCaseLog(caseID);
                         PopupUI.HideLoading();//隱藏Loading
                     }
                     else
                     {
-                        if (ShowLoading) CaseLogManager.ShowCaseLog(2004);
+                        CaseLogManager.ShowCaseLog(2004);
                         PopupUI.HideLoading();//隱藏Loading
                     }
                 }
@@ -73,7 +89,7 @@ public partial class ServerRequest : MonoBehaviour
                 catch (Exception ex)
                 {
                     Debug.LogException(ex);
-                    if (ShowLoading) CaseLogManager.ShowCaseLog(2003);//註冊例外
+                    CaseLogManager.ShowCaseLog(2003);//註冊例外
                     PopupUI.HideLoading();//隱藏Loading
                 }
             }
@@ -81,7 +97,7 @@ public partial class ServerRequest : MonoBehaviour
             else
             {
                 Debug.LogWarning(w.error);
-                if (ShowLoading) CaseLogManager.ShowCaseLog(2); ;//連線不到server
+                CaseLogManager.ShowCaseLog(2); ;//連線不到server
                 PopupUI.HideLoading();//隱藏Loading
             }
         }
@@ -102,14 +118,14 @@ public partial class ServerRequest : MonoBehaviour
             if (ReSendQuestTimes_FBBinding > 0)
             {
                 ReSendQuestTimes_FBBinding--;
-                if (ShowLoading) CaseLogManager.ShowCaseLog(30001);//連線逾時，嘗試重複連線請玩家稍待
+                CaseLogManager.ShowCaseLog(30001);//連線逾時，嘗試重複連線請玩家稍待
                 //向Server重送要求
                 SendFBBindingQuest();
             }
             else
             {
                 WaitCB_FBBinding = false;//設定為false代表不接受回傳了
-                if (ShowLoading) CaseLogManager.ShowCaseLog(40001); ;//請玩家檢查網路狀況或一段時間再嘗試連線
+                CaseLogManager.ShowCaseLog(40001); ;//請玩家檢查網路狀況或一段時間再嘗試連線
                 //CaseLogManager.ShowCaseLog(11);//請玩家檢查網路狀況或一段時間再嘗試連線
                 PopupUI.HideLoading();//隱藏Loading
             }

@@ -1,4 +1,4 @@
-server找到FBID 且跟現在本基帳號依樣 將現在資料存到server
-server找到FBID 但跟本基帳號不一樣 依造FB帳號的server資料傳到本機
-server找不到FBID 但找到相同帳號 將FBID跟現在資料存到servery上
-本基沒有帳號 創立新帳號在server並將資料跟FBID傳到server上
+//server找到FBID 且跟現在本基帳號依樣 將現在資料跟FBID存到server 回傳:UpdateAC
+//server找到FBID 但跟本基帳號不一樣 依造FB帳號的server資料傳到本機 回傳:ChangeAC
+//server找不到FBID 但找到相同帳號 將FBID跟現在資料存到servery上 回傳:BlindingFB
+//server找不到FBID 也找不到相同帳號 創立新帳號在server並將資料跟FBID傳到server上 回傳:NoAC

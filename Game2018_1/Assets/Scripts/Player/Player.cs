@@ -74,19 +74,9 @@ public partial class Player
     }
     public static void SetFBUserID(string _id)
     {
-        if (FBID == _id)
-        {
-            AutoLogin();
-        }
-        else if (FBID == "")
-        {
-            AutoLogin();
-        }
-        else if (FBID != _id)
-        {
-
-        }
-        PlayerPrefs.SetString("FBID", _id);
+        FBID = _id;
+        PlayerPrefs.SetString("FBID", FBID);
+        ServerRequest.FBBinding();
     }
     public static void Test()
     {
