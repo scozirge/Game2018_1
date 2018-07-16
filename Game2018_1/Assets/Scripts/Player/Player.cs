@@ -15,6 +15,7 @@ public partial class Player
     public static int CriticalHit { get; protected set; }
     public static int Death { get; protected set; }
     public static int CriticalCombo { get; protected set; }
+    public static string LeaderboardData { get; protected set; }
 
     public static string FBID { get; private set; }
 
@@ -38,6 +39,8 @@ public partial class Player
             Death = PlayerPrefs.GetInt("Death");
         if (PlayerPrefs.GetInt("CriticalCombo") != 0)
             CriticalCombo = PlayerPrefs.GetInt("CriticalCombo");
+        if (PlayerPrefs.GetString("LeaderboardData") != "")
+            LeaderboardData = PlayerPrefs.GetString("LeaderboardData");
 
         if (PlayerPrefs.GetString("FBID") != "")
             FBID = PlayerPrefs.GetString("FBID");
@@ -76,7 +79,7 @@ public partial class Player
     {
         FBID = _id;
         PlayerPrefs.SetString("FBID", FBID);
-        ServerRequest.FBBinding();
+        ServerRequest.FBLogin();
     }
     public static void Test()
     {

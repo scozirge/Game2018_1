@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
 public class RecordUI : MonoBehaviour
 {
-
+    static RecordUI Myself;
     [SerializeField]
     Text PlayerRecord_Title;
     [SerializeField]
@@ -39,6 +40,15 @@ public class RecordUI : MonoBehaviour
     Text Death_Value;
     [SerializeField]
     Text CriticalCombo_Value;
+    [SerializeField]
+    Image FBIcon;
+
+    public void Init()
+    {
+        Myself = this;
+        gameObject.SetActive(true);
+        gameObject.SetActive(false);
+    }
 
     void OnEnable()
     {
@@ -52,12 +62,36 @@ public class RecordUI : MonoBehaviour
         CriticalCombo_Title.text = GameDictionary.String_UIDic["MaxComboStrikes"].GetString(Player.UseLanguage);
         Post_Title.text = GameDictionary.String_UIDic["Post"].GetString(Player.UseLanguage);
         Back_Title.text = GameDictionary.String_UIDic["Back"].GetString(Player.UseLanguage);
-
         Kill_Value.text = Player.Kills.ToString();
         Accuracy_Value.text = string.Format("{0}%", TextManager.ToPercent(Player.Accuracy));
         Shot_Value.text = Player.Shot.ToString();
         CriticalHit_Value.text = Player.CriticalHit.ToString();
         Death_Value.text = Player.Death.ToString();
         CriticalCombo_Value.text = Player.CriticalCombo.ToString();
+        RefreshFBIcon();
+    }
+    public static void RefreshFBIcon()
+    {
+        if (FBManager.IsGetIcon)
+        {
+            Texture2D t = FBManager.FBICon;
+            Sprite s = Sprite.Create(t, new Rect(0, 0, t.width, t.height), new Vector2(0.5f, 0.5f));
+            Myself.FBIcon.sprite = s;
+            Myself.FBIcon.gameObject.SetActive(true);
+
+            IOManager.SaveTextureAsPNG(t, string.Format("{0}/{1}", Application.persistentDataPath, Player.FBID));
+        }
+        else
+        {
+            //FBManager.GetProfilePhoto();
+            if (File.Exists(string.Format("{0}/{1}", Application.persistentDataPath, Player.FBID)))
+            {
+                Myself.FBIcon.sprite = IOManager.LoadPNGAsSprite(string.Format("{0}/{1}", Application.persistentDataPath, Player.FBID));
+                Myself.FBIcon.gameObject.SetActive(true);
+            }
+            else
+            {
+            }
+        }
     }
 }

@@ -73,12 +73,16 @@ public partial class ServerRequest : MonoBehaviour
                     else if (result[0] == ServerCBCode.Fail.ToString())
                     {
                         int caseID = int.Parse(result[1]);
-                        CaseLogManager.ShowCaseLog(caseID);
+                        //CaseLogManager.ShowCaseLog(caseID);
+                        Debug.LogWarning("取得排行榜資料失敗");
+                        LeaderboardUI.GetChampionData(Player.LeaderboardData);
                         PopupUI.HideLoading();//隱藏Loading
                     }
                     else
                     {
-                        CaseLogManager.ShowCaseLog(2004);
+                        //CaseLogManager.ShowCaseLog(2004);
+                        Debug.LogWarning("取得排行榜資料失敗");
+                        LeaderboardUI.GetChampionData(Player.LeaderboardData);
                         PopupUI.HideLoading();//隱藏Loading
                     }
                 }
@@ -86,7 +90,9 @@ public partial class ServerRequest : MonoBehaviour
                 catch (Exception ex)
                 {
                     Debug.LogException(ex);
-                    CaseLogManager.ShowCaseLog(2003);//註冊例外
+                    Debug.LogWarning("取得排行榜資料失敗");
+                    LeaderboardUI.GetChampionData(Player.LeaderboardData);
+                    //CaseLogManager.ShowCaseLog(2003);//註冊例外
                     PopupUI.HideLoading();//隱藏Loading
                 }
             }
@@ -94,7 +100,9 @@ public partial class ServerRequest : MonoBehaviour
             else
             {
                 Debug.LogWarning(w.error);
-                CaseLogManager.ShowCaseLog(2); ;//連線不到server
+                Debug.LogWarning("取得排行榜資料失敗");
+                LeaderboardUI.GetChampionData(Player.LeaderboardData);
+                //CaseLogManager.ShowCaseLog(2); ;//連線不到server
                 PopupUI.HideLoading();//隱藏Loading
             }
         }
@@ -122,7 +130,9 @@ public partial class ServerRequest : MonoBehaviour
             else
             {
                 WaitCB_Leaderboard = false;//設定為false代表不接受回傳了
-                CaseLogManager.ShowCaseLog(40001); ;//請玩家檢查網路狀況或一段時間再嘗試連線
+                Debug.LogWarning("取得排行榜資料失敗");
+                LeaderboardUI.GetChampionData(Player.LeaderboardData);
+                //CaseLogManager.ShowCaseLog(40001); ;//請玩家檢查網路狀況或一段時間再嘗試連線
                 //CaseLogManager.ShowCaseLog(11);//請玩家檢查網路狀況或一段時間再嘗試連線
                 PopupUI.HideLoading();//隱藏Loading
             }

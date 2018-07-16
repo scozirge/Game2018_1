@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LeaderboardUI : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class LeaderboardUI : MonoBehaviour
     Transform ItemParent;
     [SerializeField]
     int MaxItemNum = 100;
+
     bool IsSpawn;
 
 
@@ -23,7 +25,7 @@ public class LeaderboardUI : MonoBehaviour
     {
 
         Myself = this;
-        ServerRequest.GetLeaderboard();            
+        ServerRequest.GetLeaderboard();
     }
 
     public static void GetChampionData(string _str)
@@ -33,18 +35,18 @@ public class LeaderboardUI : MonoBehaviour
         for (int i = 0; i < strData.Length; i++)
         {
             string[] data = strData[i].Split('$');
-            ChampionData cd = new ChampionData(data[0], int.Parse(data[1]));
+            ChampionData cd = new ChampionData(data[0], int.Parse(data[1]), data[2]);
             CDList.Add(cd);
         }
         if (!Myself.IsSpawn)
             Myself.SpawnItem(CDList);
         else
             Myself.RefreshItems(CDList);
+        Player.LeaderBoard_CB(_str);
     }
 
     public void SpawnItem(List<ChampionData> _list)
     {
-        Debug.Log("a");
         LBIList = new List<LeaderboardItemUI>();
         for (int i = 0; i < MaxItemNum; i++)
         {
@@ -64,7 +66,6 @@ public class LeaderboardUI : MonoBehaviour
     }
     public void RefreshItems(List<ChampionData> _list)
     {
-        Debug.Log("b");
         if (LBIList == null)
             return;
         int dataCount = _list.Count;

@@ -42,7 +42,7 @@ public partial class Player
         */
         IsRigister = true;
     }
-    public static void NoACFB_CallBack(string[] _data)
+    public static void FBLogin_CB1(string[] _data)
     {
         AC = _data[0];
         ACPass = _data[1];
@@ -52,34 +52,13 @@ public partial class Player
         PlayerPrefs.SetString("Name", Name);
         IsRigister = true;
     }
-    public static void ChangeACFB_CallBack(string[] _data)
-    {
-        AC = _data[0];
-        ACPass = _data[1];
-        Name = _data[2];
-        BestScore = int.Parse(_data[3]);
-        Kills = int.Parse(_data[4]);
-        Shot = int.Parse(_data[5]);
-        CriticalHit = int.Parse(_data[6]);
-        Death = int.Parse(_data[7]);
-        CriticalCombo = int.Parse(_data[8]);
-        PlayerPrefs.SetString("AC", AC);
-        PlayerPrefs.SetString("ACPass", ACPass);
-        PlayerPrefs.SetString("Name", Name);
-        PlayerPrefs.SetInt("BestScore", BestScore);
-        PlayerPrefs.SetInt("Kills", Kills);
-        PlayerPrefs.SetInt("Shot", Shot);
-        PlayerPrefs.SetInt("CriticalHit", CriticalHit);
-        PlayerPrefs.SetInt("Death", Death);
-        PlayerPrefs.SetInt("CriticalCombo", CriticalCombo);
-        IsRigister = true;
-    }
-    public static void UpdateACFB_CallBack()
+    public static void FBLogin_CB2()
     {
         IsRigister = true;
     }
-    public static void BlindingFB_CallBack()
+    public static void LeaderBoard_CB(string _data)
     {
-        IsRigister = true;
+        LeaderboardData = _data;
+        PlayerPrefs.SetString("LeaderboardData", _data);
     }
 }

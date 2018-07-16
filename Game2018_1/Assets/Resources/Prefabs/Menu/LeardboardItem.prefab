@@ -135,7 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name_Text: {fileID: 114501225927244278}
   Score_Text: {fileID: 114618561835839820}
-  Icon: {fileID: 114073640628291626}
+  Icon_Sprite: {fileID: 114073640628291626}
 --- !u!114 &114501225927244278
 MonoBehaviour:
   m_ObjectHideFlags: 1

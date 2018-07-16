@@ -17,6 +17,7 @@ public class MenuCanvas : MonoBehaviour
     {
         if (!GameDictionary.IsInit)
             GameDictionary.InitDic();
+        MyRecordUI.Init();
         Start_Title.text = GameDictionary.String_UIDic["Start"].GetString(Player.UseLanguage);
     }
     public void CallRecordUI(bool _bool)

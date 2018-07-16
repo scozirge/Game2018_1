@@ -40,7 +40,7 @@ if($diffTime>60)
 	if (!$con_l)
 		die('Fail:1:' . mysql_error());
 	mysql_select_db($db_name , $con_l) or die ('Fail:1:' . mysql_error());
-    $getTopRank = mysql_query("SELECT `name`,`score` FROM `playeraccount` ORDER by `score` DESC LIMIT 50",$con_l);
+    $getTopRank = mysql_query("SELECT `name`,`score`,`FBID` FROM `playeraccount` ORDER by `score` DESC LIMIT 50",$con_l);
     $currentRankStr='';
     $dataCount=0;
     //依照取得的陣列設定排行榜文字
@@ -48,7 +48,7 @@ if($diffTime>60)
     {
         if($dataCount!=0)
             $currentRankStr.='/';
-        $currentRankStr.=$row[0].'$'.$row[1];
+        $currentRankStr.=$row[0].'$'.$row[1].'$'.$row[2];
         $dataCount++;
     }
     $con_w = mysql_connect($db_host_write,$db_user,$db_pass,true) or ("'Fail:1:"  . mysql_error());
