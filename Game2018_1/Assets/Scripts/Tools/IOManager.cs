@@ -9,7 +9,7 @@ public class IOManager : MonoBehaviour
     {
         byte[] _bytes = _texture.EncodeToPNG();
         System.IO.File.WriteAllBytes(_fullPath, _bytes);
-        Debug.Log(_bytes.Length / 1024 + "Kb was saved as: " + _fullPath);
+        //Debug.Log(_bytes.Length / 1024 + "Kb was saved as: " + _fullPath);
     }
     public static Sprite LoadPNGAsSprite(string _fullPath)
     {

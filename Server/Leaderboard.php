@@ -55,13 +55,15 @@ if($diffTime>60)
     if (!$con_w)
         die('Fail:20:' . mysql_error());
     mysql_select_db($db_name , $con_w) or die ('Fail:1:' . mysql_error());
+    $result=mysql_query("SELECT count(*) as total from playeraccount",$con_l);
+	$count=mysql_fetch_assoc($result);
     //將這次抓取排行榜的時間寫到玩家資料中
 	//$updateRequest = mysql_query("UPDATE `PlayerAccount` SET  `RequestTimes` = '".$requestTimes."' WHERE `Account` = '".$account."' ",$con_w);
     //計算執行時間
     $time_end = microtime(true);
     $executeTime = $time_end - $time_start;
     //送回排行榜字串給Client
-    die ("Success:".$currentRankStr.": \nExecuteTime=".$executeTime."");
+    die ("Success:".$currentRankStr.",".$count['total'].": \nExecuteTime=".$executeTime."");
 }
 else
 {

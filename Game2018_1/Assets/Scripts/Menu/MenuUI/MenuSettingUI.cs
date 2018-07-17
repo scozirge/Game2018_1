@@ -7,6 +7,14 @@ public class MenuSettingUI : MonoBehaviour {
     Toggle Sound_Toggle;
     [SerializeField]
     Toggle Music_Toggle;
+    [SerializeField]
+    InputField Name_Text;
+
+    void OnEnable()
+    {
+        Name_Text.text = Player.Name;
+    }
+
     public void UpdateSoundSwitch()
     {
         Debug.Log(string.Format("音效關閉{0}",Sound_Toggle.isOn));
@@ -21,5 +29,9 @@ public class MenuSettingUI : MonoBehaviour {
             FBManager.Init();
         else
             FBManager.Login();
+    }
+    public void ChangeName()
+    {
+        ServerRequest.ChangeName(Name_Text.text);
     }
 }

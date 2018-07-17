@@ -42,6 +42,22 @@ public partial class Player
         */
         IsRigister = true;
     }
+    public static void ChangeName1(string[] _data)
+    {
+        AC = _data[0];
+        ACPass = _data[1];
+        Name = _data[2];
+        PlayerPrefs.SetString("AC", AC);
+        PlayerPrefs.SetString("ACPass", ACPass);
+        PlayerPrefs.SetString("Name", Name);
+        IsRigister = true;
+    }
+    public static void ChangeName2(string[] _data)
+    {
+        Name = _data[0];
+        PlayerPrefs.SetString("Name", Name);
+        IsRigister = true;
+    }
     public static void FBLogin_CB1(string[] _data)
     {
         AC = _data[0];

@@ -11,6 +11,20 @@ public class LeaderboardItemUI : MonoBehaviour
     Text Score_Text;
     [SerializeField]
     Image Icon_Sprite;
+    [SerializeField]
+    Text Rank_Text;
+    [SerializeField]
+    Image RankBot_Image;
+
+    [SerializeField]
+    Sprite Rank1Bot_Prefab;
+    [SerializeField]
+    Sprite Rank2Bot_Prefab;
+    [SerializeField]
+    Sprite Rank3Bot_Prefab;
+    [SerializeField]
+    Sprite Rank4Bot_Prefab;
+
     public Sprite MySprite { get; private set; }
 
     ChampionData MyChampionData;
@@ -20,6 +34,28 @@ public class LeaderboardItemUI : MonoBehaviour
         MyChampionData = _data;
         Name_Text.text = MyChampionData.Name;
         Score_Text.text = MyChampionData.Score.ToString();
+        /*
+         *         if (MyChampionData.Rank > LeaderboardUI.MaxItemNum)
+            Rank_Text.text = string.Format("{0}{1}{2}", GameDictionary.String_UIDic[""].GetString(Player.UseLanguage), 1, "%");
+        else
+         */
+
+        Rank_Text.text = MyChampionData.Rank.ToString();
+        switch (MyChampionData.Rank)
+        {
+            case 1:
+                RankBot_Image.sprite = Rank1Bot_Prefab;
+                break;
+            case 2:
+                RankBot_Image.sprite = Rank2Bot_Prefab;
+                break;
+            case 3:
+                RankBot_Image.sprite = Rank3Bot_Prefab;
+                break;
+            default:
+                RankBot_Image.sprite = Rank4Bot_Prefab;
+                break;
+        }
         if (MyChampionData.FBID != "")
         {
             FBManager.GetChampionIcon(Icon_CB());

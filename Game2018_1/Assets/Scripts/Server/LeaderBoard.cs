@@ -36,8 +36,8 @@ public partial class ServerRequest : MonoBehaviour
         bool pass = false;
         DateTime nowTime = DateTime.Now;
         TimeSpan diffTimeSpan = nowTime - LastUpdateTime_Leaderboard;
-        //如果距離上次更新超過10秒
-        if (diffTimeSpan.TotalSeconds > 1)
+        //如果距離上次更新超過60秒
+        if (diffTimeSpan.TotalMinutes > 1)
         {
             //紀錄上次點更新的時間
             LastUpdateTime_Leaderboard = DateTime.Now;
@@ -72,7 +72,7 @@ public partial class ServerRequest : MonoBehaviour
                     //////////////////失敗///////////////
                     else if (result[0] == ServerCBCode.Fail.ToString())
                     {
-                        int caseID = int.Parse(result[1]);
+                        //int caseID = int.Parse(result[1]);
                         //CaseLogManager.ShowCaseLog(caseID);
                         Debug.LogWarning("取得排行榜資料失敗");
                         LeaderboardUI.GetChampionData(Player.LeaderboardData);

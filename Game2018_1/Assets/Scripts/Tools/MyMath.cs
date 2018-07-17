@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class MyMath : MonoBehaviour
 {
-
+    public static int GetTopProportionInTotal(int _curRank, int _total)
+    {
+        int result = 1;
+        result = _curRank / _total * 100;
+        return result;
+    }
     public static float GetAngerFormTowPoint2D(Vector2 _form, Vector2 _to)
     {
         Vector2 vector = _form - _to;
@@ -16,6 +21,7 @@ public class MyMath : MonoBehaviour
     {
         return (int)(Mathf.Round(_number1 / _number2));
     }
+
     public static float Calculate_ReturnFloat(float _num1, float _num2, Operator _operator)
     {
         float result = 0;

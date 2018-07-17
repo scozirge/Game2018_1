@@ -74,7 +74,7 @@ public class FBManager : MonoBehaviour
             // AccessToken class will have session details
             var aToken = Facebook.Unity.AccessToken.CurrentAccessToken;
             // Print current access token's User ID
-            Player.SetFBUserID("UserID="+aToken.UserId);
+            Player.SetFBUserID(aToken.UserId);
             GetProfilePhoto();
             // Print current access token's granted permissions
             foreach (string perm in aToken.Permissions)

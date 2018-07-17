@@ -11,8 +11,9 @@ public class LeaderboardUI : MonoBehaviour
     [SerializeField]
     Transform ItemParent;
     [SerializeField]
-    int MaxItemNum = 100;
-
+    Text Leaderboard_Text;
+    public static int MaxItemNum = 50;
+    static int TotalChampionNum;
     bool IsSpawn;
 
 
@@ -26,16 +27,20 @@ public class LeaderboardUI : MonoBehaviour
 
         Myself = this;
         ServerRequest.GetLeaderboard();
+        Leaderboard_Text.text = GameDictionary.String_UIDic["Leaderboard"].GetString(Player.UseLanguage);
     }
 
     public static void GetChampionData(string _str)
     {
         CDList = new List<ChampionData>();
-        string[] strData = _str.Split('/');
-        for (int i = 0; i < strData.Length; i++)
+        string[] dataStr = _str.Split(',');
+        TotalChampionNum = int.Parse(dataStr[1]);
+        ChampionData.TotalChampionNum = TotalChampionNum;
+        string[] chData = dataStr[0].Split('/');
+        for (int i = 0; i < chData.Length; i++)
         {
-            string[] data = strData[i].Split('$');
-            ChampionData cd = new ChampionData(data[0], int.Parse(data[1]), data[2]);
+            string[] data = chData[i].Split('$');
+            ChampionData cd = new ChampionData(data[0], int.Parse(data[1]), data[2], i + 1);
             CDList.Add(cd);
         }
         if (!Myself.IsSpawn)

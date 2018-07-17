@@ -16,6 +16,7 @@ public partial class Player
     public static int Death { get; protected set; }
     public static int CriticalCombo { get; protected set; }
     public static string LeaderboardData { get; protected set; }
+    public static int Rank { get; private set; }
 
     public static string FBID { get; private set; }
 
@@ -27,6 +28,8 @@ public partial class Player
             AC = PlayerPrefs.GetString("AC");
         if (PlayerPrefs.GetString("ACPass") != "")
             ACPass = PlayerPrefs.GetString("ACPass");
+        if (PlayerPrefs.GetString("Name") != "")
+            Name = PlayerPrefs.GetString("Name");
         if (PlayerPrefs.GetInt("BestScore") != 0)
             BestScore = PlayerPrefs.GetInt("BestScore");
         if (PlayerPrefs.GetInt("Kills") != 0)
@@ -41,7 +44,6 @@ public partial class Player
             CriticalCombo = PlayerPrefs.GetInt("CriticalCombo");
         if (PlayerPrefs.GetString("LeaderboardData") != "")
             LeaderboardData = PlayerPrefs.GetString("LeaderboardData");
-
         if (PlayerPrefs.GetString("FBID") != "")
             FBID = PlayerPrefs.GetString("FBID");
     }
