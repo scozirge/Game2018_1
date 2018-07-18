@@ -94,4 +94,14 @@ public class RecordUI : MonoBehaviour
             }
         }
     }
+    public void TakeScreenShopAndPostToFB()
+    {
+        FBManager.MyRequest = FBRequest.TakeScreenShot;
+        if (!FBManager.IsInit)
+            FBManager.Init();
+        else if (!FBManager.IsLogin)
+            FBManager.Login();
+        else
+            FBManager.TakeScreenShot();
+    }
 }

@@ -8,6 +8,7 @@ public class SettingUI : MonoBehaviour
     [SerializeField]
     GameObject CheckUI;
 
+
     public void CallSetting(bool _bool)
     {
         gameObject.SetActive(_bool);
@@ -25,4 +26,5 @@ public class SettingUI : MonoBehaviour
     {
         CheckUI.SetActive(_bool);
     }
+
 }

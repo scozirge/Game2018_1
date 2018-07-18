@@ -18,7 +18,6 @@ public class MyRankUI : MonoBehaviour
 
     void OnEnable()
     {
-        Debug.Log(Player.Name);
         Name_Text.text = Player.Name;
         Score_Text.text = Player.BestScore.ToString();
         if (Player.Rank > LeaderboardUI.MaxItemNum)

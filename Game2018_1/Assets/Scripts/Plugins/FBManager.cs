@@ -12,6 +12,7 @@ public class FBManager : MonoBehaviour
     public static bool IsGetIcon;
     public static Texture2D FBICon;
     static FBManager Myself;
+    public static FBRequest MyRequest;
 
     void Awake()
     {
@@ -63,7 +64,7 @@ public class FBManager : MonoBehaviour
     }
     public static void Login()
     {
-        var perms = new List<string>() { "public_profile", "email" };
+        var perms = new List<string>() { "public_profile", "publish_actions" };//, "email"
         FB.LogInWithReadPermissions(perms, AuthCallback);
     }
     static void AuthCallback(ILoginResult result)
@@ -75,7 +76,21 @@ public class FBManager : MonoBehaviour
             var aToken = Facebook.Unity.AccessToken.CurrentAccessToken;
             // Print current access token's User ID
             Player.SetFBUserID(aToken.UserId);
-            GetProfilePhoto();
+            switch (MyRequest)
+            {
+                case FBRequest.Login:
+                    break;
+                case FBRequest.GetPhoto:
+                    GetProfilePhoto();
+                    break;
+                case FBRequest.TakeScreenShot:
+                    TakeScreenShot();
+                    break;
+                default:
+                    break;
+            }
+
+
             // Print current access token's granted permissions
             foreach (string perm in aToken.Permissions)
             {
@@ -135,5 +150,28 @@ public class FBManager : MonoBehaviour
     public static void GetChampionIcon(IEnumerator _cb)
     {
         Myself.StartCoroutine(_cb);
+    }
+
+    public static void TakeScreenShot()
+    {
+        Myself.StartCoroutine(TakeScreenshot());
+    }
+    static IEnumerator TakeScreenshot()
+    {
+        yield return new WaitForEndOfFrame();
+
+        var width = Screen.width;
+        var height = Screen.height;
+        var tex = new Texture2D(width, height, TextureFormat.RGB24, false);
+
+        // Read screen contents into the texture
+        tex.ReadPixels(new Rect(0, 0, width, height), 0, 0);
+        tex.Apply();
+        byte[] screenshot = tex.EncodeToPNG();
+
+        var wwwForm = new WWWForm();
+        wwwForm.AddBinaryData("image", screenshot, "InteractiveConsole.png");
+        wwwForm.AddField("message", "herp derp.  I did a thing!  Did I do this right?");
+        FB.API("me/photos", HttpMethod.POST, HandleResult, wwwForm);
     }
 }

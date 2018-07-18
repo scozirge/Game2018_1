@@ -25,6 +25,8 @@ public partial class BattleCanvas : MonoBehaviour
     UpgradeUI MyUpgradeUI;
     [SerializeField]
     SettlementUI MySettlementUI;
+    [SerializeField]
+    GameObject LeaderboardUI;
 
 
 
@@ -197,5 +199,9 @@ public partial class BattleCanvas : MonoBehaviour
     {
         MySelf.MySettlementUI.gameObject.SetActive(true);
         MySelf.MySettlementUI.Settle(_data);
+    }
+    public void CallLeaderBoardUI(bool _bool)
+    {
+        LeaderboardUI.SetActive(_bool);
     }
 }

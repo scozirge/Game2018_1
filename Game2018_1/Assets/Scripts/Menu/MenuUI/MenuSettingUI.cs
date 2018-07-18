@@ -25,10 +25,13 @@ public class MenuSettingUI : MonoBehaviour {
     }
     public void FBLogin()
     {
+        FBManager.MyRequest = FBRequest.GetPhoto;
         if (!FBManager.IsInit)
             FBManager.Init();
-        else
+        else if (!FBManager.IsLogin)
             FBManager.Login();
+        else
+            PopupUI.ShowWarning("Alerdy Login!", "");
     }
     public void ChangeName()
     {

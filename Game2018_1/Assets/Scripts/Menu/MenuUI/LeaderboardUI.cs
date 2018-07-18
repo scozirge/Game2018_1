@@ -24,7 +24,6 @@ public class LeaderboardUI : MonoBehaviour
 
     void OnEnable()
     {
-
         Myself = this;
         ServerRequest.GetLeaderboard();
         Leaderboard_Text.text = GameDictionary.String_UIDic["Leaderboard"].GetString(Player.UseLanguage);

@@ -36,4 +36,8 @@ public class MenuCanvas : MonoBehaviour
     {
         MyLeaderBoard.gameObject.SetActive(_bool);
     }
+    public void Exit()
+    {
+        Application.Quit();
+    }
 }

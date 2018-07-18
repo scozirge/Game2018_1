@@ -51,7 +51,7 @@ PlayerSettings:
   m_MTRendering: 1
   m_StackTraceTypes: 010000000100000001000000010000000100000001000000
   iosShowActivityIndicatorOnLoading: -1
-  androidShowActivityIndicatorOnLoading: -1
+  androidShowActivityIndicatorOnLoading: 0
   tizenShowActivityIndicatorOnLoading: -1
   iosAppInBackgroundBehavior: 0
   displayResolutionDialog: 1
@@ -158,7 +158,7 @@ PlayerSettings:
   buildNumber:
     iOS: 
   AndroidBundleVersionCode: 1
-  AndroidMinSdkVersion: 19
+  AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 0
   aotOptions: 
