@@ -246,6 +246,7 @@ MonoBehaviour:
   MyAni: {fileID: 95753715877738866}
   Trans_Shield: {fileID: 4829837822205484}
   MyAudio: {fileID: 114568334461662236}
+  DieAduio: {fileID: 8300000, guid: 91c4954166e998e44a69074b3376147d, type: 3}
   MyAmmoSpawner: {fileID: 114924643967990478}
   MoveRangeX: 200
   MovePosY: 400

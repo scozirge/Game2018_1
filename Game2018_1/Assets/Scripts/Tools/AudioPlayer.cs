@@ -51,6 +51,27 @@ public class AudioPlayer : MonoBehaviour
             Init();
         }
     }
+    public void PlaySound(AudioClip _ac)
+    {
+        if (IsInit)
+        {
+            if (GetApplicableAudioSource() != null)
+            {
+                CurAS.clip = _ac;
+                CurAS.Play(0);
+            }
+            else
+            {
+                GetNewAudioSource();
+                CurAS.clip = _ac;
+                CurAS.Play(0);
+            }
+        }
+        else
+        {
+            Init();
+        }
+    }
     AudioSource GetApplicableAudioSource()
     {
         CurAS = null;

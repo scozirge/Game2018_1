@@ -37,11 +37,13 @@ public class EnemyAmmo : AmmoPrefab
         switch (_col.gameObject.tag)
         {
             case "Player":
+                MyAudio.PlaySound(HitAduio);
                 EffectEmitter.EmitParticle("bloodEffect", transform.position, new Vector3(0, 0, 180 - MyMath.GetAngerFormTowPoint2D(BattleManager.MyPlayerRole.transform.position, transform.position)), null);
                 BattleManager.MyPlayerRole.BeStruck(Damage);
                 SelfDestroy();
                 break;
             case "PlayerShield":
+                MyAudio.PlaySound(HitShieldAduio);
                 EffectEmitter.EmitParticle("shieldhit", transform.position, new Vector3(0, 0, 180 - MyMath.GetAngerFormTowPoint2D(BattleManager.MyPlayerRole.transform.position, transform.position)), null);
                 BattleManager.MyPlayerRole.ShieldBeSruck(Damage);
                 SelfDestroy();

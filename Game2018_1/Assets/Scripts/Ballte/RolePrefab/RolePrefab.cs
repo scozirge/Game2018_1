@@ -8,6 +8,8 @@ public abstract partial class RolePrefab : MonoBehaviour
     protected Transform Trans_Shield;
     [SerializeField]
     protected AudioPlayer MyAudio;
+    [SerializeField]
+    protected AudioClip DieAduio;
     public int ShieldAngle { get; protected set; }
     public bool IsAlive { get; protected set; }
     protected Camera MyCamera;
@@ -54,13 +56,11 @@ public abstract partial class RolePrefab : MonoBehaviour
     }
     public virtual void BeStruck(int _dmg)
     {
-        MyAudio.PlaySound("sfx_hit_blood");
         EffectEmitter.EmitParticle("hitEffect", transform.position, Vector3.zero, null);
         ReceiveDmg(_dmg);
     }
     public virtual void ShieldBeSruck(int _dmg)
     {
-        MyAudio.PlaySound("sfx_hit_shield");
     }
     public virtual void ReceiveDmg(int _dmg)
     {
@@ -89,7 +89,7 @@ public abstract partial class RolePrefab : MonoBehaviour
             IsAlive = false;
             EffectEmitter.EmitParticle("deathEffect", transform.position, Vector3.zero, null);
             BattleCanvas.ShowRole(MyForce, false);
-            MyAudio.PlaySound("sfx_death");
+            MyAudio.PlaySound(DieAduio);
         }
         else IsAlive = true;
         return !IsAlive;

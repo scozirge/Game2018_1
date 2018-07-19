@@ -6,6 +6,13 @@ public abstract class AmmoPrefab : MonoBehaviour
 {
     [SerializeField]
     protected AudioPlayer MyAudio;
+    [SerializeField]
+    protected AudioClip HitShieldAduio;
+    [SerializeField]
+    protected AudioClip HitAduio;
+    [SerializeField]
+    protected AudioClip HitWallAduio;
+
     public bool IsLaunching { get; protected set; }
     protected Vector3 Force;
     protected Rigidbody2D MyRigi;

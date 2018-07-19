@@ -32,28 +32,28 @@ public class PlayerAmmo : AmmoPrefab
         switch (_col.gameObject.tag)
         {
             case "LeftCol":
-                MyAudio.PlaySound("sfx_hit_bounce");
+                MyAudio.PlaySound(HitWallAduio);
                 EffectEmitter.EmitParticle("bounceEffect", transform.position, new Vector3(0, 0, 180), null);
                 CameraPrefab.DoAction("Shake", 0);
                 if (Bounce())
                     MyRigi.velocity = new Vector2(MyRigi.velocity.x * -1, MyRigi.velocity.y);
                 break;
             case "RightCol":
-                MyAudio.PlaySound("sfx_hit_bounce");
+                MyAudio.PlaySound(HitWallAduio);
                 EffectEmitter.EmitParticle("bounceEffect", transform.position, Vector3.zero, null);
                 CameraPrefab.DoAction("Shake", 0);
                 if (Bounce())
                     MyRigi.velocity = new Vector2(MyRigi.velocity.x * -1, MyRigi.velocity.y);
                 break;
             case "TopCol":
-                MyAudio.PlaySound("sfx_hit_bounce");
+                MyAudio.PlaySound(HitWallAduio);
                 EffectEmitter.EmitParticle("bounceEffect", transform.position, new Vector3(0, 0, 90), null);
                 CameraPrefab.DoAction("Shake", 0);
                 if (Bounce())
                     MyRigi.velocity = new Vector2(MyRigi.velocity.x, MyRigi.velocity.y * -1);
                 break;
             case "BotCol":
-                MyAudio.PlaySound("sfx_hit_bounce");
+                MyAudio.PlaySound(HitWallAduio);
                 EffectEmitter.EmitParticle("bounceEffect", transform.position, new Vector3(0, 0, 270), null);
                 CameraPrefab.DoAction("Shake", 0);
                 if (Bounce())
@@ -62,6 +62,7 @@ public class PlayerAmmo : AmmoPrefab
             case "EnemyShield":
                 if (IsHitTarget)
                     return;
+                MyAudio.PlaySound(HitShieldAduio);
                 EffectEmitter.EmitParticle("shieldhit", transform.position, new Vector3(0, 0, 180 - MyMath.GetAngerFormTowPoint2D(BattleManager.MyEnemyRole.transform.position, transform.position)), null);
                 BattleManager.MyEnemyRole.ShieldBeSruck(Damage);
                 BattleManager.SetRecord("StrikeTimes", 1, Operator.Plus);
@@ -71,6 +72,7 @@ public class PlayerAmmo : AmmoPrefab
             case "Monster":
                 if (IsHitTarget)
                     return;
+                MyAudio.PlaySound(HitAduio);
                 EffectEmitter.EmitParticle("bloodEffect", transform.position, new Vector3(0, 0, 180 - MyMath.GetAngerFormTowPoint2D(BattleManager.MyEnemyRole.transform.position, transform.position)), null);
                 BattleManager.MyEnemyRole.BeStruck(Damage);
                 BattleManager.SetRecord("WeaknessStrikeTimes", 1, Operator.Plus);
