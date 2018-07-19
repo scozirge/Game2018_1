@@ -40,12 +40,16 @@ public abstract class AmmoPrefab : MonoBehaviour
     {
         MyRigi.AddForce(Force);
         IsLaunching = true;
+        if (FlyingAudio != null)
+            MyAudio.PlayLoopSound(FlyingAudio, name.ToString(), true);
     }
     protected virtual void OnTriggerEnter2D(Collider2D _col)
     {
     }
     public virtual void SelfDestroy()
     {
+        if (FlyingAudio != null)
+            MyAudio.PlayLoopSound(FlyingAudio, name.ToString(), false);
         IsDavestated = true;
         BattleManager.RemoveFromStartPauseFnc(PauseGame);
         BattleManager.RemoveFromEndPauseFnc(ResumeGame);

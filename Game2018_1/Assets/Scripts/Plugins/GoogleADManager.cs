@@ -135,14 +135,22 @@ public class GoogleADManager : MonoBehaviour
     public static void CallRewardBasedVideo()
     {
         Debug.Log("////////////////////////////////////");
-        if (!MySelf || !MySelf.rewardBasedVideo.IsLoaded())
+        if(Application.platform== RuntimePlatform.WindowsEditor)
         {
+            Debug.LogWarning("編輯器直接復活");
             BattleManager.Revive();
-            return;
         }
-        if (MySelf.rewardBasedVideo.IsLoaded())
+        else
         {
-            MySelf.rewardBasedVideo.Show();
+            if (!MySelf || !MySelf.rewardBasedVideo.IsLoaded())
+            {
+                Debug.LogWarning("googleAD尚未初始化");
+                return;
+            }
+            if (MySelf.rewardBasedVideo.IsLoaded())
+            {
+                MySelf.rewardBasedVideo.Show();
+            }
         }
     }
     public static void CallInterstitialAD()

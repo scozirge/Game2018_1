@@ -90,6 +90,7 @@ public abstract partial class RolePrefab : MonoBehaviour
             EffectEmitter.EmitParticle("deathEffect", transform.position, Vector3.zero, null);
             BattleCanvas.ShowRole(MyForce, false);
             MyAudio.PlaySound(DieAduio);
+            BattleManager.DestroyAllAmmo();
         }
         else IsAlive = true;
         return !IsAlive;

@@ -45,7 +45,7 @@ public partial class BattleManager : MonoBehaviour
         MySelf = transform.GetComponent<BattleManager>();
         StartGame();
     }
-    
+
     static void ResetScore()
     {
         StrikeTimes = 0;
@@ -155,6 +155,13 @@ public partial class BattleManager : MonoBehaviour
     {
         if (MyEnemyRole != null)
             MyEnemyRole.SelfDestroy();
+    }
+    public static void DestroyAllAmmo()
+    {
+        if (MyPlayerRole != null)
+            MyPlayerRole.MyAmmoSpawner.DestroyAllAmmos();
+        if (MyEnemyRole != null)
+            MyEnemyRole.MyAmmoSpawner.DestroyAllAmmos();
     }
     public static void AddToStartPauseFnc(PauseFunc _pf)
     {
