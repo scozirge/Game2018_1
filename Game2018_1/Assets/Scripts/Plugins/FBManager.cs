@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Facebook.Unity;
+using System;
 public class FBManager : MonoBehaviour
 {
 
@@ -13,6 +14,7 @@ public class FBManager : MonoBehaviour
     public static Texture2D FBICon;
     static FBManager Myself;
     public static FBRequest MyRequest;
+    Uri link = new Uri("https://www.imdb.com/chart/top?sort=ir,desc&mode=simple&page=1");
 
     void Awake()
     {
@@ -173,5 +175,24 @@ public class FBManager : MonoBehaviour
         wwwForm.AddBinaryData("image", screenshot, "InteractiveConsole.png");
         wwwForm.AddField("message", "herp derp.  I did a thing!  Did I do this right?");
         FB.API("me/photos", HttpMethod.POST, HandleResult, wwwForm);
+    }
+    public static void Feed()
+    {
+        string feedTo = "";
+        Uri link = new Uri("www.google.com");
+        string feedTitle = "";
+        string feedCaption = "";
+        string feedDescription = "";
+        Uri feedImage = new Uri("www.google.com");
+        string feedMediaSource = "";
+        FB.FeedShare(
+        feedTo,
+        link,
+        feedTitle,
+        feedCaption,
+        feedDescription,
+        feedImage,
+        feedMediaSource,
+        HandleResult);
     }
 }
