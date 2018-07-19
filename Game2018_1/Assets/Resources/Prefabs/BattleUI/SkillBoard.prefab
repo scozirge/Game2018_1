@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 114948610120514390}
   - component: {fileID: 114912706144284974}
   - component: {fileID: 114502251171028190}
+  - component: {fileID: 114193348242900676}
   m_Layer: 5
   m_Name: SkillBoard
   m_TagString: Untagged
@@ -130,6 +131,17 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\u751F\u547D\u56DE\u5FA9"
+--- !u!114 &114193348242900676
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1863603801115322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23453e74b9a0b7b49966cca230716054, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114241584035004016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -192,10 +204,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 24
+    m_FontSize: 22
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 2
+    m_MinSize: 0
     m_MaxSize: 110
     m_Alignment: 3
     m_AlignByGeometry: 0
@@ -411,6 +423,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -89.899994, y: 43.9}
-  m_SizeDelta: {x: 281.5, y: 90}
+  m_AnchoredPosition: {x: -89.899994, y: 43}
+  m_SizeDelta: {x: 281.5, y: 79.4}
   m_Pivot: {x: 0, y: 1}
