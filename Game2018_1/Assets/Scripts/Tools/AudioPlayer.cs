@@ -49,6 +49,7 @@ public class AudioPlayer : MonoBehaviour
         else
         {
             Init();
+            CurAS.Play(0);
         }
     }
     public void PlaySound(AudioClip _ac)
@@ -70,6 +71,7 @@ public class AudioPlayer : MonoBehaviour
         else
         {
             Init();
+            CurAS.Play(0);
         }
     }
     AudioSource GetApplicableAudioSource()
