@@ -50,6 +50,7 @@ public class EnemyAmmoSpawner : MonoBehaviour
         for (int i = 0; i < ammoNum; i++)
         {
             GameObject ammoGo = Instantiate(ThatAmmoPrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
+            ammoGo.name = string.Format("enemyAmmo{0}", i);
             EnemyAmmo ea = ammoGo.GetComponent<EnemyAmmo>();
             float divAngle = 360 / ammoNum;
             float x = radius * Mathf.Cos(i * divAngle * Mathf.Deg2Rad) + shooterPos.x;
