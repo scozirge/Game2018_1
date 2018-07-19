@@ -66,7 +66,7 @@ public class FBManager : MonoBehaviour
     }
     public static void Login()
     {
-        var perms = new List<string>() { "public_profile", "publish_actions" };//, "email"
+        var perms = new List<string>() { "public_profile", "email" };//, "email"
         FB.LogInWithReadPermissions(perms, AuthCallback);
     }
     static void AuthCallback(ILoginResult result)
