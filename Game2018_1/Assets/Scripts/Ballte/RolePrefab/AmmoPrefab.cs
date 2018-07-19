@@ -12,6 +12,8 @@ public abstract class AmmoPrefab : MonoBehaviour
     protected AudioClip HitAduio;
     [SerializeField]
     protected AudioClip HitWallAduio;
+    [SerializeField]
+    protected AudioClip HitHardWallAduio;
 
     public bool IsLaunching { get; protected set; }
     protected Vector3 Force;
