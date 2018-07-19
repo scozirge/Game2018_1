@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114959043584152922}
   - component: {fileID: 95306542236467558}
   - component: {fileID: 58421327867920746}
+  - component: {fileID: 114107792301519168}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -220,6 +221,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114107792301519168
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1162516791219670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23453e74b9a0b7b49966cca230716054, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114709486295756554
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -233,6 +245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MyAni: {fileID: 95306542236467558}
   Trans_Shield: {fileID: 4087013404676266}
+  MyAudio: {fileID: 114107792301519168}
   SpawnPos: {x: 0, y: -484}
   MyAmmoSpawner: {fileID: 114959043584152922}
   StartPosPrefab: {fileID: 1005113402372418, guid: 3e5a2f4365082c04a8de08162ecf2ff1,

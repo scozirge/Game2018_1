@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 50877580756615086}
   - component: {fileID: 58440601404789558}
   - component: {fileID: 114101913509486774}
+  - component: {fileID: 114670930291250298}
   m_Layer: 0
   m_Name: EnemyAmmo
   m_TagString: Untagged
@@ -118,7 +119,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b73379e39d760e0418c228b71f46bab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MyAudio: {fileID: 114670930291250298}
+  IsDavestated: 0
   LifeTime: 2
+--- !u!114 &114670930291250298
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1044436428652978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23453e74b9a0b7b49966cca230716054, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212372916562161044
 SpriteRenderer:
   m_ObjectHideFlags: 1

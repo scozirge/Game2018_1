@@ -14,7 +14,7 @@ public class FBManager : MonoBehaviour
     public static Texture2D FBICon;
     static FBManager Myself;
     public static FBRequest MyRequest;
-    Uri link = new Uri("https://www.imdb.com/chart/top?sort=ir,desc&mode=simple&page=1");
+    //Uri link = new Uri("https://www.imdb.com/chart/top?sort=ir,desc&mode=simple&page=1");
 
     void Awake()
     {

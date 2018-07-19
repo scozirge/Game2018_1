@@ -30,6 +30,8 @@ public partial class ServerRequest : MonoBehaviour
         WWW w = new WWW(string.Format("{0}{1}", GetServerURL(), "QuickSignUp.php"), form);
         //設定為正等待伺服器回傳
         WaitCB_QuickSignUp = true;
+        if (Conn == null)
+            return;
         Conn.StartCoroutine(Coroutine_QuickSignUpCB(w));
         Conn.StartCoroutine(SignUpTimeOutHandle(2f, 0.5f, 12));
     }

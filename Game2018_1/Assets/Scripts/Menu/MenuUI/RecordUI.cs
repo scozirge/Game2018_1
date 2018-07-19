@@ -104,4 +104,13 @@ public class RecordUI : MonoBehaviour
         else
             FBManager.TakeScreenShot();
     }
+    public void SetActivity()
+    {
+        gameObject.SetActive(true);
+    }
+    public void SetInActivity()
+    {
+        gameObject.SetActive(false);
+    }
+
 }

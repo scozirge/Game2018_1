@@ -24,6 +24,7 @@ public class PlayerAmmo : AmmoPrefab
         base.Launch();
         EffectEmitter.EmitParticle("trail_shiny", Vector3.zero, Vector3.zero, transform);
         BattleManager.SetRecord("ShootTimes", 1, Operator.Plus);
+        MyAudio.PlaySound("sfx_shoot");
     }
     protected override void OnTriggerEnter2D(Collider2D _col)
     {
@@ -31,24 +32,28 @@ public class PlayerAmmo : AmmoPrefab
         switch (_col.gameObject.tag)
         {
             case "LeftCol":
+                MyAudio.PlaySound("sfx_hit_bounce");
                 EffectEmitter.EmitParticle("bounceEffect", transform.position, new Vector3(0, 0, 180), null);
                 CameraPrefab.DoAction("Shake", 0);
                 if (Bounce())
                     MyRigi.velocity = new Vector2(MyRigi.velocity.x * -1, MyRigi.velocity.y);
                 break;
             case "RightCol":
+                MyAudio.PlaySound("sfx_hit_bounce");
                 EffectEmitter.EmitParticle("bounceEffect", transform.position, Vector3.zero, null);
                 CameraPrefab.DoAction("Shake", 0);
                 if (Bounce())
                     MyRigi.velocity = new Vector2(MyRigi.velocity.x * -1, MyRigi.velocity.y);
                 break;
             case "TopCol":
+                MyAudio.PlaySound("sfx_hit_bounce");
                 EffectEmitter.EmitParticle("bounceEffect", transform.position, new Vector3(0, 0, 90), null);
                 CameraPrefab.DoAction("Shake", 0);
                 if (Bounce())
                     MyRigi.velocity = new Vector2(MyRigi.velocity.x, MyRigi.velocity.y * -1);
                 break;
             case "BotCol":
+                MyAudio.PlaySound("sfx_hit_bounce");
                 EffectEmitter.EmitParticle("bounceEffect", transform.position, new Vector3(0, 0, 270), null);
                 CameraPrefab.DoAction("Shake", 0);
                 if (Bounce())

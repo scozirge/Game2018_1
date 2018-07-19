@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 95753715877738866}
   - component: {fileID: 114924643967990478}
   - component: {fileID: 58842675906725244}
+  - component: {fileID: 114568334461662236}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Monster
@@ -220,6 +221,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114568334461662236
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1654188251740376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23453e74b9a0b7b49966cca230716054, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114587355147601490
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -233,6 +245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MyAni: {fileID: 95753715877738866}
   Trans_Shield: {fileID: 4829837822205484}
+  MyAudio: {fileID: 114568334461662236}
   MyAmmoSpawner: {fileID: 114924643967990478}
   MoveRangeX: 200
   MovePosY: 400
@@ -282,7 +295,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 323703241
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 3f08b92efadb6da4a90f866c1c4771f1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -372,7 +385,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 323703241
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 12007133277203e4a8eaf6d5acc70df7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

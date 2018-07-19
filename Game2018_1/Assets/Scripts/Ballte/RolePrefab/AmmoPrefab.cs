@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class AmmoPrefab : MonoBehaviour
 {
+    [SerializeField]
+    protected AudioPlayer MyAudio;
     public bool IsLaunching { get; protected set; }
     protected Vector3 Force;
     protected Rigidbody2D MyRigi;
