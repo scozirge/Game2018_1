@@ -82,51 +82,47 @@ public class AudioPlayer : MonoBehaviour
             CurAS.Play(0);
         }
     }
-    public void PlayLoopSound(AudioClip _ac,string _key,bool _play)
+    public void StopLoopSound(string _key)
     {
-        if(_play)
+        if (LoopAudioDic.ContainsKey(_key))
         {
-            if (LoopAudioDic.ContainsKey(_key))
+            LoopAudioDic[_key].Stop();
+            LoopAudioDic[_key].loop = false;
+            LoopAudioDic.Remove(_key);
+        }
+        else
+            Debug.LogWarning(string.Format("Key:{0}　不存在尋換播放音效清單中", _key));
+    }
+    public void PlayLoopSound(AudioClip _ac, string _key)
+    {
+        if (LoopAudioDic.ContainsKey(_key))
+        {
+            Debug.LogWarning(string.Format("Key:{0} 循環播放音效索引重複", _key));
+            return;
+        }
+        if (IsInit)
+        {
+            if (GetApplicableAudioSource() != null)
             {
-                Debug.LogWarning(string.Format("Key:{0} 循環播放音效索引重複", _key));
-                return;
-            }
-            if (IsInit)
-            {
-                if (GetApplicableAudioSource() != null)
-                {
-                    CurAS.loop = true;
-                    CurAS.clip = _ac;
-                    CurAS.Play();
-                }
-                else
-                {
-                    GetNewAudioSource();
-                    CurAS.loop = true;
-                    CurAS.clip = _ac;
-                    CurAS.Play();
-                }
+                CurAS.loop = true;
+                CurAS.clip = _ac;
+                CurAS.Play();
             }
             else
             {
-                Init();
+                GetNewAudioSource();
                 CurAS.loop = true;
+                CurAS.clip = _ac;
                 CurAS.Play();
             }
-            LoopAudioDic.Add(_key, CurAS);
         }
         else
         {
-            if (LoopAudioDic.ContainsKey(_key))
-            {
-                LoopAudioDic[_key].Stop();
-                LoopAudioDic[_key].loop = false;
-                LoopAudioDic.Remove(_key);
-            }
-            else
-                Debug.LogWarning(string.Format("Key:{0}　不存在尋換播放音效清單中", _key));
+            Init();
+            CurAS.loop = true;
+            CurAS.Play();
         }
-
+        LoopAudioDic.Add(_key, CurAS);
     }
     AudioSource GetApplicableAudioSource()
     {

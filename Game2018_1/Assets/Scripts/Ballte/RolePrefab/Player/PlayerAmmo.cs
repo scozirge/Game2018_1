@@ -80,6 +80,11 @@ public class PlayerAmmo : AmmoPrefab
                 SelfDestroy();
                 IsHitTarget = true;
                 break;
+            case "BounceWall":
+                MyAudio.PlaySound(HitHardWallAduio);
+                MyAudio.PlayLoopSound(SpeedyFlyingAudio, string.Format("{0}_{1}", name.ToString(), "SpeedyFlyingAudio"));
+                MyRigi.velocity = _col.GetComponent<BounceWallObj>().GetVelocity(MyRigi.velocity);
+                break;
             default:
                 break;
         }

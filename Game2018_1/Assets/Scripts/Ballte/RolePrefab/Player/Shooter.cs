@@ -49,6 +49,7 @@ public partial class PlayerRole
             Go_EndPos.transform.position = StartPos;
             Go_StartPos.transform.position = StartPos;
             Target.Arm();
+            BattleManager.SetBounceWall();
             IsPress = true;
         }
         if (Input.GetMouseButton(0))

@@ -11,6 +11,7 @@ TagManager:
   - BotCol
   - RightCol
   - LeftCol
+  - BounceWall
   layers:
   - Default
   - TransparentFX

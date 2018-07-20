@@ -43,6 +43,7 @@ public partial class BattleManager : MonoBehaviour
             GameDictionary.InitDic();
         IsPause = false;
         MySelf = transform.GetComponent<BattleManager>();
+        HideBounceWall();
         StartGame();
     }
 
@@ -238,6 +239,7 @@ public partial class BattleManager : MonoBehaviour
             return;
         if (MyEnemyRole.MyAmmoSpawner.CheckAlifeAmmo())
             return;
+        HideBounceWall();
         PlayerRole.SetCanShoot(true);
     }
 }
