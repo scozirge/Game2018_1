@@ -152,8 +152,8 @@ MonoBehaviour:
   MyAudio: {fileID: 114512099260779062}
   HitShieldAduio: {fileID: 8300000, guid: 7c923fcce1eba9f40adb016a1afdd2fa, type: 3}
   HitAduio: {fileID: 8300000, guid: ab546af7adb217e49be510a800706d75, type: 3}
-  HitWallAduio: {fileID: 8300000, guid: a6b8b9e445533e34c936d02c6977e472, type: 3}
-  HitHardWallAduio: {fileID: 8300000, guid: f81ed2c5a3055c24eac2e81602ffdb7a, type: 3}
+  HitWallAduio: {fileID: 8300000, guid: f81ed2c5a3055c24eac2e81602ffdb7a, type: 3}
+  HitHardWallAduio: {fileID: 8300000, guid: 95cb18412fb5d9646afcfff29e73fff2, type: 3}
   FlyingAudio: {fileID: 0}
   SpeedyFlyingAudio: {fileID: 8300000, guid: cb92f50909fb1e94cb00f831e213cba1, type: 3}
   IsDavestated: 0
