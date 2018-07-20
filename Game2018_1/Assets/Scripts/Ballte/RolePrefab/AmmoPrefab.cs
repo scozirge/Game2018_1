@@ -25,6 +25,8 @@ public abstract class AmmoPrefab : MonoBehaviour
     public virtual int BaseDamage { get; protected set; }
     public virtual int Damage { get { return BaseDamage; } }
     public bool IsDavestated = false;
+    protected Vector2 SavedVelocity;
+    protected float SavedAngularVelocity;
     public virtual void Init(Dictionary<string, object> _dic)
     {
         IsLaunching = false;
@@ -59,9 +61,14 @@ public abstract class AmmoPrefab : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public virtual void SpeedUpAmmo()
+    {
+        if (SpeedyFlyingAudio != null)
+            MyAudio.PlayLoopSound(SpeedyFlyingAudio, string.Format("{0}_{1}", name.ToString(), "SpeedyFlyingAudio"));
+        EffectEmitter.EmitParticle("trail_star", Vector3.zero, Vector3.zero, transform);
+    }
 
-    protected Vector2 SavedVelocity;
-    protected float SavedAngularVelocity;
+
 
     protected virtual void PauseGame()
     {

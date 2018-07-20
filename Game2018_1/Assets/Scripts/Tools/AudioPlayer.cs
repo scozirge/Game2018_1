@@ -90,14 +90,14 @@ public class AudioPlayer : MonoBehaviour
             LoopAudioDic[_key].loop = false;
             LoopAudioDic.Remove(_key);
         }
-        else
-            Debug.LogWarning(string.Format("Key:{0}　不存在尋換播放音效清單中", _key));
+        //else
+            //Debug.LogWarning(string.Format("Key:{0}　不存在尋換播放音效清單中", _key));
     }
     public void PlayLoopSound(AudioClip _ac, string _key)
     {
         if (LoopAudioDic.ContainsKey(_key))
         {
-            Debug.LogWarning(string.Format("Key:{0} 循環播放音效索引重複", _key));
+            //Debug.LogWarning(string.Format("Key:{0} 循環播放音效索引重複", _key));
             return;
         }
         if (IsInit)

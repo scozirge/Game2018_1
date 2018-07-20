@@ -31,6 +31,11 @@ public class PlayerAmmo : AmmoPrefab
         base.OnTriggerEnter2D(_col);
         switch (_col.gameObject.tag)
         {
+            case "BounceWall":
+                MyAudio.PlaySound(HitHardWallAduio);
+                SpeedUpAmmo();
+                MyRigi.velocity = _col.GetComponent<BounceWallObj>().GetVelocity(MyRigi.velocity);
+                break;
             case "LeftCol":
                 MyAudio.PlaySound(HitWallAduio);
                 EffectEmitter.EmitParticle("bounceEffect", transform.position, new Vector3(0, 0, 180), null);
@@ -80,14 +85,14 @@ public class PlayerAmmo : AmmoPrefab
                 SelfDestroy();
                 IsHitTarget = true;
                 break;
-            case "BounceWall":
-                MyAudio.PlaySound(HitHardWallAduio);
-                MyAudio.PlayLoopSound(SpeedyFlyingAudio, string.Format("{0}_{1}", name.ToString(), "SpeedyFlyingAudio"));
-                MyRigi.velocity = _col.GetComponent<BounceWallObj>().GetVelocity(MyRigi.velocity);
-                break;
             default:
                 break;
         }
+    }
+    public override void SpeedUpAmmo()
+    {
+        base.SpeedUpAmmo();
+        CurBounceTimes--;
     }
     bool Bounce()
     {
