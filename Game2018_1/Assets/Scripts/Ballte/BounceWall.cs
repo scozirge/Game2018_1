@@ -6,6 +6,8 @@ using UnityEngine;
 public partial class BattleManager : MonoBehaviour
 {
     [SerializeField]
+    List<NormalWallObj> MyNormalWall;
+    [SerializeField]
     BounceWallObj MyBounceWall;
     [SerializeField]
     float MaxWallLength;
@@ -18,12 +20,22 @@ public partial class BattleManager : MonoBehaviour
     [SerializeField]
     float PosX;
     [SerializeField]
-    float Bounciness;
+    float RedWallBounciness;
     [SerializeField]
-    float UpDownEtraForce;
+    float RedWallUpDownEtraForce;
     [SerializeField]
-    float LeftRightExtraForce;
+    float RedWallLeftRightExtraForce;
+    [SerializeField]
+    float MaxDragForce;
 
+
+    void SetNormanWall()
+    {
+        for (int i = 0; i < MyNormalWall.Count; i++)
+        {
+            MyNormalWall[i].SetWall(MaxDragForce);
+        }
+    }
 
     public static void SetBounceWall()
     {
@@ -31,7 +43,7 @@ public partial class BattleManager : MonoBehaviour
 
         float rand = Random.Range(0, 2);
         float dir = (rand == 0) ? dir = 1 : -1;
-        MySelf.MyBounceWall.SetWall(MySelf.Bounciness, Random.Range(MySelf.MinWallLength, MySelf.MaxWallLength), MySelf.UpDownEtraForce, MySelf.LeftRightExtraForce);
+        MySelf.MyBounceWall.SetWall(MySelf.RedWallBounciness, Random.Range(MySelf.MinWallLength, MySelf.MaxWallLength), MySelf.RedWallUpDownEtraForce, MySelf.RedWallLeftRightExtraForce);
         MySelf.MyBounceWall.transform.position = new Vector2(MySelf.PosX * dir, Random.Range(MySelf.MinYPos, MySelf.MaxYPos));
     }
     public static void HideBounceWall()

@@ -16,6 +16,8 @@ public partial class PlayerRole
     int MinSpeed;
     [SerializeField]
     int DragForce;
+    [SerializeField]
+    int MaxDragDistance;
 
     bool IsPress;
     public static bool CanShoot { get; protected set; }
@@ -24,6 +26,8 @@ public partial class PlayerRole
     Vector3 EndPos;
     GameObject Go_StartPos;
     GameObject Go_EndPos;
+    float DragProportion;
+
     protected void InitShooter()
     {
         SetCanShoot(true);
@@ -83,6 +87,7 @@ public partial class PlayerRole
         data.Add("Force", GetForce());
         data.Add("AmmoBounceTimes", AmmoBounceTimes);
         data.Add("AmmoBounceDamage", AmmoBounceDamage);
+        data.Add("DragProportion", GetDragProportion());
         MyAmmoSpawner.Spawn(data);
         Target.LaunchAmmo();
         SetCanShoot(false);
@@ -102,5 +107,15 @@ public partial class PlayerRole
         if (dir == Vector3.zero)
             dir = Vector3.up;
         return dir * speed;
+    }
+    float GetDragProportion()
+    {
+        float dragProportion = 0;
+        float dragDistance = Vector3.Distance(StartPos, EndPos);
+        if (dragDistance > MaxDragDistance)
+            dragProportion = 1;
+        else
+            dragProportion = dragDistance / MaxDragDistance;
+        return dragProportion;
     }
 }

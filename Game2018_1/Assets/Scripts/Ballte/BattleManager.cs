@@ -44,6 +44,7 @@ public partial class BattleManager : MonoBehaviour
         IsPause = false;
         MySelf = transform.GetComponent<BattleManager>();
         HideBounceWall();
+        SetNormanWall();
         StartGame();
     }
 
@@ -111,10 +112,10 @@ public partial class BattleManager : MonoBehaviour
         enemyGo.transform.SetParent(transform);
         //Init EnemyData
         Dictionary<string, object> enemyDataDic = new Dictionary<string, object>();
-        enemyDataDic.Add("Health", 60 + Level * 10);
-        enemyDataDic.Add("Attack", 10 + Level * 5);
+        enemyDataDic.Add("Health", 50 + Level * 5);
+        enemyDataDic.Add("Attack", 5 + Level * 2);
         enemyDataDic.Add("Camera", MyCamera);
-        enemyDataDic.Add("AmmoNum", Level + 5);
+        enemyDataDic.Add("AmmoNum", Level + 3);
         MyEnemyRole.Init(enemyDataDic);
     }
     void SpawnRoles()
@@ -130,10 +131,10 @@ public partial class BattleManager : MonoBehaviour
 
         //Init EnemyData
         Dictionary<string, object> enemyDataDic = new Dictionary<string, object>();
-        enemyDataDic.Add("Health", 60);
-        enemyDataDic.Add("Attack", 10);
+        enemyDataDic.Add("Health", 50 + Level * 5);
+        enemyDataDic.Add("Attack", 5 + Level * 2);
         enemyDataDic.Add("Camera", MyCamera);
-        enemyDataDic.Add("AmmoNum", Level + 5);
+        enemyDataDic.Add("AmmoNum", Level + 3);
         MyEnemyRole.Init(enemyDataDic);
         //Init PlayerData
         Dictionary<string, object> playerDataDic = new Dictionary<string, object>();
