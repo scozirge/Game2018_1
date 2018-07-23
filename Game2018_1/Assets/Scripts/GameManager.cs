@@ -16,6 +16,10 @@ public partial class GameManager : MonoBehaviour
     FBManager FBPrefab;
     [SerializeField]
     ServerRequest SR;
+    void Awake()
+    {
+        Screen.fullScreen = true;
+    }
     void Start()
     {
         if (!Debugger.IsSpawn)

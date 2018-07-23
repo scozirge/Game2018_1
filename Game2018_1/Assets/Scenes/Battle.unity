@@ -5507,10 +5507,10 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 1
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 10, y: 600}
+  m_ReferenceResolution: {x: 720, y: 1280}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -9870,6 +9870,11 @@ Prefab:
     - target: {fileID: 4002851025407576, guid: 6bfb4ac94e3e37746a907bbd252df488, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 20068007258607420, guid: 6bfb4ac94e3e37746a907bbd252df488,
+        type: 2}
+      propertyPath: orthographic size
+      value: 640
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6bfb4ac94e3e37746a907bbd252df488, type: 2}
