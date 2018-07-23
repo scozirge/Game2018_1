@@ -31,7 +31,6 @@ public class NormalWallObj : WallObj
     }
     public Vector2 GetDragForce(Vector2 _velocity, float _dragProportion)
     {
-        Debug.Log(new Vector2(_velocity.x * (1 + MaxDragForce * _dragProportion), _velocity.y));
         return new Vector2(_velocity.x * (1 + MaxDragForce * _dragProportion), _velocity.y);
     }
 }
