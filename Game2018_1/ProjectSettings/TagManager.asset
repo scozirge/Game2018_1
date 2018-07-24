@@ -61,3 +61,9 @@ TagManager:
   - name: Effect
     uniqueID: 612120315
     locked: 0
+  - name: bg_scence
+    uniqueID: 2606868005
+    locked: 0
+  - name: bg_board
+    uniqueID: 588825491
+    locked: 0

@@ -2714,63 +2714,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 434150798}
---- !u!1001 &481018599
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4005551428458052, guid: 964618808e8fc2c45b43ffc5a3b22aef, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4005551428458052, guid: 964618808e8fc2c45b43ffc5a3b22aef, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4005551428458052, guid: 964618808e8fc2c45b43ffc5a3b22aef, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4005551428458052, guid: 964618808e8fc2c45b43ffc5a3b22aef, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4005551428458052, guid: 964618808e8fc2c45b43ffc5a3b22aef, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4005551428458052, guid: 964618808e8fc2c45b43ffc5a3b22aef, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4005551428458052, guid: 964618808e8fc2c45b43ffc5a3b22aef, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4005551428458052, guid: 964618808e8fc2c45b43ffc5a3b22aef, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114615350611071640, guid: 964618808e8fc2c45b43ffc5a3b22aef,
-        type: 2}
-      propertyPath: MyBattleCanvas
-      value: 
-      objectReference: {fileID: 1843365642}
-    - target: {fileID: 114615350611071640, guid: 964618808e8fc2c45b43ffc5a3b22aef,
-        type: 2}
-      propertyPath: MyCamera
-      value: 
-      objectReference: {fileID: 960585234}
-    - target: {fileID: 114615350611071640, guid: 964618808e8fc2c45b43ffc5a3b22aef,
-        type: 2}
-      propertyPath: MaxDragForce
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 964618808e8fc2c45b43ffc5a3b22aef, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &492859303
 GameObject:
   m_ObjectHideFlags: 0
@@ -5302,6 +5245,68 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!1001 &1005247371
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4005551428458052, guid: 964618808e8fc2c45b43ffc5a3b22aef, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4005551428458052, guid: 964618808e8fc2c45b43ffc5a3b22aef, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4005551428458052, guid: 964618808e8fc2c45b43ffc5a3b22aef, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4005551428458052, guid: 964618808e8fc2c45b43ffc5a3b22aef, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4005551428458052, guid: 964618808e8fc2c45b43ffc5a3b22aef, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4005551428458052, guid: 964618808e8fc2c45b43ffc5a3b22aef, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4005551428458052, guid: 964618808e8fc2c45b43ffc5a3b22aef, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4005551428458052, guid: 964618808e8fc2c45b43ffc5a3b22aef, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114615350611071640, guid: 964618808e8fc2c45b43ffc5a3b22aef,
+        type: 2}
+      propertyPath: MyBattleCanvas
+      value: 
+      objectReference: {fileID: 1843365642}
+    - target: {fileID: 114615350611071640, guid: 964618808e8fc2c45b43ffc5a3b22aef,
+        type: 2}
+      propertyPath: MyCamera
+      value: 
+      objectReference: {fileID: 960585234}
+    - target: {fileID: 198303016095650810, guid: 964618808e8fc2c45b43ffc5a3b22aef,
+        type: 2}
+      propertyPath: InitialModule.maxNumParticles
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 198303016095650810, guid: 964618808e8fc2c45b43ffc5a3b22aef,
+        type: 2}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 964618808e8fc2c45b43ffc5a3b22aef, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1036317395
 GameObject:
   m_ObjectHideFlags: 0
