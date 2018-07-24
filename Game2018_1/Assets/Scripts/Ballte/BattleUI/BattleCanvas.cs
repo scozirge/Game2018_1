@@ -150,6 +150,10 @@ public partial class BattleCanvas : MonoBehaviour
     {
         MyPlayerUI.BowDraw(_angle, _force);
     }
+    public static void PlayerReleaseBow()
+    {
+        MyPlayerUI.Release();
+    }
     public static void ClearRoles()
     {
         MyEnemyUI.SelfDestroy();

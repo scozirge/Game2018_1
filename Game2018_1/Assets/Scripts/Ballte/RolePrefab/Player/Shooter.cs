@@ -91,6 +91,7 @@ public partial class PlayerRole
         MyAmmoSpawner.Spawn(data);
         Target.LaunchAmmo();
         SetCanShoot(false);
+        BattleCanvas.PlayerReleaseBow();
     }
     public static void SetCanShoot(bool _canShoot)
     {
