@@ -24,7 +24,7 @@ public partial class BattleManager : MonoBehaviour
     public static PlayerRole MyPlayerRole;
     public static EnemyRole MyEnemyRole;
     public static bool IsPause { get; private set; }
-    public int ReviveTimes { get; private set; }
+    public static bool IsRevived { get; private set; }
     public static int StrikeTimes { get; protected set; }
     public static int WeaknessStrikeTimes { get; protected set; }
     public static int MaxComboStrikes { get; protected set; }
@@ -41,6 +41,7 @@ public partial class BattleManager : MonoBehaviour
             DeployDebugger();
         if (!GameDictionary.IsInit)
             GameDictionary.InitDic();
+        IsRevived = false;
         IsPause = false;
         MySelf = transform.GetComponent<BattleManager>();
         HideBounceWall();
@@ -59,9 +60,20 @@ public partial class BattleManager : MonoBehaviour
         HighestScoring = Player.BestScore;
         Level = 1;
     }
+    public static void CallAD()
+    {
+
+        GoogleADManager.CallRewardBasedVideo();
+    }
+    public static void FailToRevive()
+    {
+        if (!IsRevived)
+            PopupUI.ShowWarning("CancelWatchAD", "FailToRevive");
+    }
     public static void Revive()
     {
-        MySelf.ReviveTimes++;
+        IsRevived = true;
+        BattleCanvas.CallSettle(false);
         MyPlayerRole.Revive();
         PlayerRole.SetCanShoot(true);
         SetPause(false);

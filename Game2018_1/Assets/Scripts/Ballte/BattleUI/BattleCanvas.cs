@@ -204,6 +204,10 @@ public partial class BattleCanvas : MonoBehaviour
         MySelf.MySettlementUI.gameObject.SetActive(true);
         MySelf.MySettlementUI.Settle(_data);
     }
+    public static void CallSettle(bool _bool)
+    {
+        MySelf.MySettlementUI.gameObject.SetActive(_bool);
+    }
     public void CallLeaderBoardUI(bool _bool)
     {
         LeaderboardUI.SetActive(_bool);

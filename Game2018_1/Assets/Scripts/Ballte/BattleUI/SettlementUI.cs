@@ -24,6 +24,14 @@ public class SettlementUI : MonoBehaviour
     Text Retry_Title;
     [SerializeField]
     Text MaxComboStrikes_Title;
+    [SerializeField]
+    Button RetryButton;
+
+    void OnEnable()
+    {
+        RetryButton.interactable = !BattleManager.IsRevived;
+        Debug.Log(BattleManager.IsRevived);
+    }
 
     public void Settle(Dictionary<string, object> _data)
     {
@@ -36,7 +44,7 @@ public class SettlementUI : MonoBehaviour
         ShootTimes_Value.text = string.Format("x {0}", _data["ShootTimes"].ToString());
         Accuracy_Value.text = string.Format("{0}%", TextManager.ToPercent((float)_data["Accuracy"]));
         Kill_Value.text = string.Format("x {0}", _data["Kill"].ToString());
-        Score_Value.text = string.Format("{0}:{1}",GameDictionary.String_UIDic["Score"].GetString(Player.UseLanguage), _data["Score"].ToString());
+        Score_Value.text = string.Format("{0}:{1}", GameDictionary.String_UIDic["Score"].GetString(Player.UseLanguage), _data["Score"].ToString());
         HighestScoring_Value.text = string.Format("{0}:{1}", GameDictionary.String_UIDic["HighestScoring"].GetString(Player.UseLanguage), _data["HighestScoring"].ToString());
 
     }
@@ -47,8 +55,9 @@ public class SettlementUI : MonoBehaviour
     }
     public void WatchADToRevive()
     {
-        GoogleADManager.CallRewardBasedVideo();
-        gameObject.SetActive(false);
+        BattleManager.CallAD();
+        RetryButton.interactable = false;
+        //gameObject.SetActive(false);
     }
     public void QuitGame()
     {

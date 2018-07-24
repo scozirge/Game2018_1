@@ -6234,7 +6234,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1955217511}
   m_OnClick:
     m_PersistentCalls:
@@ -11740,6 +11740,7 @@ MonoBehaviour:
   Post_Title: {fileID: 962068858}
   Retry_Title: {fileID: 2002735151}
   MaxComboStrikes_Title: {fileID: 2010833224}
+  RetryButton: {fileID: 1127343295}
 --- !u!1 &2136667816
 GameObject:
   m_ObjectHideFlags: 0
