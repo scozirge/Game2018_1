@@ -46,6 +46,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: bg_scence
+    uniqueID: 2606868005
+    locked: 0
+  - name: bg_board
+    uniqueID: 588825491
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
@@ -60,10 +66,4 @@ TagManager:
     locked: 0
   - name: Effect
     uniqueID: 612120315
-    locked: 0
-  - name: bg_scence
-    uniqueID: 2606868005
-    locked: 0
-  - name: bg_board
-    uniqueID: 588825491
     locked: 0
