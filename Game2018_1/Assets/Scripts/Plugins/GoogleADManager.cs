@@ -26,13 +26,13 @@ public class GoogleADManager : MonoBehaviour
         this.rewardBasedVideo = RewardBasedVideoAd.Instance;
 
         // Called when an ad request has successfully loaded.
-        //rewardBasedVideo.OnAdLoaded += HandleRewardBasedVideoLoaded;
+        rewardBasedVideo.OnAdLoaded += HandleRewardBasedVideoLoaded;
         // Called when an ad request failed to load.
         rewardBasedVideo.OnAdFailedToLoad += HandleRewardBasedVideoFailedToLoad;
         // Called when an ad is shown.
-        //rewardBasedVideo.OnAdOpening += HandleRewardBasedVideoOpened;
+        rewardBasedVideo.OnAdOpening += HandleRewardBasedVideoOpened;
         // Called when the ad starts to play.
-        //rewardBasedVideo.OnAdStarted += HandleRewardBasedVideoStarted;
+        rewardBasedVideo.OnAdStarted += HandleRewardBasedVideoStarted;
         // Called when the user should be rewarded for watching a video.
         rewardBasedVideo.OnAdRewarded += HandleRewardBasedVideoRewarded;
         // Called when the ad is closed.
@@ -87,12 +87,10 @@ public class GoogleADManager : MonoBehaviour
         // Load the interstitial with the request.
         interstitial.LoadAd(request);
     }
-    /*
     public void HandleRewardBasedVideoLoaded(object sender, EventArgs args)
     {
         MonoBehaviour.print("HandleRewardBasedVideoLoaded event received");
     }
-    */
     public void HandleRewardBasedVideoFailedToLoad(object sender, AdFailedToLoadEventArgs args)
     {
         MonoBehaviour.print(
@@ -100,18 +98,15 @@ public class GoogleADManager : MonoBehaviour
                              + args.Message);
         BattleManager.Revive();
     }
-    /*
     public void HandleRewardBasedVideoOpened(object sender, EventArgs args)
     {
         MonoBehaviour.print("HandleRewardBasedVideoOpened event received");
     }
-    */
-    /*
     public void HandleRewardBasedVideoStarted(object sender, EventArgs args)
     {
         MonoBehaviour.print("HandleRewardBasedVideoStarted event received");
     }
-    */
+    
     public void HandleRewardBasedVideoClosed(object sender, EventArgs args)
     {
         MonoBehaviour.print("HandleRewardBasedVideoClosed event received");
@@ -148,7 +143,7 @@ public class GoogleADManager : MonoBehaviour
         {
             if (!MySelf || !MySelf.rewardBasedVideo.IsLoaded())
             {
-                BattleManager.FailToRevive();
+                BattleManager.Revive();
                 Debug.LogWarning("googleAD尚未初始化:nofill");
                 return;
             }

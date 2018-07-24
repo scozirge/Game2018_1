@@ -47,6 +47,12 @@ public class CameraPrefab : MonoBehaviour
                 else
                     MyAni.StopPlayback();//重播
                 break;
+            case "Shake2":
+                if (Animator.StringToHash(string.Format("Base Layer.{0}", _motion)) != MyAni.GetCurrentAnimatorStateInfo(0).fullPathHash)
+                    MyAni.Play(_motion, 0, _normalizedTime);
+                else
+                    MyAni.StopPlayback();//重播
+                break;
             default:
                 break;
         }

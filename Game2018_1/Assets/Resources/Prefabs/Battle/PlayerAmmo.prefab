@@ -157,6 +157,11 @@ MonoBehaviour:
   FlyingAudio: {fileID: 0}
   SpeedyFlyingAudio: {fileID: 8300000, guid: cb92f50909fb1e94cb00f831e213cba1, type: 3}
   IsDavestated: 0
+  MyAmmoStar: {fileID: 212785199866030662}
+  AmmoLevelSprites:
+  - {fileID: 21300000, guid: b4735ec080c6a1e40aaa5d2d729e1ee2, type: 3}
+  - {fileID: 21300000, guid: 2678adecabc35ce47b93f9d1ffd046f7, type: 3}
+  - {fileID: 21300000, guid: f5a56509747ddfe4386b312e2afde059, type: 3}
   IsHitTarget: 0
 --- !u!114 &114512099260779062
 MonoBehaviour:

@@ -57,6 +57,7 @@ public abstract partial class RolePrefab : MonoBehaviour
     public virtual void BeStruck(int _dmg)
     {
         EffectEmitter.EmitParticle("hitEffect", transform.position, Vector3.zero, null);
+        CameraPrefab.DoAction("Shake2", 0);
         ReceiveDmg(_dmg);
     }
     public virtual void ShieldBeSruck(int _dmg)

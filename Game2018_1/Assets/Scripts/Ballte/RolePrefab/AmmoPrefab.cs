@@ -61,7 +61,7 @@ public abstract class AmmoPrefab : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public virtual void SpeedUpAmmo()
+    public virtual void PowerUp()
     {
         if (SpeedyFlyingAudio != null)
             MyAudio.PlayLoopSound(SpeedyFlyingAudio, string.Format("{0}_{1}", name.ToString(), "SpeedyFlyingAudio"));

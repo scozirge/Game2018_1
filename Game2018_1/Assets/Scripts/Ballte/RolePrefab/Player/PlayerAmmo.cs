@@ -4,13 +4,21 @@ using UnityEngine;
 
 public class PlayerAmmo : AmmoPrefab
 {
+    [SerializeField]
+    SpriteRenderer MyAmmoStar;
+    [SerializeField]
+    List<Sprite> AmmoLevelSprites;
+
     public int MaxBounceTimes { get; protected set; }
     public int CurBounceTimes { get; protected set; }
     public int AmmoBounceDamage { get; protected set; }
-    public override int Damage { get { return BaseDamage + CurBounceTimes * AmmoBounceDamage; } }
+    public float DamageFactor { get; protected set; }
+    public override int Damage { get { return (int)((BaseDamage + CurBounceTimes * AmmoBounceDamage) * DamageFactor); } }
     public bool IsWeaknessStrike { get; protected set; }
     public bool IsHitTarget = false;
     public float Dragproportion { get; protected set; }
+    public int AmmoLevel { get; protected set; }
+
     public override void Init(Dictionary<string, object> _dic)
     {
         base.Init(_dic);
@@ -19,7 +27,9 @@ public class PlayerAmmo : AmmoPrefab
         AmmoBounceDamage = (int)_dic["AmmoBounceDamage"];
         Dragproportion = (float)_dic["DragProportion"];
         CurBounceTimes = 0;
+        DamageFactor = 1;
         IsWeaknessStrike = false;
+        AmmoLevel = 0;
     }
     public override void Launch()
     {
@@ -35,7 +45,7 @@ public class PlayerAmmo : AmmoPrefab
         {
             case "BounceWall":
                 MyAudio.PlaySound(HitHardWallAduio);
-                SpeedUpAmmo();
+                PowerUp();
                 MyRigi.velocity = _col.GetComponent<BounceWallObj>().GetVelocity(MyRigi.velocity);
                 break;
             case "LeftCol":
@@ -99,10 +109,14 @@ public class PlayerAmmo : AmmoPrefab
                 break;
         }
     }
-    public override void SpeedUpAmmo()
+    public override void PowerUp()
     {
-        base.SpeedUpAmmo();
+        base.PowerUp();
+        DamageFactor += 0.5f;
         MaxBounceTimes++;
+        AmmoLevel++;
+        if (AmmoLevel<=AmmoLevelSprites.Count)
+            MyAmmoStar.sprite = AmmoLevelSprites[AmmoLevel];
     }
     bool Bounce()
     {

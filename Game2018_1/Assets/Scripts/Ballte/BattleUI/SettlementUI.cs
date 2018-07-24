@@ -30,7 +30,6 @@ public class SettlementUI : MonoBehaviour
     void OnEnable()
     {
         RetryButton.interactable = !BattleManager.IsRevived;
-        Debug.Log(BattleManager.IsRevived);
     }
 
     public void Settle(Dictionary<string, object> _data)
