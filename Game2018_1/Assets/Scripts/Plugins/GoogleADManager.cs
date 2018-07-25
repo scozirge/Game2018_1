@@ -21,7 +21,6 @@ public class GoogleADManager : MonoBehaviour
     public void Start()
     {
         MySelf = this;
-        Debug.Log(MySelf);
         // Get singleton reward based video ad reference.
         this.rewardBasedVideo = RewardBasedVideoAd.Instance;
 
@@ -62,6 +61,7 @@ public class GoogleADManager : MonoBehaviour
 
         // Create an empty ad request.
         AdRequest request = new AdRequest.Builder().Build();
+        Debug.Log("////////////////request=" + request);
         // Load the rewarded video ad with the request.
         this.rewardBasedVideo.LoadAd(request, adUnitId);
     }
@@ -110,7 +110,7 @@ public class GoogleADManager : MonoBehaviour
     public void HandleRewardBasedVideoClosed(object sender, EventArgs args)
     {
         MonoBehaviour.print("HandleRewardBasedVideoClosed event received");
-        BattleManager.FailToRevive();
+        this.RequestRewardBasedVideo();
     }
 
     public void HandleRewardBasedVideoRewarded(object sender, Reward args)
