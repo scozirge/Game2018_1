@@ -130,7 +130,7 @@ public partial class BattleManager : MonoBehaviour
         enemyDataDic.Add("Attack", 50 + Level * 12);
         enemyDataDic.Add("Camera", MyCamera);
         enemyDataDic.Add("AmmoNum", Level + 3);
-        enemyDataDic.Add("AmmoBounceTimes", 0);
+        enemyDataDic.Add("AmmoBounceTimes", 1);
         MyEnemyRole.Init(enemyDataDic);
     }
     void SpawnRoles()
@@ -150,7 +150,7 @@ public partial class BattleManager : MonoBehaviour
         enemyDataDic.Add("Attack", 50 + Level * 12);
         enemyDataDic.Add("Camera", MyCamera);
         enemyDataDic.Add("AmmoNum", Level + 3);
-        enemyDataDic.Add("AmmoBounceTimes", 0);
+        enemyDataDic.Add("AmmoBounceTimes", 1);
         MyEnemyRole.Init(enemyDataDic);
         //Init PlayerData
         Dictionary<string, object> playerDataDic = new Dictionary<string, object>();

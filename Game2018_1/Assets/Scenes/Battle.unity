@@ -5342,7 +5342,7 @@ Prefab:
     - target: {fileID: 114615350611071640, guid: 964618808e8fc2c45b43ffc5a3b22aef,
         type: 2}
       propertyPath: WindForce.x
-      value: -800
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 964618808e8fc2c45b43ffc5a3b22aef, type: 2}
