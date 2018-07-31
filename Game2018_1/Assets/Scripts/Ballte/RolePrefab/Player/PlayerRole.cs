@@ -9,7 +9,6 @@ public partial class PlayerRole : RolePrefab
     [SerializeField]
     Vector2 SpawnPos;
 
-    public int AmmoBounceTimes { get; protected set; }
     public int AmmoBounceDamage { get; protected set; }
     public int DecreaseEnemyAmmo { get; protected set; }
     public int ShieldLevel { get; protected set; }
@@ -20,7 +19,6 @@ public partial class PlayerRole : RolePrefab
     {
         base.Init(_dataDic);
         SetTarget(_dataDic["Target"] as EnemyRole);
-        AmmoBounceTimes = (int)_dataDic["AmmoBounceTimes"];
         AmmoBounceDamage = (int)_dataDic["AmmoBounceDamage"];
         DecreaseEnemyAmmo = (int)_dataDic["DecreaseEnemyAmmo"];
         ShieldLevel = (int)_dataDic["ShieldLevel"];
@@ -101,7 +99,7 @@ public partial class PlayerRole : RolePrefab
         }
         if (_data.Shield > 0)
         {
-            ShieldLevel += _data.Shield;
+            ShieldLevel =1;//最高一層盾
         }
     }
     public void Revive()

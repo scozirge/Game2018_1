@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 
 public partial class BattleCanvas : MonoBehaviour
@@ -40,6 +41,7 @@ public partial class BattleCanvas : MonoBehaviour
     static EnemyRoleUI MyEnemyUI;
 
 
+
     void Start()
     {
         if (GameDictionary.IsInit)
@@ -48,6 +50,7 @@ public partial class BattleCanvas : MonoBehaviour
     public void Init(PlayerRole _pr, EnemyRole _er)
     {
         MySelf = transform.GetComponent<BattleCanvas>();
+        PlayerRole.SetGraphicRaycaster(GetComponent<GraphicRaycaster>(), GetComponent<EventSystem>());
         RelyPRole = _pr;
         RelyERole = _er;
     }

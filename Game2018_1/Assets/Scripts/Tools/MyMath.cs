@@ -21,6 +21,10 @@ public class MyMath : MonoBehaviour
     {
         return (int)(Mathf.Round(_number1 / _number2));
     }
+    public static int GetNumber1TimesNumber2(float _number1, float _number2)
+    {
+        return (int)(Mathf.Round(_number1 * _number2));
+    }
 
     public static float Calculate_ReturnFloat(float _num1, float _num2, Operator _operator)
     {
@@ -74,4 +78,5 @@ public class MyMath : MonoBehaviour
         }
         return result;
     }
+ 
 }

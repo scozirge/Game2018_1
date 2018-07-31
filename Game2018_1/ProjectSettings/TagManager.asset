@@ -12,6 +12,7 @@ TagManager:
   - RightCol
   - LeftCol
   - BounceWall
+  - UI
   layers:
   - Default
   - TransparentFX

@@ -19,8 +19,10 @@ public partial class BattleManager : MonoBehaviour
     PlayerRole PlayerPrefab;
     [SerializeField]
     Debugger DebuggerPrefab;
+    [SerializeField]
+    public Vector2 WindForce;
 
-    static BattleManager MySelf;
+    public static BattleManager MySelf;
     public static PlayerRole MyPlayerRole;
     public static EnemyRole MyEnemyRole;
     public static bool IsPause { get; private set; }
@@ -124,10 +126,11 @@ public partial class BattleManager : MonoBehaviour
         enemyGo.transform.SetParent(transform);
         //Init EnemyData
         Dictionary<string, object> enemyDataDic = new Dictionary<string, object>();
-        enemyDataDic.Add("Health", 50 + Level * 5);
-        enemyDataDic.Add("Attack", 5 + Level * 2);
+        enemyDataDic.Add("Health", 100 + Level * 12);
+        enemyDataDic.Add("Attack", 50 + Level * 12);
         enemyDataDic.Add("Camera", MyCamera);
         enemyDataDic.Add("AmmoNum", Level + 3);
+        enemyDataDic.Add("AmmoBounceTimes", 0);
         MyEnemyRole.Init(enemyDataDic);
     }
     void SpawnRoles()
@@ -143,15 +146,16 @@ public partial class BattleManager : MonoBehaviour
 
         //Init EnemyData
         Dictionary<string, object> enemyDataDic = new Dictionary<string, object>();
-        enemyDataDic.Add("Health", 50 + Level * 5);
-        enemyDataDic.Add("Attack", 5 + Level * 2);
+        enemyDataDic.Add("Health", 100 + Level * 12);
+        enemyDataDic.Add("Attack", 50 + Level * 12);
         enemyDataDic.Add("Camera", MyCamera);
         enemyDataDic.Add("AmmoNum", Level + 3);
+        enemyDataDic.Add("AmmoBounceTimes", 0);
         MyEnemyRole.Init(enemyDataDic);
         //Init PlayerData
         Dictionary<string, object> playerDataDic = new Dictionary<string, object>();
-        playerDataDic.Add("Health", 30);
-        playerDataDic.Add("Attack", 50);
+        playerDataDic.Add("Health", 100);
+        playerDataDic.Add("Attack", 34);
         playerDataDic.Add("AmmoBounceTimes", 2);
         playerDataDic.Add("AmmoBounceDamage", 0);
         playerDataDic.Add("DecreaseEnemyAmmo", 0);

@@ -124,8 +124,48 @@ public class SkillData
         int rand = UnityEngine.Random.Range(0, keys.Count);
         return GameDictionary.SkillDic[keys[rand]];
     }
+    /// <summary>
+    /// 取不重複隨機技能，且須傳入是否會隨機到護盾
+    /// </summary>
+    /// <returns></returns>
+    public static List<SkillData> GetRandomSkills(int _num,bool _bool)
+    {
+        if (_num <= 0)
+            return null;
+        if (GameDictionary.SkillDic == null)
+        {
+            Debug.LogWarning("尚未初始化SkillData");
+            return null;
+        }
+        List<SkillData> results = new List<SkillData>();
+        List<int> keys = new List<int>(GameDictionary.SkillDic.Keys);
+        if(!_bool)
+        {
+            for (int i = 0; i < keys.Count; i++)
+            {
+                if (GameDictionary.SkillDic[keys[i]].Shield > 0)
+                    keys.RemoveAt(i);
+            }
+        }
+
+        for (int i = 0; i < _num; i++)
+        {
+            int rand = 0;
+            if (keys.Count > 0)
+                rand = UnityEngine.Random.Range(0, keys.Count);
+            else
+            {
+                results.Add(GameDictionary.SkillDic[1]);
+                continue;
+            }
+            results.Add(GameDictionary.SkillDic[keys[rand]]);
+            keys.RemoveAt(rand);
+        }
+
+        return results;
+    }
     public Sprite GetSkillICON()
     {
-        return Resources.Load<Sprite>(string.Format("Images/BattleUI/{0}",IconString));
+        return Resources.Load<Sprite>(string.Format("Images/BattleUI/{0}", IconString));
     }
 }

@@ -19,6 +19,8 @@ public abstract class AmmoPrefab : MonoBehaviour
     [SerializeField]
     protected AudioClip SpeedyFlyingAudio;
 
+    public int MaxBounceTimes { get; protected set; }
+    public int CurBounceTimes { get; protected set; }
     public bool IsLaunching { get; protected set; }
     protected Vector3 Force;
     protected Rigidbody2D MyRigi;
@@ -32,11 +34,13 @@ public abstract class AmmoPrefab : MonoBehaviour
         IsLaunching = false;
         MyRigi = transform.GetComponent<Rigidbody2D>();
         BaseDamage = (int)_dic["Damage"];
+        MaxBounceTimes = (int)_dic["AmmoBounceTimes"];
         BattleManager.AddToStartPauseFnc(PauseGame);
         BattleManager.AddToEndPauseFnc(ResumeGame);
     }
     protected virtual void Update()
     {
+        MyRigi.velocity += BattleManager.MySelf.WindForce * Time.deltaTime;
     }
     public virtual void Launch()
     {

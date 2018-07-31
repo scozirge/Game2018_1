@@ -31,6 +31,7 @@ public abstract partial class RolePrefab : MonoBehaviour
     public int BaseAttack { get; protected set; }
     public int BaseAmmoNum { get; protected set; }
     public virtual int AmmoNum { get { return BaseAmmoNum; } }
+    public int AmmoBounceTimes { get; protected set; }
     public Force MyForce { get; protected set; }
 
 
@@ -41,6 +42,7 @@ public abstract partial class RolePrefab : MonoBehaviour
         Health = (int)_dataDic["Health"];
         MyCamera = _dataDic["Camera"] as Camera;
         BaseAttack = (int)_dataDic["Attack"];
+        AmmoBounceTimes = (int)_dataDic["AmmoBounceTimes"];
         MaxHealth = Health;
         StartConditionRefresh();
     }

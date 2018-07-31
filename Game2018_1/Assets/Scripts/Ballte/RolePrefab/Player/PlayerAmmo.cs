@@ -9,8 +9,7 @@ public class PlayerAmmo : AmmoPrefab
     [SerializeField]
     List<Sprite> AmmoLevelSprites;
 
-    public int MaxBounceTimes { get; protected set; }
-    public int CurBounceTimes { get; protected set; }
+
     public int AmmoBounceDamage { get; protected set; }
     public float DamageFactor { get; protected set; }
     public override int Damage { get { return (int)((BaseDamage + CurBounceTimes * AmmoBounceDamage) * DamageFactor); } }
@@ -19,11 +18,11 @@ public class PlayerAmmo : AmmoPrefab
     public float Dragproportion { get; protected set; }
     public int AmmoLevel { get; protected set; }
 
+
     public override void Init(Dictionary<string, object> _dic)
     {
         base.Init(_dic);
         Force = (Vector3)_dic["Force"];
-        MaxBounceTimes = (int)_dic["AmmoBounceTimes"];
         AmmoBounceDamage = (int)_dic["AmmoBounceDamage"];
         Dragproportion = (float)_dic["DragProportion"];
         CurBounceTimes = 0;
@@ -88,7 +87,8 @@ public class PlayerAmmo : AmmoPrefab
                 if (IsHitTarget)
                     return;
                 MyAudio.PlaySound(HitShieldAduio);
-                EffectEmitter.EmitParticle("shieldhit", transform.position, new Vector3(0, 0, 180 - MyMath.GetAngerFormTowPoint2D(BattleManager.MyEnemyRole.transform.position, transform.position)), null);
+                Vector2 effectPos = Vector2.Lerp(BattleManager.MyEnemyRole.transform.position, transform.position, 0.8f);
+                EffectEmitter.EmitParticle("shieldhit", effectPos, new Vector3(0, 0, 180 - MyMath.GetAngerFormTowPoint2D(BattleManager.MyEnemyRole.transform.position, transform.position)), null);
                 BattleManager.MyEnemyRole.ShieldBeSruck(Damage);
                 BattleManager.SetRecord("StrikeTimes", 1, Operator.Plus);
                 SelfDestroy();
@@ -112,7 +112,7 @@ public class PlayerAmmo : AmmoPrefab
     public override void PowerUp()
     {
         base.PowerUp();
-        DamageFactor += 0.5f;
+        DamageFactor += 0.33f;
         MaxBounceTimes++;
         AmmoLevel++;
         if (AmmoLevel<=AmmoLevelSprites.Count)

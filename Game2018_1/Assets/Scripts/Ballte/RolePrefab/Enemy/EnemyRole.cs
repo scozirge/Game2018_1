@@ -64,7 +64,7 @@ public partial class EnemyRole : RolePrefab
     public override void ShieldBeSruck(int _dmg)
     {
         base.ShieldBeSruck(_dmg);
-        ReceiveDmg(MyMath.GetNumber1DividedByNumber2(_dmg, 2));
+        ReceiveDmg(MyMath.GetNumber1TimesNumber2(_dmg, 0.6f));
     }
     public override void ReceiveDmg(int _dmg)
     {
@@ -99,6 +99,7 @@ public partial class EnemyRole : RolePrefab
         data.Add("Damage", Attack);
         data.Add("ShooterPos", transform.position);
         data.Add("AmmoNum", AmmoNum);
+        data.Add("AmmoBounceTimes", AmmoBounceTimes);
         MyAmmoSpawner.SpawnAmmo(data);
         SetShield();
     }

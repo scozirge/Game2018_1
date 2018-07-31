@@ -6,11 +6,13 @@ public class NormalWallObj : WallObj
 {
     [SerializeField]
     public Direction Dir;
-    float MaxDragForce;
+    float MaxXDragForce;
+    float MaxYDragForce;
 
-    public void SetWall(float _maxDragForce)
+    public void SetWall(float _maxDragForce, float _maxYDragForce)
     {
-        MaxDragForce = _maxDragForce;
+        MaxXDragForce = _maxDragForce;
+        MaxYDragForce = _maxYDragForce;
     }
     public override Vector2 GetVelocity(Vector2 _velocity)
     {
@@ -31,6 +33,6 @@ public class NormalWallObj : WallObj
     }
     public Vector2 GetDragForce(Vector2 _velocity, float _dragProportion)
     {
-        return new Vector2(_velocity.x * (1 + MaxDragForce * _dragProportion), _velocity.y);
+        return new Vector2(_velocity.x * (1 + MaxXDragForce * _dragProportion), _velocity.y * (1 + MaxYDragForce * _dragProportion));
     }
 }

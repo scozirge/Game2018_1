@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public partial class PlayerRole
 {
@@ -36,6 +38,14 @@ public partial class PlayerRole
         Go_StartPos.SetActive(false);
         Go_EndPos.SetActive(false);
     }
+    static GraphicRaycaster m_Raycaster;
+    static EventSystem m_EventSystem;
+    static PointerEventData m_PointerEventData;
+    public static void SetGraphicRaycaster(GraphicRaycaster _gr, EventSystem _es)
+    {
+        m_Raycaster = _gr;
+        m_EventSystem = _es;
+    }
 
     void ClickToSpawn()
     {
@@ -45,6 +55,23 @@ public partial class PlayerRole
             return;
         if (Input.GetMouseButtonDown(0))
         {
+            //Set up the new Pointer Event
+            m_PointerEventData = new PointerEventData(m_EventSystem);
+            //Set the Pointer Event Position to that of the mouse position
+            m_PointerEventData.position = Input.mousePosition;
+            //Create a list of Raycast Results
+            List<RaycastResult> results = new List<RaycastResult>();
+            //Raycast using the Graphics Raycaster and mouse click position
+            m_Raycaster.Raycast(m_PointerEventData, results);
+            //For every result returned, output the name of the GameObject on the Canvas hit by the Ray
+            foreach (RaycastResult result in results)
+            {
+                if (result.gameObject.tag == "UI")
+                {
+                    return;
+                }
+            }
+
             Ray ray = MyCamera.ScreenPointToRay(Input.mousePosition);
             StartPos = ray.origin + (ray.direction * MyCamera.transform.position.z * -1);
 
@@ -62,7 +89,7 @@ public partial class PlayerRole
                 return;
             Ray ray = MyCamera.ScreenPointToRay(Input.mousePosition);
             CurPos = ray.origin + (ray.direction * MyCamera.transform.position.z * -1);
-            Go_EndPos.transform.position = CurPos;;
+            Go_EndPos.transform.position = CurPos; ;
             float angle = MyMath.GetAngerFormTowPoint2D(CurPos, StartPos);
             BattleCanvas.PlayerBowDraw(180 - angle, Vector2.Distance(CurPos, StartPos));
         }

@@ -26,14 +26,16 @@ public partial class BattleManager : MonoBehaviour
     [SerializeField]
     float RedWallLeftRightExtraForce;
     [SerializeField]
-    float MaxDragForce;
+    float MaxXDragForce;
+    [SerializeField]
+    float MaxYDragForce;
 
 
     void SetNormanWall()
     {
         for (int i = 0; i < MyNormalWall.Count; i++)
         {
-            MyNormalWall[i].SetWall(MaxDragForce);
+            MyNormalWall[i].SetWall(MaxXDragForce, MaxYDragForce);
         }
     }
 

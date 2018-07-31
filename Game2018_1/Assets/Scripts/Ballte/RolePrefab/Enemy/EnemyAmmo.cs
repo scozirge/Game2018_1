@@ -12,6 +12,8 @@ public class EnemyAmmo : AmmoPrefab
     protected float StartRadian;
     protected float CurRadian;
     protected Vector3 ShootPos;
+
+
     public override void Init(Dictionary<string, object> _dic)
     {
         base.Init(_dic);
@@ -33,6 +35,8 @@ public class EnemyAmmo : AmmoPrefab
     }
     protected override void OnTriggerEnter2D(Collider2D _col)
     {
+        if (!IsLaunching)
+            return;
         base.OnTriggerEnter2D(_col);
         switch (_col.gameObject.tag)
         {
@@ -47,6 +51,44 @@ public class EnemyAmmo : AmmoPrefab
                 EffectEmitter.EmitParticle("shieldhit", transform.position, new Vector3(0, 0, 180 - MyMath.GetAngerFormTowPoint2D(BattleManager.MyPlayerRole.transform.position, transform.position)), null);
                 BattleManager.MyPlayerRole.ShieldBeSruck(Damage);
                 SelfDestroy();
+                break;
+
+
+            case "LeftCol":
+                MyAudio.PlaySound(HitWallAduio);
+                EffectEmitter.EmitParticle("bounceEffect", transform.position, new Vector3(0, 0, 180), null);
+                CameraPrefab.DoAction("Shake", 0);
+                if (CurBounceTimes == 0)
+                    MyRigi.velocity = _col.GetComponent<NormalWallObj>().GetDragForce(MyRigi.velocity, 0);
+                if (Bounce())
+                    MyRigi.velocity = _col.GetComponent<NormalWallObj>().GetVelocity(MyRigi.velocity);
+                break;
+            case "RightCol":
+                MyAudio.PlaySound(HitWallAduio);
+                EffectEmitter.EmitParticle("bounceEffect", transform.position, Vector3.zero, null);
+                CameraPrefab.DoAction("Shake", 0);
+                if (CurBounceTimes == 0)
+                    MyRigi.velocity = _col.GetComponent<NormalWallObj>().GetDragForce(MyRigi.velocity, 0);
+                if (Bounce())
+                    MyRigi.velocity = _col.GetComponent<NormalWallObj>().GetVelocity(MyRigi.velocity);
+                break;
+            case "TopCol":
+                MyAudio.PlaySound(HitWallAduio);
+                EffectEmitter.EmitParticle("bounceEffect", transform.position, new Vector3(0, 0, 90), null);
+                CameraPrefab.DoAction("Shake", 0);
+                if (CurBounceTimes == 0)
+                    MyRigi.velocity = _col.GetComponent<NormalWallObj>().GetDragForce(MyRigi.velocity, 0);
+                if (Bounce())
+                    MyRigi.velocity = _col.GetComponent<NormalWallObj>().GetVelocity(MyRigi.velocity);
+                break;
+            case "BotCol":
+                MyAudio.PlaySound(HitWallAduio);
+                EffectEmitter.EmitParticle("bounceEffect", transform.position, new Vector3(0, 0, 270), null);
+                CameraPrefab.DoAction("Shake", 0);
+                if (CurBounceTimes == 0)
+                    MyRigi.velocity = _col.GetComponent<NormalWallObj>().GetDragForce(MyRigi.velocity, 0);
+                if (Bounce())
+                    MyRigi.velocity = _col.GetComponent<NormalWallObj>().GetVelocity(MyRigi.velocity);
                 break;
             default:
                 break;
@@ -77,5 +119,18 @@ public class EnemyAmmo : AmmoPrefab
         EffectEmitter.EmitParticle("trail_arrow", Vector3.zero, Vector3.zero, transform);
         Force = (transform.position - ShootPos).normalized * 30000;
         MyRigi.AddForce(Force);
+    }
+
+
+
+    bool Bounce()
+    {
+        CurBounceTimes++;
+        if (CurBounceTimes > MaxBounceTimes)
+        {
+            SelfDestroy();
+            return false;
+        }
+        return true;
     }
 }
