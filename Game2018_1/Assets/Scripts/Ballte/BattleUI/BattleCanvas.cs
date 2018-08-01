@@ -149,9 +149,9 @@ public partial class BattleCanvas : MonoBehaviour
             return;
         MyEnemyUI.SetPosition(RelyERole.transform.position);
     }
-    public static void PlayerBowDraw(float _angle, float _force)
+    public static void PlayerBowDraw(float _angle, float _proportion)
     {
-        MyPlayerUI.BowDraw(_angle, _force);
+        MyPlayerUI.BowDraw(_angle, _proportion);
     }
     public static void PlayerReleaseBow()
     {

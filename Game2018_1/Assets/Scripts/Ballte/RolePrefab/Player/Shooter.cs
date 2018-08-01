@@ -21,6 +21,7 @@ public partial class PlayerRole
     [SerializeField]
     int MaxDragDistance;
 
+
     bool IsPress;
     public static bool CanShoot { get; protected set; }
     Vector3 StartPos;
@@ -91,7 +92,7 @@ public partial class PlayerRole
             CurPos = ray.origin + (ray.direction * MyCamera.transform.position.z * -1);
             Go_EndPos.transform.position = CurPos; ;
             float angle = MyMath.GetAngerFormTowPoint2D(CurPos, StartPos);
-            BattleCanvas.PlayerBowDraw(180 - angle, Vector2.Distance(CurPos, StartPos));
+            BattleCanvas.PlayerBowDraw(180 - angle, GetDragProportion());
         }
         if (Input.GetMouseButtonUp(0))
         {
@@ -102,7 +103,8 @@ public partial class PlayerRole
             Go_StartPos.SetActive(false);
             Go_EndPos.SetActive(false);
             Ray ray = MyCamera.ScreenPointToRay(Input.mousePosition);
-            EndPos = ray.origin + (ray.direction * MyCamera.transform.position.z * -1);
+            CurPos = ray.origin + (ray.direction * MyCamera.transform.position.z * -1);
+            EndPos = CurPos;
             Shoot();
         }
     }
@@ -139,7 +141,7 @@ public partial class PlayerRole
     float GetDragProportion()
     {
         float dragProportion = 0;
-        float dragDistance = Vector3.Distance(StartPos, EndPos);
+        float dragDistance = Vector3.Distance(StartPos, CurPos);
         if (dragDistance > MaxDragDistance)
             dragProportion = 1;
         else
