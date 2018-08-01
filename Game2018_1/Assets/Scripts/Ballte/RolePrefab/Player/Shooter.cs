@@ -17,8 +17,6 @@ public partial class PlayerRole
     [SerializeField]
     int MinSpeed;
     [SerializeField]
-    int DragForce;
-    [SerializeField]
     int MaxDragDistance;
 
 
@@ -128,15 +126,11 @@ public partial class PlayerRole
     }
     Vector3 GetForce()
     {
-        float speed = Vector3.Distance(StartPos, EndPos) * DragForce;
-        if (speed < MinSpeed)
-            speed = MinSpeed;
-        else if (speed > MaxSpeed)
-            speed = MaxSpeed;
+        int extraSpeed = MaxSpeed - MinSpeed;
         Vector3 dir = (StartPos - EndPos).normalized;
         if (dir == Vector3.zero)
             dir = Vector3.up;
-        return dir * speed;
+        return dir * (MinSpeed + (extraSpeed * GetDragProportion()));
     }
     float GetDragProportion()
     {
