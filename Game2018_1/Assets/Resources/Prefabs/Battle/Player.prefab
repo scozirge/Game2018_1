@@ -254,9 +254,9 @@ MonoBehaviour:
   EndPosPrefab: {fileID: 1684528259388834, guid: b860698ffdb4dd240b6b7f7e5522e308,
     type: 2}
   MaxSpeed: 130000
-  MinSpeed: 50000
+  MinSpeed: 40000
   DragForce: 180
-  MaxDragDistance: 500
+  MaxDragDistance: 150
 --- !u!114 &114959043584152922
 MonoBehaviour:
   m_ObjectHideFlags: 1
