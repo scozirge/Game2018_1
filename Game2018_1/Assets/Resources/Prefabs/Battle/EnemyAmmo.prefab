@@ -128,7 +128,7 @@ MonoBehaviour:
   SpeedyFlyingAudio: {fileID: 0}
   IsDavestated: 0
   LifeTime: 3
-  AngularVlocity: 2
+  AngularVlocity: 2.5
 --- !u!114 &114670930291250298
 MonoBehaviour:
   m_ObjectHideFlags: 1
