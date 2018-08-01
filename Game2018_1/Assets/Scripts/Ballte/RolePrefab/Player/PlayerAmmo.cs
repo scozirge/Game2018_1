@@ -22,9 +22,9 @@ public class PlayerAmmo : AmmoPrefab
     public override void Init(Dictionary<string, object> _dic)
     {
         base.Init(_dic);
-        Force = (Vector3)_dic["Force"];
         AmmoBounceDamage = (int)_dic["AmmoBounceDamage"];
         Dragproportion = (float)_dic["DragProportion"];
+        Force = (Vector3)_dic["Force"];
         CurBounceTimes = 0;
         DamageFactor = 1;
         IsWeaknessStrike = false;

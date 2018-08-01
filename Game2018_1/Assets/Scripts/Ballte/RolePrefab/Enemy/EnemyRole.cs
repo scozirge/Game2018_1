@@ -10,6 +10,8 @@ public partial class EnemyRole : RolePrefab
     float MoveRangeX;
     [SerializeField]
     float MovePosY;
+    [SerializeField]
+    int AmmoSpeed;
 
     delegate void OneDelegate();
     static OneDelegate MonsterUnarm;
@@ -100,6 +102,7 @@ public partial class EnemyRole : RolePrefab
         data.Add("ShooterPos", transform.position);
         data.Add("AmmoNum", AmmoNum);
         data.Add("AmmoBounceTimes", AmmoBounceTimes);
+        data.Add("AmmoSpeed", AmmoSpeed);
         MyAmmoSpawner.SpawnAmmo(data);
         SetShield();
     }

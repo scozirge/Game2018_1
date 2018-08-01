@@ -6,18 +6,20 @@ public class EnemyAmmo : AmmoPrefab
 {
     [SerializeField]
     float LifeTime;
-
+    [SerializeField]
     protected float AngularVlocity = 3f;
+
     protected float Radius { get; set; }
     protected float StartRadian;
     protected float CurRadian;
     protected Vector3 ShootPos;
-
+    protected float AmmoSpeed;
 
     public override void Init(Dictionary<string, object> _dic)
     {
         base.Init(_dic);
         ShootPos = (Vector3)_dic["ShooterPos"];
+        AmmoSpeed = (int)_dic["AmmoSpeed"];
     }
     public void SetCircularMotion(float _radius, float _startAngle)
     {
@@ -117,7 +119,7 @@ public class EnemyAmmo : AmmoPrefab
     {
         base.Launch();
         EffectEmitter.EmitParticle("trail_arrow", Vector3.zero, Vector3.zero, transform);
-        Force = (transform.position - ShootPos).normalized * 30000;
+        Force = (transform.position - ShootPos).normalized * AmmoSpeed;
         MyRigi.AddForce(Force);
     }
 

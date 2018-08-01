@@ -45,6 +45,7 @@ public class EnemyAmmoSpawner : MonoBehaviour
         float radius = 150f;
         MyAmmos = new List<EnemyAmmo>();
         int ammoNum = (int)_data["AmmoNum"];
+        int ammoSpeed = (int)_data["AmmoSpeed"];
         Vector3 shooterPos = (Vector3)_data["ShooterPos"];
 
         for (int i = 0; i < ammoNum; i++)
