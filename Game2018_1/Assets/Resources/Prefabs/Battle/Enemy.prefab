@@ -250,7 +250,7 @@ MonoBehaviour:
   MyAmmoSpawner: {fileID: 114924643967990478}
   MoveRangeX: 200
   MovePosY: 400
-  AmmoSpeed: 40000
+  AmmoSpeed: 35000
 --- !u!114 &114924643967990478
 MonoBehaviour:
   m_ObjectHideFlags: 1
