@@ -28,7 +28,7 @@ public partial class ServerRequest : MonoBehaviour
                 break;
             case RuntimePlatform.WindowsEditor:
                 Debug.Log("WindowsEditor");
-                IsFormal = false;
+                IsFormal = true;
                 break;
             case RuntimePlatform.OSXEditor:
                 Debug.Log("OSXEditor");
