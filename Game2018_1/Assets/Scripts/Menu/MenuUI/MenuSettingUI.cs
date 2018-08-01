@@ -13,11 +13,11 @@ public class MenuSettingUI : MonoBehaviour {
     void OnEnable()
     {
         Name_Text.text = Player.Name;
+        Sound_Toggle.isOn = AudioPlayer.IsMute;
     }
-
     public void UpdateSoundSwitch()
     {
-        Debug.Log(string.Format("音效關閉{0}",Sound_Toggle.isOn));
+        AudioPlayer.Mute(Sound_Toggle.isOn);
     }
     public void UpdateMusicSwitch()
     {
@@ -35,6 +35,18 @@ public class MenuSettingUI : MonoBehaviour {
     }
     public void ChangeName()
     {
+        if (Name_Text.text == Player.Name)
+        {
+            PopupUI.ShowWarning("Fail to change name", "The name you just input is same to your old name");
+            Name_Text.text = Player.Name;
+            return;
+        }
+        else if (Name_Text.text == "")
+        {
+            PopupUI.ShowWarning("Fail to change name", "The name can't be empty");
+            Name_Text.text = Player.Name;
+            return;
+        }
         ServerRequest.ChangeName(Name_Text.text);
     }
 }

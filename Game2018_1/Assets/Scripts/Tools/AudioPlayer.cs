@@ -5,6 +5,7 @@ using UnityEngine;
 public class AudioPlayer : MonoBehaviour
 {
     public static bool IsInit;
+    public static bool IsMute=false;
     static List<AudioSource> ASList;
     static GameObject MyAudioObject;
     static Dictionary<string, AudioSource> LoopAudioDic;
@@ -32,8 +33,14 @@ public class AudioPlayer : MonoBehaviour
         }
         IsInit = true;
     }
+    public static void Mute(bool _isMute)
+    {
+        IsMute = _isMute;
+    }
     public void PlaySound(string _soundName)
     {
+        if (IsMute)
+            return;
         if (IsInit)
         {
             if (GetApplicableAudioSource() != null)
@@ -59,6 +66,8 @@ public class AudioPlayer : MonoBehaviour
     }
     public void PlaySound(AudioClip _ac)
     {
+        if (IsMute)
+            return;
         if (IsInit)
         {
             if (GetApplicableAudioSource() != null)
@@ -95,6 +104,8 @@ public class AudioPlayer : MonoBehaviour
     }
     public void PlayLoopSound(AudioClip _ac, string _key)
     {
+        if (IsMute)
+            return;
         if (LoopAudioDic.ContainsKey(_key))
         {
             //Debug.LogWarning(string.Format("Key:{0} 循環播放音效索引重複", _key));
