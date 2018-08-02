@@ -88,7 +88,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224164305815584874}
-  - component: {fileID: 114980056049020026}
+  - component: {fileID: 114778174002907482}
   m_Layer: 5
   m_Name: MyRank
   m_TagString: Untagged
@@ -244,7 +244,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_FontSize: 25
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -256,6 +256,20 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 50
+--- !u!114 &114778174002907482
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1661331887995912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2812650c645d22c4f8a767229977e47a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name_Text: {fileID: 114892728806544712}
+  Score_Text: {fileID: 114568553327375742}
+  Icon_Sprite: {fileID: 114012045783850000}
 --- !u!114 &114892728806544712
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -277,18 +291,18 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 25
+    m_FontSize: 20
     m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 2
-    m_MaxSize: 55
+    m_BestFit: 1
+    m_MinSize: 0
+    m_MaxSize: 22
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u982D\u50CF\u6700\u591A\u5341\u4E8C\u500B\u5B57\u5594\u5594\u5594\u5594"
+  m_Text: "\u982D\u50CF\u6700\u591A\u5341\u4E8C\u500B\u5B57\u5341\u4E8C\u500B\u5B57"
 --- !u!114 &114962976950967586
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -316,26 +330,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114980056049020026
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1661331887995912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b74c39e648dac44284c285ba0dbeb48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name_Text: {fileID: 114892728806544712}
-  Score_Text: {fileID: 114568553327375742}
-  Icon_Sprite: {fileID: 114012045783850000}
-  Rank_Text: {fileID: 0}
-  RankBot_Image: {fileID: 114012045783850000}
-  Rank1Bot_Prefab: {fileID: 21300000, guid: 4fda4dd7dee06054bb216bf44a260321, type: 3}
-  Rank2Bot_Prefab: {fileID: 21300000, guid: d3e553d569258c24aa87622433330919, type: 3}
-  Rank3Bot_Prefab: {fileID: 21300000, guid: b2d09b115b985294fb74908fa04905f3, type: 3}
-  Rank4Bot_Prefab: {fileID: 21300000, guid: bd7182d2f7051d440bb65b6a0cf6e462, type: 3}
 --- !u!222 &222022497097786630
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -383,7 +377,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224446169365492412}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -401,7 +395,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224446169365492412}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -463,7 +457,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -160, y: 10}
+  m_AnchoredPosition: {x: -160, y: 11.75}
   m_SizeDelta: {x: 322.5, y: 66.2}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!224 &224446169365492412
@@ -476,8 +470,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 224018300648818964}
   - {fileID: 224015373689665494}
+  - {fileID: 224018300648818964}
   m_Father: {fileID: 224164305815584874}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
