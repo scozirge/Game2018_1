@@ -204,7 +204,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 22
+    m_FontSize: 23
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -215,7 +215,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u751F\u547D\u56DE\u5FA9\u751F\u547D\u751F\u547D\u56DE\u5FA9\u751F\u547D\u751F\u547D\u56DE\u5FA9\u751F\u547D\u751F\u547D\u56DE\u5FA9\u751F\u547D"
+  m_Text: "\u751F\u547D\u56DE\u5FA9\u751F\u547D\u751F\u547D\u56DE\u5FA9\u751F\u547D\u751F\u547D\u56DE\u5FA9\u751F\u547D\u751F\u547D\u56DE\u5FA9\u751F\u547D\u751F\u547D\u56DE\u5FA9\u751F\u547D\u751F\u547D\u56DE\u5FA9\u751F\u547D\u751F\u547D\u56DE\u5FA9\u751F\u547D\u751F\u547D\u56DE\u5FA9\u751F\u547D"
 --- !u!114 &114910755433805766
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -308,6 +308,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: {fileID: 0}
   Shield: {fileID: 0}
+  MyScoreObj: {fileID: 0}
+  ScoreTitle_Text: {fileID: 0}
+  ScoreValue_Text: {fileID: 0}
+  ScoreAni: {fileID: 0}
 --- !u!222 &222647239304083676
 CanvasRenderer:
   m_ObjectHideFlags: 1
