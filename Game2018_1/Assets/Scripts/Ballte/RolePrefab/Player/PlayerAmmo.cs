@@ -115,7 +115,7 @@ public class PlayerAmmo : AmmoPrefab
         DamageFactor += 0.33f;
         MaxBounceTimes++;
         AmmoLevel++;
-        if (AmmoLevel<=AmmoLevelSprites.Count)
+        if (AmmoLevel<AmmoLevelSprites.Count)
             MyAmmoStar.sprite = AmmoLevelSprites[AmmoLevel];
     }
     bool Bounce()

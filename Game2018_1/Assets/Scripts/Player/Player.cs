@@ -23,7 +23,7 @@ public partial class Player
     public static void Init()
     {
         //PlayerPrefs.DeleteAll();//清除玩家資料
-        Player.SetLanguage(Language.ZH_TW);
+        Player.SetLanguage(Language.EN);
         if (PlayerPrefs.GetString("AC") != "")
             AC = PlayerPrefs.GetString("AC");
         if (PlayerPrefs.GetString("ACPass") != "")
