@@ -215,4 +215,8 @@ public partial class BattleCanvas : MonoBehaviour
     {
         LeaderboardUI.SetActive(_bool);
     }
+    public static void ShowScoreOnEnemy(string _str,int _score)
+    {
+        MyEnemyUI.ShowScore(_str, _score);
+    }
 }

@@ -187,6 +187,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114623681451556512, guid: e436e80b4b09c3f4aa27ef861b1d1f62,
+        type: 2}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 224362988109392338, guid: e436e80b4b09c3f4aa27ef861b1d1f62,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -277,9 +282,64 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1135133815215266, guid: e436e80b4b09c3f4aa27ef861b1d1f62, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 225282572272638686, guid: e436e80b4b09c3f4aa27ef861b1d1f62,
+        type: 2}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114325402333259532, guid: e436e80b4b09c3f4aa27ef861b1d1f62,
+        type: 2}
+      propertyPath: Sound_Toggle
+      value: 
+      objectReference: {fileID: 1441640103}
+    - target: {fileID: 114623681451556512, guid: e436e80b4b09c3f4aa27ef861b1d1f62,
+        type: 2}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114623681451556512, guid: e436e80b4b09c3f4aa27ef861b1d1f62,
+        type: 2}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114623681451556512, guid: e436e80b4b09c3f4aa27ef861b1d1f62,
+        type: 2}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1441640104}
+    - target: {fileID: 114623681451556512, guid: e436e80b4b09c3f4aa27ef861b1d1f62,
+        type: 2}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdateSoundSwitch
+      objectReference: {fileID: 0}
+    - target: {fileID: 114623681451556512, guid: e436e80b4b09c3f4aa27ef861b1d1f62,
+        type: 2}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1573313442216910, guid: e436e80b4b09c3f4aa27ef861b1d1f62, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e436e80b4b09c3f4aa27ef861b1d1f62, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1441640103 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114623681451556512, guid: e436e80b4b09c3f4aa27ef861b1d1f62,
+    type: 2}
+  m_PrefabInternal: {fileID: 1441640102}
+  m_Script: {fileID: 2109663825, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!114 &1441640104 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114325402333259532, guid: e436e80b4b09c3f4aa27ef861b1d1f62,
+    type: 2}
+  m_PrefabInternal: {fileID: 1441640102}
+  m_Script: {fileID: 11500000, guid: 081c9faf231cece4798e4679e8c48df9, type: 3}
 --- !u!1 &1445310762
 GameObject:
   m_ObjectHideFlags: 0
@@ -637,6 +697,16 @@ Prefab:
         type: 2}
       propertyPath: VerticalWallXpos
       value: 342
+      objectReference: {fileID: 0}
+    - target: {fileID: 114615350611071640, guid: 964618808e8fc2c45b43ffc5a3b22aef,
+        type: 2}
+      propertyPath: CriticalScore
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114615350611071640, guid: 964618808e8fc2c45b43ffc5a3b22aef,
+        type: 2}
+      propertyPath: ShieldStrikeScore
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 964618808e8fc2c45b43ffc5a3b22aef, type: 2}

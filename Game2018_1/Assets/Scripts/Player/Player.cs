@@ -18,6 +18,7 @@ public partial class Player
     public static string LeaderboardData { get; protected set; }
     public static int Rank { get; private set; }
 
+
     public static string FBID { get; private set; }
 
     public static void Init()

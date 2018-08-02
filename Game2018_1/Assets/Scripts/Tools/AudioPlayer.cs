@@ -5,7 +5,7 @@ using UnityEngine;
 public class AudioPlayer : MonoBehaviour
 {
     public static bool IsInit;
-    public static bool IsMute=false;
+    public static bool IsMute = false;
     static List<AudioSource> ASList;
     static GameObject MyAudioObject;
     static Dictionary<string, AudioSource> LoopAudioDic;
@@ -20,6 +20,11 @@ public class AudioPlayer : MonoBehaviour
     }
     void Init()
     {
+        if (PlayerPrefs.GetInt("IsMute") == 0)
+            Mute(false);
+        else
+            AudioPlayer.Mute(true);
+
         LoopAudioDic = new Dictionary<string, AudioSource>();
         ASList = new List<AudioSource>();
         MyAudioObject = new GameObject("AudioPlayer");
@@ -35,7 +40,13 @@ public class AudioPlayer : MonoBehaviour
     }
     public static void Mute(bool _isMute)
     {
+        if (_isMute == IsMute)
+            return;
         IsMute = _isMute;
+        if (IsMute)
+            PlayerPrefs.SetInt("IsMute", 1);
+        else
+            PlayerPrefs.SetInt("IsMute", 0);
     }
     public void PlaySound(string _soundName)
     {
@@ -100,7 +111,7 @@ public class AudioPlayer : MonoBehaviour
             LoopAudioDic.Remove(_key);
         }
         //else
-            //Debug.LogWarning(string.Format("Key:{0}　不存在尋換播放音效清單中", _key));
+        //Debug.LogWarning(string.Format("Key:{0}　不存在尋換播放音效清單中", _key));
     }
     public void PlayLoopSound(AudioClip _ac, string _key)
     {

@@ -21,6 +21,10 @@ public partial class BattleManager : MonoBehaviour
     Debugger DebuggerPrefab;
     [SerializeField]
     public Vector2 WindForce;
+    [SerializeField]
+    public int CriticalScore;
+    [SerializeField]
+    public int ShieldStrikeScore;
 
     public static BattleManager MySelf;
     public static PlayerRole MyPlayerRole;
@@ -221,11 +225,12 @@ public partial class BattleManager : MonoBehaviour
         {
             case "StrikeTimes":
                 StrikeTimes = MyMath.Calculate_ReturnINT(StrikeTimes, _value, _operator);
-                Score += 3;
+                Score += MySelf.ShieldStrikeScore;
+
                 break;
             case "WeaknessStrikeTimes":
                 WeaknessStrikeTimes = MyMath.Calculate_ReturnINT(WeaknessStrikeTimes, _value, _operator);
-                Score += 5;
+                Score += MySelf.CriticalScore;
                 break;
             case "MaxComboStrikes":
                 MaxComboStrikes = MyMath.Calculate_ReturnINT(MaxComboStrikes, _value, _operator);

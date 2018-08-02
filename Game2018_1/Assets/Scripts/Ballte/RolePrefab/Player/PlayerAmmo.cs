@@ -13,7 +13,7 @@ public class PlayerAmmo : AmmoPrefab
     public int AmmoBounceDamage { get; protected set; }
     public float DamageFactor { get; protected set; }
     public override int Damage { get { return (int)((BaseDamage + CurBounceTimes * AmmoBounceDamage) * DamageFactor); } }
-    public bool IsWeaknessStrike { get; protected set; }
+    public HitCondition AmmoHitCondition { get; protected set; }
     public bool IsHitTarget = false;
     public float Dragproportion { get; protected set; }
     public int AmmoLevel { get; protected set; }
@@ -27,7 +27,7 @@ public class PlayerAmmo : AmmoPrefab
         Force = (Vector3)_dic["Force"];
         CurBounceTimes = 0;
         DamageFactor = 1;
-        IsWeaknessStrike = false;
+        AmmoHitCondition = HitCondition.NoHit;
         AmmoLevel = 0;
     }
     public override void Launch()
@@ -90,7 +90,8 @@ public class PlayerAmmo : AmmoPrefab
                 Vector2 effectPos = Vector2.Lerp(BattleManager.MyEnemyRole.transform.position, transform.position, 0.8f);
                 EffectEmitter.EmitParticle("shieldhit", effectPos, new Vector3(0, 0, 180 - MyMath.GetAngerFormTowPoint2D(BattleManager.MyEnemyRole.transform.position, transform.position)), null);
                 BattleManager.MyEnemyRole.ShieldBeSruck(Damage);
-                BattleManager.SetRecord("StrikeTimes", 1, Operator.Plus);
+
+                AmmoHitCondition = HitCondition.HitShell;
                 SelfDestroy();
                 IsHitTarget = true;
                 break;
@@ -100,8 +101,8 @@ public class PlayerAmmo : AmmoPrefab
                 MyAudio.PlaySound(HitAduio);
                 EffectEmitter.EmitParticle("bloodEffect", transform.position, new Vector3(0, 0, 180 - MyMath.GetAngerFormTowPoint2D(BattleManager.MyEnemyRole.transform.position, transform.position)), null);
                 BattleManager.MyEnemyRole.BeStruck(Damage);
-                BattleManager.SetRecord("WeaknessStrikeTimes", 1, Operator.Plus);
-                IsWeaknessStrike = true;
+
+                AmmoHitCondition = HitCondition.Hit;
                 SelfDestroy();
                 IsHitTarget = true;
                 break;
@@ -135,10 +136,26 @@ public class PlayerAmmo : AmmoPrefab
     public override void SelfDestroy()
     {
         EnemyRole.SetAllMonsterUnarm();
-        if (IsWeaknessStrike)
-            BattleManager.SetRecord("MaxComboStrikes", 1, Operator.Plus);
-        else
-            BattleManager.SetRecord("MaxComboStrikes", 0, Operator.Equal);
+        switch(AmmoHitCondition)
+        {
+            case HitCondition.Hit:
+                BattleManager.SetRecord("StrikeTimes", 1, Operator.Plus);
+                BattleManager.SetRecord("MaxComboStrikes", 1, Operator.Plus);
+                BattleManager.SetRecord("WeaknessStrikeTimes", 1, Operator.Plus);
+                if (BattleManager.MaxComboStrikes > 1)
+                    BattleCanvas.ShowScoreOnEnemy(string.Format("{0}x{1}", GameDictionary.String_UIDic["CriticalCombo"].GetString(Player.UseLanguage), BattleManager.MaxComboStrikes), BattleManager.MySelf.CriticalScore + BattleManager.MaxComboStrikes);
+                else
+                    BattleCanvas.ShowScoreOnEnemy(GameDictionary.String_UIDic["CriticalHit"].GetString(Player.UseLanguage), BattleManager.MySelf.CriticalScore);
+                break;
+            case HitCondition.HitShell:
+                BattleManager.SetRecord("MaxComboStrikes", 0, Operator.Equal);
+                BattleCanvas.ShowScoreOnEnemy(GameDictionary.String_UIDic["ShieldHit"].GetString(Player.UseLanguage), BattleManager.MySelf.ShieldStrikeScore);
+                break;
+            case HitCondition.NoHit:
+                BattleManager.SetRecord("MaxComboStrikes", 0, Operator.Equal);
+                break;
+        }
+            
         base.SelfDestroy();
     }
 }
