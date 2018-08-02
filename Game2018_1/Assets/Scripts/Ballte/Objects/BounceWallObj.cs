@@ -14,8 +14,19 @@ public class BounceWallObj : WallObj
     public float UpDownEtraForce { get; protected set; }
     public float LeftRightExtraForce { get; protected set; }
 
-    public void SetWall(float _bounciness, float _slicedHeight, float _upDownEtraForce, float _leftRightExtraForce)
+    public void SetVerticalWall(float _bounciness, float _slicedHeight, float _upDownEtraForce, float _leftRightExtraForce)
     {
+        transform.localRotation = Quaternion.Euler(Vector3.zero);
+        Bounciness = _bounciness;
+        SlicedHeight = _slicedHeight;
+        UpDownEtraForce = _upDownEtraForce;
+        LeftRightExtraForce = _leftRightExtraForce;
+        MySR.size = new Vector2(MySR.size.x, _slicedHeight);
+        MyCollider.size = new Vector2(MySR.size.x, MySR.size.y);
+    }
+    public void SetHorizontalWall(float _bounciness, float _slicedHeight, float _upDownEtraForce, float _leftRightExtraForce)
+    {
+        transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 90));
         Bounciness = _bounciness;
         SlicedHeight = _slicedHeight;
         UpDownEtraForce = _upDownEtraForce;

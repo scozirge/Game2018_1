@@ -8,17 +8,23 @@ public partial class BattleManager : MonoBehaviour
     [SerializeField]
     List<NormalWallObj> MyNormalWall;
     [SerializeField]
-    BounceWallObj MyBounceWall;
+    List<BounceWallObj> MyBounceWall;
     [SerializeField]
-    float MaxWallLength;
+    float MaxVerticalWallLength;
     [SerializeField]
-    float MinWallLength;
+    float MinVerticalWallLength;
     [SerializeField]
-    float MaxYPos;
+    float MaxHorizontalWallLength;
     [SerializeField]
-    float MinYPos;
+    float MinHorizontalWallLength;
     [SerializeField]
-    float PosX;
+    Vector2 VerticalWallYPosRange;
+    [SerializeField]
+    int VerticalWallXpos;
+    [SerializeField]
+    Vector2 HorizontalWallXPosRange;
+    [SerializeField]
+    int VerticalWallYpos;
     [SerializeField]
     float RedWallBounciness;
     [SerializeField]
@@ -41,15 +47,41 @@ public partial class BattleManager : MonoBehaviour
 
     public static void SetBounceWall()
     {
-        MySelf.MyBounceWall.gameObject.SetActive(true);
+        int rndSide = Random.Range(0, 3);
+        switch (rndSide)
+        {
+            case 0:
+                MySelf.MyBounceWall[0].SetVerticalWall(MySelf.RedWallBounciness, Random.Range(MySelf.MinVerticalWallLength, MySelf.MaxVerticalWallLength), MySelf.RedWallUpDownEtraForce, MySelf.RedWallLeftRightExtraForce);
+                MySelf.MyBounceWall[0].transform.position = new Vector2(MySelf.VerticalWallXpos, Random.Range(MySelf.VerticalWallYPosRange.x, MySelf.VerticalWallYPosRange.y));
+                MySelf.MyBounceWall[1].SetHorizontalWall(MySelf.RedWallBounciness, Random.Range(MySelf.MinHorizontalWallLength, MySelf.MaxHorizontalWallLength), MySelf.RedWallUpDownEtraForce, MySelf.RedWallLeftRightExtraForce);
+                MySelf.MyBounceWall[1].transform.position = new Vector2(Random.Range(MySelf.HorizontalWallXPosRange.x, MySelf.HorizontalWallXPosRange.y), MySelf.VerticalWallYpos);
+                break;
+            case 1:
+                MySelf.MyBounceWall[0].SetVerticalWall(MySelf.RedWallBounciness, Random.Range(MySelf.MinVerticalWallLength, MySelf.MaxVerticalWallLength), MySelf.RedWallUpDownEtraForce, MySelf.RedWallLeftRightExtraForce);
+                MySelf.MyBounceWall[0].transform.position = new Vector2(MySelf.VerticalWallXpos - 1, Random.Range(MySelf.VerticalWallYPosRange.x, MySelf.VerticalWallYPosRange.y));
+                MySelf.MyBounceWall[1].SetHorizontalWall(MySelf.RedWallBounciness, Random.Range(MySelf.MinHorizontalWallLength, MySelf.MaxHorizontalWallLength), MySelf.RedWallUpDownEtraForce, MySelf.RedWallLeftRightExtraForce);
+                MySelf.MyBounceWall[1].transform.position = new Vector2(Random.Range(MySelf.HorizontalWallXPosRange.x * -1, MySelf.HorizontalWallXPosRange.y), MySelf.VerticalWallYpos);
+                break;
+            case 2:
+                MySelf.MyBounceWall[0].SetVerticalWall(MySelf.RedWallBounciness, Random.Range(MySelf.MinVerticalWallLength, MySelf.MaxVerticalWallLength), MySelf.RedWallUpDownEtraForce, MySelf.RedWallLeftRightExtraForce);
+                MySelf.MyBounceWall[0].transform.position = new Vector2(MySelf.VerticalWallXpos, Random.Range(MySelf.VerticalWallYPosRange.x, MySelf.VerticalWallYPosRange.y));
+                MySelf.MyBounceWall[1].SetVerticalWall(MySelf.RedWallBounciness, Random.Range(MySelf.MinVerticalWallLength, MySelf.MaxVerticalWallLength), MySelf.RedWallUpDownEtraForce, MySelf.RedWallLeftRightExtraForce);
+                MySelf.MyBounceWall[1].transform.position = new Vector2(MySelf.VerticalWallXpos * -1, Random.Range(MySelf.VerticalWallYPosRange.x * -1, MySelf.VerticalWallYPosRange.y));
+                break;
+        }
+        for (int i = 0; i < MySelf.MyBounceWall.Count; i++)
+        {
+            MySelf.MyBounceWall[i].gameObject.SetActive(true);
+        }
 
-        float rand = Random.Range(0, 2);
-        float dir = (rand == 0) ? dir = 1 : -1;
-        MySelf.MyBounceWall.SetWall(MySelf.RedWallBounciness, Random.Range(MySelf.MinWallLength, MySelf.MaxWallLength), MySelf.RedWallUpDownEtraForce, MySelf.RedWallLeftRightExtraForce);
-        MySelf.MyBounceWall.transform.position = new Vector2(MySelf.PosX * dir, Random.Range(MySelf.MinYPos, MySelf.MaxYPos));
+
+
     }
     public static void HideBounceWall()
     {
-        MySelf.MyBounceWall.gameObject.SetActive(false);
+        for (int i = 0; i < MySelf.MyBounceWall.Count; i++)
+        {
+            MySelf.MyBounceWall[i].gameObject.SetActive(false);
+        }
     }
 }
