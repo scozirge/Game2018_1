@@ -39,7 +39,6 @@ public partial class GameManager : MonoBehaviour
         SR.Init();
         Player.AutoLogin();
         IsInit = true;
-        GameManager.ChangeScene("Menu");
     }
     void DeployDebugger()
     {
