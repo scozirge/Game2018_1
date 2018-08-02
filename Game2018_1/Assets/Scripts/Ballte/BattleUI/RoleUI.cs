@@ -17,6 +17,8 @@ public abstract class RoleUI : MonoBehaviour
 
     public virtual void UpdateHealthUI(float _healthRatio)
     {
+        if (_healthRatio < 0.15f)
+            _healthRatio = 0.15f;
         Health.fillAmount = _healthRatio;
     }
     public virtual void RotateShield(float _angle)

@@ -33,6 +33,11 @@ public class NormalWallObj : WallObj
     }
     public Vector2 GetDragForce(Vector2 _velocity, float _dragProportion)
     {
-        return new Vector2(_velocity.x * (1 + MaxXDragForce * _dragProportion), _velocity.y * (1 + MaxYDragForce * _dragProportion));
+        if (Dir==Direction.Top || Dir==Direction.Bottom)
+        {
+            return new Vector2(_velocity.x * (1 + MaxYDragForce * _dragProportion), _velocity.y * (1 + MaxXDragForce * _dragProportion));
+        }
+        else
+            return new Vector2(_velocity.x * (1 + MaxXDragForce * _dragProportion), _velocity.y * (1 + MaxYDragForce * _dragProportion));
     }
 }
