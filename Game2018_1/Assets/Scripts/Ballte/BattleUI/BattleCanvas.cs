@@ -77,6 +77,7 @@ public partial class BattleCanvas : MonoBehaviour
         GameObject playerGo = Instantiate(PlayerRoleUIPrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
         MyPlayerUI = playerGo.GetComponent<PlayerRoleUI>();
         playerGo.transform.SetParent(Trans_Roles);
+        playerGo.transform.localScale = Vector3.one;
         playerGo.transform.localPosition = RelyPRole.transform.position;
         MyPlayerUI.Init();
 
@@ -84,6 +85,7 @@ public partial class BattleCanvas : MonoBehaviour
         GameObject enemyGo = Instantiate(EnemyRoleUIPrefab.gameObject, Vector3.zero, Quaternion.identity) as GameObject;
         MyEnemyUI = enemyGo.GetComponent<EnemyRoleUI>();
         enemyGo.transform.SetParent(Trans_Roles);
+        enemyGo.transform.localScale = Vector3.one;
         enemyGo.transform.localPosition = RelyERole.transform.position;
         MyEnemyUI.Init();
         IsSpawnRoles = true;

@@ -4554,6 +4554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 081c9faf231cece4798e4679e8c48df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Sound_Toggle: {fileID: 114623681451556512}
   CheckUI: {fileID: 1789920327754444}
 --- !u!114 &114335048381376222
 MonoBehaviour:
@@ -5232,10 +5233,10 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 1000, y: 100}
-  m_Spacing: {x: 0, y: 45}
-  m_Constraint: 0
-  m_ConstraintCount: 2
+  m_CellSize: {x: 429, y: 125}
+  m_Spacing: {x: 0, y: 20}
+  m_Constraint: 1
+  m_ConstraintCount: 1
 --- !u!114 &114537514291117240
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5606,7 +5607,18 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114325402333259532}
+        m_MethodName: UpdateSoundSwitch
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
@@ -10381,7 +10393,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 119.8}
+  m_AnchoredPosition: {x: 0, y: -31.8}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224756959634853700

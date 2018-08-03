@@ -42,6 +42,7 @@ public class UpgradeUI : MonoBehaviour
             SkillBoardPrefab sbp = skillBoardGo.GetComponent<SkillBoardPrefab>();
             sbp.Init(skillDatas[i]);
             skillBoardGo.transform.SetParent(Parent_Trans);
+            skillBoardGo.transform.localScale = Vector3.one;
             SkillBoardList.Add(sbp);
         }
     }
