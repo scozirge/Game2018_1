@@ -143,13 +143,13 @@ public class PlayerAmmo : AmmoPrefab
                 BattleManager.SetRecord("MaxComboStrikes", 1, Operator.Plus);
                 BattleManager.SetRecord("WeaknessStrikeTimes", 1, Operator.Plus);
                 if (BattleManager.MaxComboStrikes > 1)
-                    BattleCanvas.ShowScoreOnEnemy(string.Format("{0}x{1}", GameDictionary.String_UIDic["CriticalCombo"].GetString(Player.UseLanguage), BattleManager.MaxComboStrikes), BattleManager.MySelf.CriticalScore + BattleManager.MaxComboStrikes);
+                    BattleCanvas.ShowScoreOnEnemy(string.Format("{0}x{1}", GameDictionary.String_UIDic["CriticalCombo"].GetString(Player.UseLanguage), BattleManager.MaxComboStrikes), string.Format("{0}{1}","+",BattleManager.MySelf.CriticalScore + BattleManager.MaxComboStrikes));
                 else
-                    BattleCanvas.ShowScoreOnEnemy(GameDictionary.String_UIDic["CriticalHit"].GetString(Player.UseLanguage), BattleManager.MySelf.CriticalScore);
+                    BattleCanvas.ShowScoreOnEnemy(GameDictionary.String_UIDic["CriticalHit"].GetString(Player.UseLanguage), string.Format("{0}{1}", "+", BattleManager.MySelf.CriticalScore));
                 break;
             case HitCondition.HitShell:
                 BattleManager.SetRecord("MaxComboStrikes", 0, Operator.Equal);
-                BattleCanvas.ShowScoreOnEnemy(GameDictionary.String_UIDic["ShieldHit"].GetString(Player.UseLanguage), BattleManager.MySelf.ShieldStrikeScore);
+                BattleCanvas.ShowScoreOnEnemy(GameDictionary.String_UIDic["ShieldHit"].GetString(Player.UseLanguage), string.Format("{0}{1}","+",BattleManager.MySelf.ShieldStrikeScore));
                 break;
             case HitCondition.NoHit:
                 BattleManager.SetRecord("MaxComboStrikes", 0, Operator.Equal);

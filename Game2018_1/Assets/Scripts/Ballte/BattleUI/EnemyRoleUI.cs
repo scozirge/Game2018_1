@@ -14,12 +14,12 @@ public class EnemyRoleUI : RoleUI
     [SerializeField]
     Animator ScoreAni;
 
-    public void ShowScore(string _str,int _score)
+    public void ShowScore(string _str,string _score)
     {
         if (!BattleManager.MyEnemyRole.IsAlive)
             return;
         ScoreTitle_Text.text = _str;
-        ScoreValue_Text.text = _score.ToString();
+        ScoreValue_Text.text = _score;
         PlayMotion("Play", 0);
     }
     public void PlayMotion(string _motion, float _normalizedTime)
