@@ -380,9 +380,31 @@ Prefab:
       propertyPath: m_SizeDelta.y
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 114549401249016114, guid: e436e80b4b09c3f4aa27ef861b1d1f62,
+        type: 2}
+      propertyPath: TextWin
+      value: 
+      objectReference: {fileID: 1441640104}
+    - target: {fileID: 114549401249016114, guid: e436e80b4b09c3f4aa27ef861b1d1f62,
+        type: 2}
+      propertyPath: TextLose
+      value: 
+      objectReference: {fileID: 1441640103}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e436e80b4b09c3f4aa27ef861b1d1f62, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1441640103 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114718497752198772, guid: e436e80b4b09c3f4aa27ef861b1d1f62,
+    type: 2}
+  m_PrefabInternal: {fileID: 1441640102}
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+--- !u!114 &1441640104 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114834458490907784, guid: e436e80b4b09c3f4aa27ef861b1d1f62,
+    type: 2}
+  m_PrefabInternal: {fileID: 1441640102}
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &1445310762
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,6 +479,37 @@ Transform:
   m_Father: {fileID: 1868626819}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!1 &1653807729 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1535005596170094, guid: 964618808e8fc2c45b43ffc5a3b22aef,
+    type: 2}
+  m_PrefabInternal: {fileID: 1868626817}
+--- !u!114 &1653807731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1653807729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6389496a21dc804ab148f2bc61dc257, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PreLoadPos: {x: 1000, y: 1000, z: 0}
+  DestroyTime: 1
+  LoadFolderSprites:
+  - Images/BattleUI
+  - Images/Monster
+  - Images/Role
+  PreLoadParticles:
+  - {fileID: 1307185496262716, guid: 0707186aced8da147a42f2e9582bd6b7, type: 2}
+  - {fileID: 1209356642106900, guid: c6d7de70ffa092d4d858e8275035d238, type: 2}
+  - {fileID: 1124865170303232, guid: d831439896a03fd4e94904ea24d07106, type: 2}
+  - {fileID: 1423328511873840, guid: 6e3258e57880320408803c17fcf00291, type: 2}
+  - {fileID: 1525672828368500, guid: affae705cad3f3d42b4fe44439dc2a0d, type: 2}
+  - {fileID: 1304839772178466, guid: 705d8b826f62c2e46a278f1d798f8c75, type: 2}
+  - {fileID: 1229769881304748, guid: 9d76221f8330c3e4e88f4600ea7c80bc, type: 2}
+  PreloadDicTag: Battle
 --- !u!1 &1683903806
 GameObject:
   m_ObjectHideFlags: 0

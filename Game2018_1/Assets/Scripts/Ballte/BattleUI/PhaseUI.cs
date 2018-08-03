@@ -11,6 +11,16 @@ public class PhaseUI : MonoBehaviour
     Text Round_Level;
     [SerializeField]
     Animator MyPhaseAni;
+    [SerializeField]
+    Text TextWin;
+    [SerializeField]
+    Text TextLose;
+
+    void Start()
+    {
+        TextWin.text = GameDictionary.String_UIDic["WinTitle"].GetString(Player.UseLanguage);
+        TextLose.text = GameDictionary.String_UIDic["LoseTitle"].GetString(Player.UseLanguage);
+    }
 
     void SetText()
     {
