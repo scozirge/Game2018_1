@@ -21,6 +21,7 @@ public partial class PlayerRole
 
 
     bool IsPress;
+    bool IsDrag;
     public static bool CanShoot { get; protected set; }
     Vector3 StartPos;
     Vector3 CurPos;
@@ -74,23 +75,25 @@ public partial class PlayerRole
             Ray ray = MyCamera.ScreenPointToRay(Input.mousePosition);
             StartPos = ray.origin + (ray.direction * MyCamera.transform.position.z * -1);
 
-            Go_StartPos.SetActive(true);
-            Go_EndPos.SetActive(true);
+
             Go_EndPos.transform.position = StartPos;
             Go_StartPos.transform.position = StartPos;
-            Target.Arm();
-            BattleManager.SetBounceWall();
             IsPress = true;
+            DragTimer = 0;
         }
         if (Input.GetMouseButton(0))
         {
             if (!IsPress)
                 return;
-            Ray ray = MyCamera.ScreenPointToRay(Input.mousePosition);
-            CurPos = ray.origin + (ray.direction * MyCamera.transform.position.z * -1);
-            Go_EndPos.transform.position = CurPos; ;
-            float angle = MyMath.GetAngerFormTowPoint2D(CurPos, StartPos);
-            BattleCanvas.PlayerBowDraw(180 - angle, GetDragProportion());
+            DragTimerFnc();
+            if (IsDrag)
+            {
+                Ray ray = MyCamera.ScreenPointToRay(Input.mousePosition);
+                CurPos = ray.origin + (ray.direction * MyCamera.transform.position.z * -1);
+                Go_EndPos.transform.position = CurPos; ;
+                float angle = MyMath.GetAngerFormTowPoint2D(CurPos, StartPos);
+                BattleCanvas.PlayerBowDraw(180 - angle, GetDragProportion());
+            }
         }
         if (Input.GetMouseButtonUp(0))
         {
@@ -98,6 +101,13 @@ public partial class PlayerRole
                 IsPress = false;
             else
                 return;
+
+            if (!IsDrag)
+                return;
+            else
+            {
+                IsDrag = false;
+            }
             Go_StartPos.SetActive(false);
             Go_EndPos.SetActive(false);
             Ray ray = MyCamera.ScreenPointToRay(Input.mousePosition);
@@ -141,5 +151,20 @@ public partial class PlayerRole
         else
             dragProportion = dragDistance / MaxDragDistance;
         return dragProportion;
+    }
+    float DragTimer;
+    void DragTimerFnc()
+    {
+        if (IsDrag)
+            return;
+        DragTimer += Time.deltaTime;
+        if (DragTimer > 0.1f)
+        {
+            IsDrag = true;
+            Target.Arm();
+            Go_StartPos.SetActive(true);
+            Go_EndPos.SetActive(true);
+            BattleManager.SetBounceWall();
+        }
     }
 }
