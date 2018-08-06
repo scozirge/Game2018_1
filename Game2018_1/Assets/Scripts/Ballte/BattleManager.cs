@@ -64,7 +64,7 @@ public partial class BattleManager : MonoBehaviour
         Kill = 0;
         Score = 0;
         HighestScoring = Player.BestScore;
-        Level = 1;
+        Level = 0;
     }
     public static void CallAD()
     {
@@ -130,8 +130,8 @@ public partial class BattleManager : MonoBehaviour
         enemyGo.transform.SetParent(transform);
         //Init EnemyData
         Dictionary<string, object> enemyDataDic = new Dictionary<string, object>();
-        enemyDataDic.Add("Health", 100 + Level * 12);
-        enemyDataDic.Add("Attack", 50 + Level * 12);
+        enemyDataDic.Add("Health", 50 + Level * 6);
+        enemyDataDic.Add("Attack", 25 + Level * 6);
         enemyDataDic.Add("Camera", MyCamera);
         enemyDataDic.Add("AmmoNum", Level + 3);
         enemyDataDic.Add("AmmoBounceTimes", 0);
@@ -150,16 +150,16 @@ public partial class BattleManager : MonoBehaviour
 
         //Init EnemyData
         Dictionary<string, object> enemyDataDic = new Dictionary<string, object>();
-        enemyDataDic.Add("Health", 100 + Level * 12);
-        enemyDataDic.Add("Attack", 50 + Level * 12);
+        enemyDataDic.Add("Health", 50 + Level * 6);
+        enemyDataDic.Add("Attack", 25 + Level * 6);
         enemyDataDic.Add("Camera", MyCamera);
         enemyDataDic.Add("AmmoNum", Level + 3);
         enemyDataDic.Add("AmmoBounceTimes", 0);
         MyEnemyRole.Init(enemyDataDic);
         //Init PlayerData
         Dictionary<string, object> playerDataDic = new Dictionary<string, object>();
-        playerDataDic.Add("Health", 100);
-        playerDataDic.Add("Attack", 34);
+        playerDataDic.Add("Health", 50);
+        playerDataDic.Add("Attack", 25);
         playerDataDic.Add("AmmoBounceTimes", 2);
         playerDataDic.Add("AmmoBounceDamage", 0);
         playerDataDic.Add("DecreaseEnemyAmmo", 0);

@@ -66,7 +66,7 @@ public partial class EnemyRole : RolePrefab
     public override void ShieldBeSruck(int _dmg)
     {
         base.ShieldBeSruck(_dmg);
-        ReceiveDmg(MyMath.GetNumber1TimesNumber2(_dmg, 0.6f));
+        ReceiveDmg(MyMath.GetNumber1TimesNumber2(_dmg, 0.5f));
     }
     public override void ReceiveDmg(int _dmg)
     {

@@ -113,7 +113,7 @@ public class PlayerAmmo : AmmoPrefab
     public override void PowerUp()
     {
         base.PowerUp();
-        DamageFactor += 0.33f;
+        DamageFactor += 1f;
         MaxBounceTimes++;
         AmmoLevel++;
         if (AmmoLevel<AmmoLevelSprites.Count)
