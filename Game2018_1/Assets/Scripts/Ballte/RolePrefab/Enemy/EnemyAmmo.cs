@@ -26,6 +26,7 @@ public class EnemyAmmo : AmmoPrefab
         Radius = _radius;
         StartRadian = _startAngle;
         CurRadian = StartRadian;
+        CircularMotion();
     }
     protected override void Update()
     {
