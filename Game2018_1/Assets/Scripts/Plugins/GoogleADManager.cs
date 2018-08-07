@@ -12,15 +12,27 @@ public class GoogleADManager : MonoBehaviour
     static GoogleADManager MySelf;
 
     string SampleRewardUnitID = "ca-app-pub-3940256099942544/5224354917";
-    string SampleInterstirialID = "ca-app-pub-3940256099942544/1033173712";
-    string MyRewardUnitID = "ca-app-pub-6853317566550401/8253800285";
-    string MyInterstitialID = "ca-app-pub-6853317566550401/5405125729";
+    string MyRewardUnitID = "ca-app-pub-6853317566550401/4502100379";
     bool IsTest = false;
     public static bool IsInit;
 
-    public void Start()
+    //不使用ADMOB
+    public void DontUse()
     {
+
         MySelf = this;
+        string appId = "ca-app-pub-6853317566550401~1672030701";
+#if UNITY_ANDROID
+        appId = "ca-app-pub-6853317566550401~1672030701";
+#elif UNITY_IPHONE
+            appId = "ca-app-pub-6853317566550401~1672030701";
+#else
+            appId = "ca-app-pub-6853317566550401~1672030701";
+#endif
+
+        // Initialize the Google Mobile Ads SDK.
+        MobileAds.Initialize(appId);
+
         // Get singleton reward based video ad reference.
         this.rewardBasedVideo = RewardBasedVideoAd.Instance;
 
@@ -39,12 +51,12 @@ public class GoogleADManager : MonoBehaviour
         // Called when the ad click caused the user to leave the application.
         rewardBasedVideo.OnAdLeavingApplication += HandleRewardBasedVideoLeftApplication;
 
-        this.RequestRewardBasedVideo();
-        //this.RequestInterstitial();
+        RequestRewardBasedVideo();
+
+
         DontDestroyOnLoad(gameObject);
         IsInit = true;
     }
-
     void RequestRewardBasedVideo()
     {
         string adUnitId;
@@ -61,42 +73,23 @@ public class GoogleADManager : MonoBehaviour
 
         // Create an empty ad request.
         AdRequest request = new AdRequest.Builder().Build();
-        Debug.Log("////////////////request=" + request);
         // Load the rewarded video ad with the request.
         this.rewardBasedVideo.LoadAd(request, adUnitId);
     }
 
-    void RequestInterstitial()
-    {
-        string adUnitId;
-#if UNITY_ANDROID
-        if (IsTest)
-            adUnitId = SampleInterstirialID;
-        else
-            adUnitId = MyInterstitialID;
-#elif UNITY_IPHONE
-        adUnitId = "ca-app-pub-3940256099942544/4411468910";
-#else
-        adUnitId = "unexpected_platform";
-#endif
-
-        // Initialize an InterstitialAd.
-        interstitial = new InterstitialAd(adUnitId);
-        // Create an empty ad request.
-        AdRequest request = new AdRequest.Builder().Build();
-        // Load the interstitial with the request.
-        interstitial.LoadAd(request);
-    }
     public void HandleRewardBasedVideoLoaded(object sender, EventArgs args)
     {
+        Debug.Log("////////////////SuccessToLoadAD////////////////");
         MonoBehaviour.print("HandleRewardBasedVideoLoaded event received");
+        BattleManager.Revive();
     }
     public void HandleRewardBasedVideoFailedToLoad(object sender, AdFailedToLoadEventArgs args)
     {
+        Debug.Log("////////////////FailToLoadAD////////////////");
         MonoBehaviour.print(
             "HandleRewardBasedVideoFailedToLoad event received with message: "
                              + args.Message);
-        BattleManager.Revive();
+        //this.RequestRewardBasedVideo();
     }
     public void HandleRewardBasedVideoOpened(object sender, EventArgs args)
     {
@@ -141,15 +134,13 @@ public class GoogleADManager : MonoBehaviour
         }
         else
         {
-            if (!MySelf || !MySelf.rewardBasedVideo.IsLoaded())
-            {
-                BattleManager.Revive();
-                Debug.LogWarning("googleAD尚未初始化:nofill");
-                return;
-            }
             if (MySelf.rewardBasedVideo.IsLoaded())
             {
                 MySelf.rewardBasedVideo.Show();
+            }
+            else
+            {
+                Debug.Log("RewardVideo Haven't loaded");
             }
         }
     }

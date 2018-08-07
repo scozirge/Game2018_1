@@ -187,6 +187,8 @@ public partial class BattleCanvas : MonoBehaviour
     }
     public void CallSetting()
     {
+        if (!BattleManager.CanPressSettingBtn)
+            return;
         MySettingUI.CallSetting(true);
         BattleManager.SetPause(true);
     }

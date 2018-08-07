@@ -31,6 +31,7 @@ public partial class BattleManager : MonoBehaviour
     public static EnemyRole MyEnemyRole;
     public static bool IsPause { get; private set; }
     public static bool IsRevived { get; private set; }
+    public static bool CallingAd { get; private set; }
     public static int StrikeTimes { get; protected set; }
     public static int WeaknessStrikeTimes { get; protected set; }
     public static int MaxComboStrikes { get; protected set; }
@@ -39,9 +40,10 @@ public partial class BattleManager : MonoBehaviour
     public static int Kill { get; protected set; }
     public static int Score { get; protected set; }
     public static int HighestScoring { get; protected set; }
+    public static bool CanPressSettingBtn { get; protected set; }
 
 
-    void Start()
+    void Awake()
     {
         if (!Debugger.IsSpawn)
             DeployDebugger();
@@ -49,6 +51,7 @@ public partial class BattleManager : MonoBehaviour
             GameDictionary.InitDic();
         IsRevived = false;
         IsPause = false;
+        CanPressSettingBtn = true;
         MySelf = transform.GetComponent<BattleManager>();
         HideBounceWall();
         SetNormanWall();
@@ -68,8 +71,8 @@ public partial class BattleManager : MonoBehaviour
     }
     public static void CallAD()
     {
-
-        GoogleADManager.CallRewardBasedVideo();
+        CallingAd = true;
+        UnityAD.ShowRewardedVideo();
     }
     public static void FailToRevive()
     {
@@ -78,7 +81,12 @@ public partial class BattleManager : MonoBehaviour
     }
     public static void Revive()
     {
+        if (!CallingAd)
+            return;
+        CallingAd = false;
         IsRevived = true;
+        CanPressSettingBtn = true;
+        DestroyAllAmmo();
         BattleCanvas.CallSettle(false);
         MyPlayerRole.Revive();
         PlayerRole.SetCanShoot(true);
@@ -115,12 +123,14 @@ public partial class BattleManager : MonoBehaviour
     {
         MySelf.ClearEnemyRole();
         MySelf.SpanwEnemyRole();
+        DestroyAllAmmo();
         MyPlayerRole.SetTarget(MyEnemyRole);
         MySelf.MyBattleCanvas.Init(MyPlayerRole, MyEnemyRole);
         BattleCanvas.ReStartGame();
         MyPlayerRole.StartConditionRefresh();
         MyEnemyRole.StartConditionRefresh();
         SetPause(false);
+        CanPressSettingBtn = true;
     }
     void SpanwEnemyRole()
     {

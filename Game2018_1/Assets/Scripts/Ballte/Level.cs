@@ -27,12 +27,14 @@ public partial class BattleManager : MonoBehaviour {
     }
     public static void Win()
     {
+        CanPressSettingBtn = false;
         SetPause(true);
         BattleCanvas.Win();
         PlayerRole.SetCanShoot(false);
     }
     public static void Lose()
     {
+        CanPressSettingBtn = false;
         SetPause(true);
         BattleCanvas.Lose();
         PlayerRole.SetCanShoot(false);
