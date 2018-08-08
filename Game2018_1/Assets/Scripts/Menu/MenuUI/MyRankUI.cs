@@ -16,14 +16,14 @@ public class MyRankUI : MonoBehaviour
 
     public Sprite MySprite { get; private set; }
 
-    void OnEnable()
+    public void UpdateMyRank()
     {
         Name_Text.text = Player.Name;
         Score_Text.text = Player.BestScore.ToString();
         if (Player.Rank > LeaderboardUI.MaxItemNum)
             Score_Text.text = string.Format("{0}{1}{2}", GameDictionary.String_UIDic["CurrentRank"].GetString(Player.UseLanguage), MyMath.GetTopProportionInTotal(Player.Rank, ChampionData.TotalChampionNum), "%");
         else
-            Score_Text.text = Player.BestScore.ToString();
+            Score_Text.text = string.Format("{0}{1}", GameDictionary.String_UIDic["CurrentRank"].GetString(Player.UseLanguage), Player.Rank.ToString());
         if (Player.FBID != "")
         {
             FBManager.GetChampionIcon(Icon_CB());

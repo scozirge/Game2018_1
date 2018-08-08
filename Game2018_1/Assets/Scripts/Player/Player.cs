@@ -47,6 +47,9 @@ public partial class Player
             LeaderboardData = PlayerPrefs.GetString("LeaderboardData");
         if (PlayerPrefs.GetString("FBID") != "")
             FBID = PlayerPrefs.GetString("FBID");
+        if (PlayerPrefs.GetInt("Rank") != 0)
+            Rank = PlayerPrefs.GetInt("Rank");
+
     }
     public static void UpdateRecord(Dictionary<string, object> _data)
     {
@@ -93,5 +96,10 @@ public partial class Player
         Death = 14;
         CriticalCombo = 15;
         ServerRequest.Settlement();
+    }
+    public static void SetRank(int _rank)
+    {
+        Rank = _rank;
+        PlayerPrefs.SetInt("Rank", Rank);
     }
 }

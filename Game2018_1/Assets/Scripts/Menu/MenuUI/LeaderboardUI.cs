@@ -12,6 +12,8 @@ public class LeaderboardUI : MonoBehaviour
     Transform ItemParent;
     [SerializeField]
     Text Leaderboard_Text;
+    [SerializeField]
+    MyRankUI MyRank;
     public static int MaxItemNum = 50;
     static int TotalChampionNum;
     bool IsSpawn;
@@ -34,7 +36,8 @@ public class LeaderboardUI : MonoBehaviour
         CDList = new List<ChampionData>();
         string[] dataStr = _str.Split(',');
         TotalChampionNum = int.Parse(dataStr[1]);
-        ChampionData.TotalChampionNum = TotalChampionNum;
+        ChampionData.SetTotalChampionNum(TotalChampionNum);
+        Player.SetRank(int.Parse(dataStr[2]));
         string[] chData = dataStr[0].Split('/');
         for (int i = 0; i < chData.Length; i++)
         {
@@ -47,6 +50,7 @@ public class LeaderboardUI : MonoBehaviour
         else
             Myself.RefreshItems(CDList);
         Player.LeaderBoard_CB(_str);
+        Myself.MyRank.UpdateMyRank();
     }
 
     public void SpawnItem(List<ChampionData> _list)

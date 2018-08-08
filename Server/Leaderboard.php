@@ -62,8 +62,9 @@ if($diffTime>60)
     //計算執行時間
     $time_end = microtime(true);
     $executeTime = $time_end - $time_start;
+	$myRank=getUserRank($account,$db_host_load,$db_user,$db_pass,$db_name);
     //送回排行榜字串給Client
-    die ("Success:".$currentRankStr.",".$count['total'].": \nExecuteTime=".$executeTime."");
+    die ("Success:".$currentRankStr.",".$count['total'].",".$myRank.": \nExecuteTime=".$executeTime."");
 }
 else
 {
@@ -73,4 +74,40 @@ else
     //送回排行榜字串給Client
     die ("Success:".$currentRankStr.": \nExecuteTime=".$executeTime."");
 }
+
+	function getUserRank($ac,$db_host_load,$db_user,$db_pass,$db_name)
+	{		
+        $sql1       = "SET @rownum := 0";
+ 
+        $sql2       =   "SELECT rank, score FROM (
+                    SELECT @rownum := @rownum + 1 AS rank, score, account
+                    FROM playeraccount ORDER BY score DESC
+                    ) as result WHERE account='".$ac."'";
+		//////////////////////////////////////////////////////////////取得玩家資料//////////////////////////////////////////////////////////////
+		$con_l = mysql_connect($db_host_load,$db_user,$db_pass) or ("'Fail:1:"  . mysql_error());
+		if (!$con_l)
+			die('Fail:1:' . mysql_error());
+		mysql_select_db($db_name , $con_l) or die ('Fail:1:' . mysql_error());
+		
+        mysql_query($sql1); /*as mysql_query function can execute one query at a time */
+        $result = mysql_query($sql2);
+        $rows = '';
+        $data = array();
+        if (!empty($result))
+            $rows      =  mysql_num_rows($result);
+        else
+            $rows      =  '';
+ 
+        if (!empty($rows)){
+            while ($rows = mysql_fetch_assoc($result)){
+                $data[]   = $rows;
+            }
+        }
+ 
+        //rank of the user
+        if (empty($data[0]['rank']))
+            return 0;
+        return $data[0]['rank'];
+	}
+
 ?>

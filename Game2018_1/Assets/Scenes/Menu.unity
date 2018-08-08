@@ -21721,6 +21721,12 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224164305815584874, guid: c90c3f6da4406164fa105b49d6051e26,
     type: 2}
   m_PrefabInternal: {fileID: 1794947611}
+--- !u!114 &1794947613 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114778174002907482, guid: c90c3f6da4406164fa105b49d6051e26,
+    type: 2}
+  m_PrefabInternal: {fileID: 1794947611}
+  m_Script: {fileID: 11500000, guid: 2812650c645d22c4f8a767229977e47a, type: 3}
 --- !u!1 &1802548071
 GameObject:
   m_ObjectHideFlags: 0
@@ -23362,6 +23368,7 @@ MonoBehaviour:
   LB_Prefab: {fileID: 1175247454050050, guid: 430a894e921077b4297579f2efaee106, type: 2}
   ItemParent: {fileID: 548745902}
   Leaderboard_Text: {fileID: 1946925365}
+  MyRank: {fileID: 1794947613}
 --- !u!95 &2124160603
 Animator:
   serializedVersion: 3
